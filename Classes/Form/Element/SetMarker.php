@@ -30,7 +30,7 @@ class SetMarker extends AbstractFormElement
             'data-formengine-input-name' => htmlspecialchars($parameterArray['itemFormElName'])
         ];
 
-        $attributes['placeholder'] = 'Enter special value for element "'.htmlspecialchars(trim($row['uid'])).
+        $attributes['placeholder'] = 'Enter special value for element "'.htmlspecialchars((string) $row['uid']).
             '" in size '. $size;
         $classes = [
             'form-control',
@@ -46,9 +46,7 @@ class SetMarker extends AbstractFormElement
         $html[] =   '<div class="form-wizards-wrap">';
         $html[] =      '<div class="form-wizards-element">';
         $html[] =         '<div class="form-control-wrap">';
-        $html[] =            '<input type="text" value="' . htmlspecialchars($itemValue, ENT_QUOTES) . '" ';
-        $html[]=               GeneralUtility::implodeAttributes($attributes, true);
-        $html[]=            ' />';
+        $html[] =           'Hier kommt das Bild rein';
         $html[] =         '</div>';
         $html[] =      '</div>';
         $html[] =   '</div>';

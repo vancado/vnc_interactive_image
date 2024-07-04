@@ -105,6 +105,7 @@ call_user_func(function () {
         'label' => 'Set Marker',
         'config' => [
             'type' => 'user',
+            'default' => '',
             // renderType needs to be registered in ext_localconf.php
             'renderType' => 'setMarker',
             'parameters' => [

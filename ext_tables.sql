@@ -21,6 +21,7 @@ CREATE TABLE tx_vncinteractiveimage_domain_model_mark
 	interactive_image int(11) DEFAULT '0' NOT NULL,
 	PRIMARY KEY (uid)
 );
+
 CREATE TABLE tt_content
 (
 	tx_vncinteractiveimage_name           varchar(255) DEFAULT '' NOT NULL,
@@ -29,4 +30,5 @@ CREATE TABLE tt_content
 	tx_vncinteractiveimage_icon           int(11) DEFAULT '0' NOT NULL,
 	tx_vncinteractiveimage_different_icon int(11) DEFAULT '0' NOT NULL,
 	tx_vncinteractiveimage_marks          int(11) DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_setmarker      varchar(255) DEFAULT '' NOT NULL
 );

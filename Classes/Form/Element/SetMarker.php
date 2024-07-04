@@ -30,7 +30,7 @@ class SetMarker extends AbstractFormElement
             'data-formengine-input-name' => htmlspecialchars($parameterArray['itemFormElName'])
         ];
 
-        $attributes['placeholder'] = 'Enter special value for element "'.htmlspecialchars(trim($row['uid'])).
+        $attributes['placeholder'] = 'Enter special value for element "'.htmlspecialchars(trim((string)$row['uid'])).
             '" in size '. $size;
         $classes = [
             'form-control',

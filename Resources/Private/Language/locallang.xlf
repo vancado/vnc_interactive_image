@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2023-04-01T12:00:00Z" product-name="vnc_interactive_image">
+    <header/>
+    <body>
+      <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage">
+        <source>Interactive Image</source>
+        <target>Interaktives Bild</target>
+      </trans-unit>
+      <trans-unit id="tx_vncinteractiveimage_domain_model_mark">
+        <source>Mark</source>
+        <target>Markierung</target>
+      </trans-unit>
+      <trans-unit id="flexform_interactive_image">
+        <source>Interactive Image Configuration</source>
+        <target>Konfiguration des interaktiven Bildes</target>
+      </trans-unit>
+      <trans-unit id="flexform_interactive_images">
+        <source>Select Interactive Images</source>
+        <target>Interaktive Bilder auswählen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

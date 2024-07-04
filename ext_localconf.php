@@ -52,10 +52,19 @@ call_user_func(function () {
         \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         ['source' => 'EXT:vnc_interactive_image/Resources/Public/Icons/Extension.svg']
     );
-    
+
+    /**
+     * Register nodes
+     */
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1720051163] = [
         'nodeName' => 'setMarker',
         'priority' => 40,
         'class' => SetMarker::class,
     ];
+    
+    /**
+     * Register hooks
+     */
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][] = \Vancado\VncInteractiveImage\Hook\PageRendererRenderPreProcess::class . '->addJavaScript';
+
 });

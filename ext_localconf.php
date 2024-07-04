@@ -3,9 +3,11 @@
 defined('TYPO3') || die();
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use VncInteractiveImage\Controller\InteractiveImageController;
+use Vancado\VncInteractiveImage\Controller\InteractiveImageController;
+use Vancado\VncInteractiveImage\Form\Element\SetMarker;
 
 call_user_func(function () {
+    
     ExtensionUtility::registerPlugin(
         'VncInteractiveImage',
         'Vncinteractive',
@@ -50,4 +52,10 @@ call_user_func(function () {
         \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         ['source' => 'EXT:vnc_interactive_image/Resources/Public/Icons/Extension.svg']
     );
+    
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1720051163] = [
+        'nodeName' => 'setMarker',
+        'priority' => 40,
+        'class' => SetMarker::class,
+    ];
 });

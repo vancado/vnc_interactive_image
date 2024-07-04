@@ -5,7 +5,7 @@ defined('TYPO3') || die();
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 call_user_func(function () {
-    $pluginSignature = str_replace('_', '', 'vncinteractiveimage') . '_vncinteractive';
+    $pluginSignature = 'vncinteractiveimage_vncinteractive';
 
     ExtensionManagementUtility::addPlugin(
         [
@@ -100,4 +100,24 @@ call_user_func(function () {
             ]
         ]
     ];
+
+    $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_setmarker'] = [
+        'label' => 'Set Marker',
+        'config' => [
+            'type' => 'user',
+            // renderType needs to be registered in ext_localconf.php
+            'renderType' => 'setMarker',
+            'parameters' => [
+                'size' => '30',
+                'color' => '#F49700',
+            ],
+        ],
+    ];
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        'tx_vncinteractiveimage_setmarker',
+        'list',
+        'after:list_type',
+    );
 });

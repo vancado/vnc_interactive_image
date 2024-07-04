@@ -30,4 +30,5 @@ CREATE TABLE tt_content
 	tx_vncinteractiveimage_icon           int(11) DEFAULT '0' NOT NULL,
 	tx_vncinteractiveimage_different_icon int(11) DEFAULT '0' NOT NULL,
 	tx_vncinteractiveimage_marks          int(11) DEFAULT '0' NOT NULL,
+	tx_vncinteractiveimage_setmarker      int(11) DEFAULT '0' NOT NULL,
 );

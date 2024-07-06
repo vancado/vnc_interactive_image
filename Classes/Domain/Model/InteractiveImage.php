@@ -12,81 +12,81 @@ class InteractiveImage extends AbstractEntity
     /**
      * @var string
      */
-    protected $name = '';
+    protected $txVncinteractiveimageName = '';
 
     /**
      * @var FileReference
      */
-    protected $image = null;
+    protected $txVncinteractiveimageImage = null;
 
     /**
      * @var string
      */
-    protected $iconMode = '';
+    protected $txVncinteractiveimageIconMode = '';
 
     /**
      * @var FileReference
      */
-    protected $icon = null;
+    protected $txVncinteractiveimageIcon = null;
 
     /**
      * @var ObjectStorage<\Vancado\VncInteractiveImage\Domain\Model\Mark>
      * @Extbase\ORM\Cascade("remove")
      */
-    protected $marks = null;
+    protected $txVncinteractiveimageMarks = null;
 
     public function __construct()
     {
-        $this->marks = new ObjectStorage();
+        $this->txVncinteractiveimageMarks = new ObjectStorage();
     }
 
-    public function getName(): string
+    public function getTxVncinteractiveimageName(): string
     {
-        return $this->name;
+        return $this->txVncinteractiveimageName;
     }
 
-    public function setName(string $name): void
+    public function setTxVncinteractiveimageName(string $txVncinteractiveimageName): void
     {
-        $this->name = $name;
+        $this->txVncinteractiveimageName = $txVncinteractiveimageName;
     }
 
-    public function getImage(): ?FileReference
+    public function getTxVncinteractiveimageImage(): ?FileReference
     {
-        return $this->image;
+        return $this->txVncinteractiveimageImage;
     }
 
-    public function setImage(FileReference $image): void
+    public function setTxVncinteractiveimageImage(?FileReference $txVncinteractiveimageImage): void
     {
-        $this->image = $image;
+        $this->txVncinteractiveimageImage = $txVncinteractiveimageImage;
     }
 
-    public function getIconMode(): string
+    public function getTxVncinteractiveimageIconMode(): string
     {
-        return $this->iconMode;
+        return $this->txVncinteractiveimageIconMode;
     }
 
-    public function setIconMode(string $iconMode): void
+    public function setTxVncinteractiveimageIconMode(string $txVncinteractiveimageIconMode): void
     {
-        $this->iconMode = $iconMode;
+        $this->txVncinteractiveimageIconMode = $txVncinteractiveimageIconMode;
     }
 
-    public function getIcon(): ?FileReference
+    public function getTxVncinteractiveimageIcon(): ?FileReference
     {
-        return $this->icon;
+        return $this->txVncinteractiveimageIcon;
     }
 
-    public function setIcon(FileReference $icon): void
+    public function setTxVncinteractiveimageIcon(?FileReference $txVncinteractiveimageIcon): void
     {
-        $this->icon = $icon;
+        $this->txVncinteractiveimageIcon = $txVncinteractiveimageIcon;
     }
 
-    public function getMarks(): ObjectStorage
+    public function getTxVncinteractiveimageMarks(): ?ObjectStorage
     {
-        return $this->marks;
+        return $this->txVncinteractiveimageMarks;
     }
 
-    public function setMarks(ObjectStorage $marks): void
+    public function setTxVncinteractiveimageMarks(?ObjectStorage $txVncinteractiveimageMarks): void
     {
-        $this->marks = $marks;
+        $this->txVncinteractiveimageMarks = $txVncinteractiveimageMarks;
     }
 }

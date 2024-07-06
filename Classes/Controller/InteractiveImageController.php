@@ -19,15 +19,15 @@ class InteractiveImageController extends ActionController
         $this->interactiveImageRepository = $interactiveImageRepository;
     }
 
-    public function listAction(): ResponseInterface
+    public function showAction(): ResponseInterface
     {
-        $interactiveImages = $this->interactiveImageRepository->findAll();
-        $this->view->assign('interactiveImages', $interactiveImages);
-        return $this->htmlResponse();
-    }
+        // get content element uid
+        $uid = (int) $this->request->getAttribute('currentContentObject')->data['uid'];
 
-    public function showAction(InteractiveImage $interactiveImage): ResponseInterface
-    {
+        // load content item via interactive image repository
+        /** @var InteractiveImage $interactiveImage */
+        $interactiveImage = $this->interactiveImageRepository->findByUid($uid);
+
         $this->view->assign('interactiveImage', $interactiveImage);
         return $this->htmlResponse();
     }

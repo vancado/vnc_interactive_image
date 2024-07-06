@@ -5,6 +5,6 @@ plugin.tx_vncinteractiveimage_vncinteractive {
         layoutRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Layouts/
     }
     persistence {
-        storagePid = 0
+        storagePid = {$plugin.tx_vncinteractiveimage_vncinteractive.persistence.storagePid}
     }
 }

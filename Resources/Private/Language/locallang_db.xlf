@@ -9,49 +9,44 @@
             <trans-unit id="tx_vnc_interactive_image_vncinteractiveimage.description">
                 <source>Displays an interactive image with icons and markers</source>
             </trans-unit>
+            <trans-unit id="tx_vnc_interactive_image_vncinteractiveimage.error.no_image_file">
+                <source>No image selected or it does not exist</source>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.name">
                 <source>Name</source>
-                <target>Name</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.image">
                 <source>Image</source>
-                <target>Bild</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon_mode">
                 <source>Icon Mode</source>
-                <target>Icon-Modus</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon">
                 <source>Icon</source>
-                <target>Icon</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.marks">
                 <source>Marks</source>
-                <target>Markierungen</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.set_marker">
+                <source>Set Marker</source>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.text">
                 <source>Text</source>
-                <target>Text</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon">
                 <source>Icon</source>
-                <target>Icon</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_x">
                 <source>Position X</source>
-                <target>Position X</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_y">
                 <source>Position Y</source>
-                <target>Position Y</target>
             </trans-unit>
             <trans-unit id="flexform_interactive_image">
                 <source>Interactive Image Configuration</source>
-                <target>Konfiguration des interaktiven Bildes</target>
             </trans-unit>
             <trans-unit id="flexform_interactive_images">
                 <source>Select Interactive Images</source>
-                <target>Interaktive Bilder auswählen</target>
             </trans-unit>
         </body>
     </file>

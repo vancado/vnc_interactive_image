@@ -18,7 +18,7 @@ call_user_func(function () {
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'pages,layout,select_key,recursive';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'tx_vncinteractiveimage_name, tx_vncinteractiveimage_image, tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon, tx_vncinteractiveimage_different_icon, tx_vncinteractiveimage_marks';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'tx_vncinteractiveimage_name, tx_vncinteractiveimage_image, tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon, tx_vncinteractiveimage_different_icon, tx_vncinteractiveimage_setmarker, tx_vncinteractiveimage_marks';
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_name'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.name',
@@ -102,23 +102,13 @@ call_user_func(function () {
     ];
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_setmarker'] = [
-        'label' => 'Set Marker',
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.set_marker',
         'config' => [
             'type' => 'user',
             'default' => '',
-            // renderType needs to be registered in ext_localconf.php
             'renderType' => 'setMarker',
             'parameters' => [
-                'size' => '30',
-                'color' => '#F49700',
             ],
         ],
     ];
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        'tt_content',
-        'tx_vncinteractiveimage_setmarker',
-        'list',
-        'after:list_type',
-    );
 });

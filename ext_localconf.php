@@ -18,11 +18,11 @@ call_user_func(function () {
         'VncInteractiveImage',
         'Vncinteractive',
         [
-            InteractiveImageController::class => 'list, show'
+            InteractiveImageController::class => 'show'
         ],
         // non-cacheable actions
         [
-            InteractiveImageController::class => 'list, show'
+            InteractiveImageController::class => 'show'
         ]
     );
 

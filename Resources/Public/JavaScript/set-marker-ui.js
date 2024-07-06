@@ -8,23 +8,33 @@ class SetMarkerUi
 
     observers = {}
 
+    intervalRemoveMarker = null
+
+    cssSelectors = {
+        localField: null,
+        panel: null,
+        panelGroup: null,
+    }
+
     constructor() {
+        this.initCssSelectors()
         this.init()
+        this.initIntervalRemoveMarker()
     }
 
     init() {
         document.querySelector('#setMarkerImage')?.addEventListener('click', (e) => {
-            const button = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .typo3-newRecordLink button')
+            const button = document.querySelector(this.cssSelectors.localField + ' .typo3-newRecordLink button')
             const xPercentage = parseFloat(e.offsetX / e.target.offsetWidth).toFixed(2)
             const yPercentage = parseFloat(e.offsetY / e.target.offsetHeight).toFixed(2)
 
             button.click()
 
             setTimeout(() => {
-                const newIrreMarker = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div:last-child');
-                const fieldX = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div:last-child [data-formengine-input-name*=position_x]')
-                const fieldY = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div:last-child [data-formengine-input-name*=position_y]')
-                const fieldText = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div:last-child [data-formengine-input-name*=text]')
+                const newIrreMarker = document.querySelector(this.cssSelectors.panel + ':last-child');
+                const fieldX = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_x]')
+                const fieldY = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_y]')
+                const fieldText = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=text]')
                 const uid = newIrreMarker.dataset.objectUid
 
                 this.addMarkerOnMap(
@@ -54,10 +64,37 @@ class SetMarkerUi
             this.setMarkerEventListener(marker)
         })
 
-        document.querySelectorAll('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div.panel-collapsed').forEach((panel) => {
+        document.querySelectorAll(this.cssSelectors.panel + '.panel-collapsed').forEach((panel) => {
             const uid = panel.dataset.objectUid
             this.addObserver(uid, panel)
         })
+    }
+
+    initCssSelectors() {
+        const localField = '[data-local-field="tx_vncinteractiveimage_marks"]'
+        const panelGroup = localField + ' .panel-group'
+        const panel = panelGroup + ' > div'
+
+        this.cssSelectors = {
+            localField,
+            panel,
+            panelGroup,
+        }
+    }
+
+    initIntervalRemoveMarker() {
+        if (document.querySelector(this.cssSelectors.localField) === null) {
+            return
+        }
+        this.intervalRemoveMarker = setInterval(() => {
+            document.querySelectorAll('[data-mark-uid]').forEach((markerOnMap) => {
+                const uid = markerOnMap.dataset.markUid
+                const panel = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"]')
+                if (!panel) {
+                    this.removeMarker(uid)
+                }
+            })
+        }, 1000)
     }
 
     addMarker(uid, title, x, y) {
@@ -79,10 +116,10 @@ class SetMarkerUi
     addObserver(uid, panel) {
         this.observers[uid] = new MutationObserver((mutationList, observers) => {
             setTimeout(() => {
-                const uid = panel.dataset.objectUid
-                const fieldX = panel.querySelector('[name*=position_x]').value
-                const fieldY = panel.querySelector('[name*=position_y]').value
-                const fieldText = panel.querySelector('[name*=text]').value
+                const uid = panel?.dataset?.objectUid
+                const fieldX = panel?.querySelector('[name*=position_x]')?.value
+                const fieldY = panel?.querySelector('[name*=position_y]')?.value
+                const fieldText = panel?.querySelector('[name*=text]')?.value
 
                 this.updateMarker(uid, fieldText, fieldX, fieldY)
                 this.syncFromMarkers(uid)
@@ -121,18 +158,19 @@ class SetMarkerUi
 
     removeMarker(uid) {
         delete(this.markers[uid])
-        this.observers[uid].disconnect()
+        this.observers[uid]?.disconnect()
         delete(this.observers[uid])
+        document.querySelector('[data-mark-uid="' + uid + '"]')?.remove()
     }
 
     setMarkerEventListener(marker) {
         marker.addEventListener('click', (e) => {
             const uid = e.target.dataset['markUid']
-            const markerTabHeader = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div.panel-collapsed[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
+            const markerTabHeader = document.querySelector(this.cssSelectors.panel + '.panel-collapsed[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
             markerTabHeader?.click()
 
             setTimeout(() => {
-                const fieldText = document.querySelector('[data-local-field="tx_vncinteractiveimage_marks"] .panel-group > div[data-object-uid="' + uid + '"] [data-formengine-input-name*=text]')
+                const fieldText = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=text]')
                 fieldText?.focus()
             }, 250)
         })

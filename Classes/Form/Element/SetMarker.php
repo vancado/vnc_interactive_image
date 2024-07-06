@@ -100,19 +100,18 @@ class SetMarker extends AbstractFormElement
             foreach ($interactiveImage->getTxVncinteractiveimageMarks() as $mark) {
                 $left = $mark->getPositionX() * 100;
                 $top = $mark->getPositionY() * 100;
-                $markers[] = '<div title="' . htmlentities($mark->getText()) . '" class="setMarkerMarkers" data-mark-uid="' . $mark->getUid() . '" style="
-                    width:1px;
-                    height:1px;
-                    background-color:#f00;
-                    position:absolute;
-                    left: calc(' . $left . '% - 14.5px);
-                    top: calc(' . $top .'% - 14.5px);
-                    border: 15px solid #f00;
-                    border-radius: 100%;
-                    outline: 2px solid #fff;
-                    -webkit-border-radius: 100%;
-                    cursor: pointer;
-                "></div>';
+                $markers[] = '<div 
+                    title="' . htmlentities($mark->getText()) . '" 
+                    class="setMarkerMarkers set-marker-marker" 
+                    data-mark-uid="' . $mark->getUid() . '"
+                    data-mark-title="' . htmlentities($mark->getText()) . '" 
+                    data-mark-position-x="' . (string) $mark->getPositionX() . '"
+                    data-mark-position-y="' . (string) $mark->getPositionY() . '"
+                    style="
+                        left: calc(' . $left . '% - 14.5px);
+                        top: calc(' . $top .'% - 14.5px);
+                    "
+                ></div>';
             }
         }
 

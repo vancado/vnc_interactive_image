@@ -67,4 +67,8 @@ call_user_func(function () {
      */
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][] = \Vancado\VncInteractiveImage\Hook\PageRendererRenderPreProcess::class . '->addJavaScript';
 
+    /**
+     * Add backend CSS
+     */
+    $GLOBALS['TYPO3_CONF_VARS']['BE']['stylesheets']['vnc_interactive_image'] = 'EXT:vnc_interactive_image/Resources/Public/Css/Backend/';
 });

@@ -1,0 +1,11 @@
+.set-marker-marker {
+    width:1px;
+    height:1px;
+    background-color:#f00;
+    position:absolute;
+    border: 15px solid #f00;
+    border-radius: 100%;
+    outline: 2px solid #fff;
+    -webkit-border-radius: 100%;
+    cursor: pointer;
+}

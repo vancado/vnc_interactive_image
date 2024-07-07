@@ -84,8 +84,6 @@ class SetMarker extends AbstractFormElement
             'data-formengine-input-name' => htmlspecialchars($parameterArray['itemFormElName'])
         ];
 
-        $attributes['placeholder'] = 'Enter special value for element "'.htmlspecialchars(trim((string)$row['uid']));
-
         $classes = [
             'form-control',
             't3js-formengine-textarea',
@@ -111,6 +109,7 @@ class SetMarker extends AbstractFormElement
                         left: calc(' . $left . '% - 14.5px);
                         top: calc(' . $top .'% - 14.5px);
                     "
+                    draggable="true"
                 ></div>';
             }
         }
@@ -120,7 +119,7 @@ class SetMarker extends AbstractFormElement
         $html[] = $fieldInformationHtml;
         $html[] =   '<div class="form-wizards-wrap">';
         $html[] =      '<div class="form-wizards-element">';
-        $html[] =         '<div class="form-control-wrap" style="position:relative;">';
+        $html[] =         '<div id="setMarkerImageMap" class="form-control-wrap">';
         $html[] =            '<img id="setMarkerImage" style="width: 100%; height: auto; cursor: crosshair;" src="' . $imageUrl . '" />';
         $html[] = implode(LF, $markers);
         $html[] =         '</div>';

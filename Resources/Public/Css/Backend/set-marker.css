@@ -1,3 +1,8 @@
+#setMarkerImageMap {
+    position: relative;
+    overflow: hidden;
+}
+
 .set-marker-marker {
     width:1px;
     height:1px;

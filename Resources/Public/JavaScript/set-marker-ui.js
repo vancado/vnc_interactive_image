@@ -194,7 +194,7 @@ class SetMarkerUi
         newMarker.style.left = 'calc(' + (x * 100) + '% - 14.5px)'
         newMarker.style.top = 'calc(' + (y * 100) + '% - 14.5px)'
         newMarker.setAttribute('data-mark-uid', uid)
-        newMarker.setAttribute('draggabe', true)
+        newMarker.setAttribute('draggable', true)
 
         map.appendChild(newMarker)
         this.setMarkerEventListener(newMarker)
@@ -232,9 +232,6 @@ class SetMarkerUi
                 const fieldText = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=text]')
                 fieldText?.focus()
             }, 250)
-        })
-
-        marker.addEventListener('dragstart', (e) => {
         })
 
         marker.addEventListener('dragend', (e) => {

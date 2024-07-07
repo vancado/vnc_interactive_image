@@ -120,7 +120,7 @@ class SetMarker extends AbstractFormElement
         $html[] =   '<div class="form-wizards-wrap">';
         $html[] =      '<div class="form-wizards-element">';
         $html[] =         '<div id="setMarkerImageMap" class="form-control-wrap">';
-        $html[] =            '<img id="setMarkerImage" style="width: 100%; height: auto; cursor: crosshair;" src="' . $imageUrl . '" />';
+        $html[] =            '<img draggable="false" id="setMarkerImage" style="width: 100%; height: auto; cursor: crosshair;" src="' . $imageUrl . '" />';
         $html[] = implode(LF, $markers);
         $html[] =         '</div>';
         $html[] =      '</div>';

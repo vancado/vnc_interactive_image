@@ -39,8 +39,12 @@
                 <source>Set Marker</source>
                 <target>Marker setzen</target>
             </trans-unit>
-            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.text" approved="yes">
-                <source>Text</source>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title" approved="yes">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.bodytext" approved="yes">
+                <source>Bodytext</source>
                 <target>Text</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon" approved="yes">

@@ -30,8 +30,11 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.set_marker">
                 <source>Set Marker</source>
             </trans-unit>
-            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.text">
-                <source>Text</source>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.bodytext">
+                <source>Bodytext</source>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon">
                 <source>Icon</source>

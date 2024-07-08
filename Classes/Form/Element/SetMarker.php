@@ -22,7 +22,7 @@ use Vancado\VncInteractiveImage\Domain\Repository\InteractiveImageRepository;
 
 class SetMarker extends AbstractFormElement
 {
-    public function render():array
+    public function render(): array
     {
         /** @var FileRepository $fileRepository */
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
@@ -46,8 +46,8 @@ class SetMarker extends AbstractFormElement
             );
         } catch (FileDoesNotExistException $e) {
             return ['html' => '<div>' . LocalizationUtility::translate(
-                'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vnc_interactive_image_vncinteractiveimage.error.no_image_file'
-            ) . '</div>'];
+                    'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vnc_interactive_image_vncinteractiveimage.error.no_image_file'
+                ) . '</div>'];
         }
 
         if (sizeof($fileObjects) === 0) {
@@ -99,10 +99,11 @@ class SetMarker extends AbstractFormElement
                 $left = $mark->getPositionX() * 100;
                 $top = $mark->getPositionY() * 100;
                 $markers[] = '<div 
-                    title="' . htmlentities($mark->getText()) . '" 
+                    title="' . htmlentities($mark->getTitle()) . '" 
                     class="setMarkerMarkers set-marker-marker" 
                     data-mark-uid="' . $mark->getUid() . '"
-                    data-mark-title="' . htmlentities($mark->getText()) . '" 
+                    data-mark-title="' . htmlentities($mark->getTitle()) . '" 
+                    data-mark-bodytext="' . htmlentities(strip_tags($mark->getBodytext())) . '"
                     data-mark-position-x="' . (string) $mark->getPositionX() . '"
                     data-mark-position-y="' . (string) $mark->getPositionY() . '"
                     style="
@@ -117,14 +118,14 @@ class SetMarker extends AbstractFormElement
         $html = [];
         $html[] = '<div class="formengine-field-item t3js-formengine-field-item">';
         $html[] = $fieldInformationHtml;
-        $html[] =   '<div class="form-wizards-wrap">';
-        $html[] =      '<div class="form-wizards-element">';
-        $html[] =         '<div id="setMarkerImageMap" class="form-control-wrap">';
-        $html[] =            '<img draggable="false" id="setMarkerImage" style="width: 100%; height: auto; cursor: crosshair;" src="' . $imageUrl . '" />';
+        $html[] = '<div class="form-wizards-wrap">';
+        $html[] = '<div class="form-wizards-element">';
+        $html[] = '<div id="setMarkerImageMap" class="form-control-wrap">';
+        $html[] = '<img draggable="false" id="setMarkerImage" style="width: 100%; height: auto; cursor: crosshair;" src="' . $imageUrl . '" />';
         $html[] = implode(LF, $markers);
-        $html[] =         '</div>';
-        $html[] =      '</div>';
-        $html[] =   '</div>';
+        $html[] = '</div>';
+        $html[] = '</div>';
+        $html[] = '</div>';
         $html[] = '</div>';
         $resultArray['html'] = implode(LF, $html);
 

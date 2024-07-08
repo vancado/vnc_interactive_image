@@ -3,7 +3,7 @@
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark',
-        'label' => 'text',
+        'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -18,20 +18,31 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'text',
+        'searchFields' => 'title, bodytext',
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'text, icon, position_x, position_y']
+        '1' => ['showitem' => 'title, bodytext, icon, position_x, position_y']
     ],
     'columns' => [
-        'text' => [
+        'title' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.text',
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
+            ]
+        ],
+        'bodytext' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.bodytext',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'enableRichtext' => true,
             ]
         ],
         'icon' => [
@@ -73,3 +84,4 @@ return [
         ]
     ]
 ];
+

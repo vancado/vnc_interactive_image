@@ -10,7 +10,12 @@ class Mark extends AbstractEntity
     /**
      * @var string
      */
-    protected $text = '';
+    protected $title = '';
+
+    /**
+     * @var string
+     */
+    protected $bodytext = '';
 
     /**
      * @var FileReference
@@ -27,14 +32,24 @@ class Mark extends AbstractEntity
      */
     protected $positionY = 0.0;
 
-    public function getText(): string
+    public function getTitle(): string
     {
-        return $this->text;
+        return $this->title;
     }
 
-    public function setText(string $text): void
+    public function setTitle(string $title): void
     {
-        $this->text = $text;
+        $this->title = $title;
+    }
+
+    public function getBodytext(): string
+    {
+        return $this->bodytext;
+    }
+
+    public function setBodytext(string $bodytext): void
+    {
+        $this->bodytext = $bodytext;
     }
 
     public function getIcon(): ?FileReference

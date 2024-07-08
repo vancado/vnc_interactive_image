@@ -42,7 +42,7 @@ class SetMarker extends AbstractFormElement
             $fileObjects = $fileRepository->findByRelation(
                 'tt_content',
                 'tx_vncinteractiveimage_image',
-                $row['uid']
+                (int) $row['uid']
             );
         } catch (FileDoesNotExistException $e) {
             return ['html' => '<div>' . LocalizationUtility::translate(

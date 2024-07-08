@@ -36,7 +36,7 @@ class SetMarkerUi
                 const newIrreMarker = document.querySelector(this.cssSelectors.panel + ':last-child');
                 const fieldX = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_x]')
                 const fieldY = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_y]')
-                const fieldText = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=text]')
+                const fieldTitle = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=title]')
                 const uid = newIrreMarker.dataset.objectUid
 
                 this.addMarkerOnMap(
@@ -45,14 +45,14 @@ class SetMarkerUi
                     xPercentage,
                     yPercentage
                 )
-                this.addMarker(uid, '', xPercentage, yPercentage)
+                this.addMarker(uid, fieldTitle.value, xPercentage, yPercentage)
                 this.addObserver(uid, newIrreMarker)
 
                 fieldX.value = xPercentage
                 fieldX.dispatchEvent(new Event('change'))
                 fieldY.value = yPercentage
                 fieldY.dispatchEvent(new Event('change'))
-                fieldText.focus()
+                fieldTitle.focus()
             }, 50)
         })
 
@@ -143,9 +143,9 @@ class SetMarkerUi
                 const uid = panel?.dataset?.objectUid
                 const fieldX = panel?.querySelector('[name*=position_x]')?.value
                 const fieldY = panel?.querySelector('[name*=position_y]')?.value
-                const fieldText = panel?.querySelector('[name*=text]')?.value
+                const fieldTitle = panel?.querySelector('[name*=title]')?.value
 
-                this.updateMarker(uid, fieldText, fieldX, fieldY)
+                this.updateMarker(uid, fieldTitle, fieldX, fieldY)
                 this.syncFromMarker(uid)
             }, 250)
         })
@@ -167,7 +167,7 @@ class SetMarkerUi
         setMarker.style.left = 'calc(' + (marker.x * 100) + '% - 14.5px';
         setMarker.style.top = 'calc(' + (marker.y * 100) + '% - 14.5px';
     }
-    
+
     syncFormMarkerOnMap(uid) {
         const markerTabHeader = document.querySelector(this.cssSelectors.panel + '.panel-collapsed[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
         const setMarker = document.querySelector('[data-mark-uid="' + uid + '"]')
@@ -177,13 +177,13 @@ class SetMarkerUi
             const panel = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"]')
             const fieldX = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_x]')
             const fieldY = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_y]')
-            const fieldText = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=text]')
+            const fieldTitle = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=title]')
 
             fieldX.value = this.markers[uid].x
             fieldX.dispatchEvent(new Event('change'))
             fieldY.value = this.markers[uid].y
             fieldY.dispatchEvent(new Event('change'))
-            fieldText.value = this.markers[uid].title
+            fieldTitle.value = this.markers[uid].title
         }, 250)
     }
 
@@ -229,8 +229,8 @@ class SetMarkerUi
             markerTabHeader?.click()
 
             setTimeout(() => {
-                const fieldText = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=text]')
-                fieldText?.focus()
+                const fieldTitle = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=title]')
+                fieldTitle?.focus()
             }, 250)
         })
 
@@ -247,5 +247,5 @@ class SetMarkerUi
 }
 
 DocumentService.ready().then(() => {
-     window.VncSetMarkerUi = new SetMarkerUi();
+    window.VncSetMarkerUi = new SetMarkerUi();
 });

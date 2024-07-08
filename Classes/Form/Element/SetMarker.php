@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vancado\VncInteractiveImage\Form\Element;
 
@@ -35,14 +35,14 @@ class SetMarker extends AbstractFormElement
         $parameterArray = $this->data['parameterArray'];
         $image = null;
         /** @var InteractiveImage $interactiveImage */
-        $interactiveImage = $interactiveImageRepository->findByUid((int) $row['uid']);
+        $interactiveImage = $interactiveImageRepository->findByUid((int)$row['uid']);
 
         try {
             /** @var FileReference[] $fileObjects */
             $fileObjects = $fileRepository->findByRelation(
                 'tt_content',
                 'tx_vncinteractiveimage_image',
-                (int) $row['uid']
+                (int)$row['uid']
             );
         } catch (FileDoesNotExistException $e) {
             return ['html' => '<div>' . LocalizationUtility::translate(
@@ -102,10 +102,9 @@ class SetMarker extends AbstractFormElement
                     title="' . htmlentities($mark->getTitle()) . '" 
                     class="setMarkerMarkers set-marker-marker" 
                     data-mark-uid="' . $mark->getUid() . '"
-                    data-mark-title="' . htmlentities($mark->getTitle()) . '" 
-                    data-mark-bodytext="' . htmlentities(strip_tags($mark->getBodytext())) . '"
-                    data-mark-position-x="' . (string) $mark->getPositionX() . '"
-                    data-mark-position-y="' . (string) $mark->getPositionY() . '"
+                    data-mark-title="' . htmlentities($mark->getTitle()) . '"
+                    data-mark-position-x="' . (string)$mark->getPositionX() . '"
+                    data-mark-position-y="' . (string)$mark->getPositionY() . '"
                     style="
                         left: calc(' . $left . '% - 14.5px);
                         top: calc(' . $top .'% - 14.5px);

@@ -3,8 +3,8 @@ plugin.tx_vncinteractiveimage_vncinteractive {
         templateRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Templates/
         partialRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Partials/
         layoutRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Layouts/
-    }
-    persistence {
-        storagePid = {$plugin.tx_vncinteractiveimage_vncinteractive.persistence.storagePid}
+        templateRootPaths.10 = {$plugin.tx_vncinteractiveimage_vncinteractive.view.templateRootPaths}
+        partialRootPaths.10 = {$plugin.tx_vncinteractiveimage_vncinteractive.view.partialRootPaths}
+        layoutRootPaths.10 = {$plugin.tx_vncinteractiveimage_vncinteractive.view.layoutRootPaths}
     }
 }

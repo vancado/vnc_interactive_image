@@ -1,10 +1,10 @@
 plugin.tx_vncinteractiveimage_vncinteractive {
     view {
-        templateRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Templates/
-        partialRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Partials/
-        layoutRootPaths.0 = EXT:vnc_interactive_image/Resources/Private/Layouts/
-    }
-    persistence {
-        storagePid = 1
+        # cat=plugin.tx_vncinteractiveimage_vncinteractive/view/a1; type=string; label= Path of Fluid Templates for all defined content elements
+        templateRootPaths = EXT:vnc_interactive_image/Resources/Private/Templates/
+        # cat=plugin.tx_vncinteractiveimage_vncinteractive/view/a2; type=string; label= Path of Fluid Partials for all defined content elements
+        partialRootPaths = EXT:vnc_interactive_image/Resources/Private/Partials/
+        # cat=plugin.tx_vncinteractiveimage_vncinteractive/view/a3; type=string; label= Path of Fluid Layouts for all defined content elements
+        layoutRootPaths = EXT:vnc_interactive_image/Resources/Private/Layouts/
     }
 }

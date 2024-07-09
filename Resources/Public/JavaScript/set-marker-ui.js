@@ -1,4 +1,5 @@
 import DocumentService from '@typo3/core/document-service.js';
+import { Popover } from 'bootstrap';
 
 class SetMarkerUi
 {
@@ -45,7 +46,7 @@ class SetMarkerUi
                     xPercentage,
                     yPercentage
                 )
-                this.addMarker(uid, fieldTitle.value, xPercentage, yPercentage)
+                this.addMarker(uid, '', '', xPercentage, yPercentage)
                 this.addObserver(uid, newIrreMarker)
 
                 fieldX.value = xPercentage
@@ -60,10 +61,11 @@ class SetMarkerUi
         document.querySelectorAll('.setMarkerMarkers').forEach((marker) => {
             const uid = marker.dataset['markUid']
             const title = marker.dataset['markTitle']
+            const bodytext = marker.dataset['markBodytext']
             const positionX = marker.dataset['markPositionX']
             const positionY = marker.dataset['markPositionY']
 
-            this.addMarker(uid, title, positionX, positionY)
+            this.addMarker(uid, title, bodytext, positionX, positionY)
             this.setMarkerEventListener(marker)
         })
 
@@ -86,7 +88,7 @@ class SetMarkerUi
                     0.0,
                     0.0
                 )
-                this.addMarker(uid, '', 0.0, 0.0)
+                this.addMarker(uid, '', '', 0.0, 0.0)
                 this.addObserver(uid, newIrreMarker)
             }, 250)
         })
@@ -121,17 +123,19 @@ class SetMarkerUi
         }, 1000)
     }
 
-    addMarker(uid, title, x, y) {
+    addMarker(uid, title, bodytext, x, y) {
         this.markers[uid] = {
             title,
+            bodytext,
             x,
             y,
         }
     }
 
-    updateMarker(uid, title, x, y) {
+    updateMarker(uid, title, bodytext, x, y) {
         this.markers[uid] = {
             title,
+            bodytext,
             x,
             y,
         }
@@ -141,11 +145,12 @@ class SetMarkerUi
         this.observers[uid] = new MutationObserver((mutationList, observers) => {
             setTimeout(() => {
                 const uid = panel?.dataset?.objectUid
-                const fieldX = panel?.querySelector('[name*=position_x]')?.value
-                const fieldY = panel?.querySelector('[name*=position_y]')?.value
-                const fieldTitle = panel?.querySelector('[name*=title]')?.value
+                const x = panel?.querySelector('[name*=position_x]')?.value
+                const y = panel?.querySelector('[name*=position_y]')?.value
+                const title = panel?.querySelector('[name*=title]')?.value
+                const bodytext = panel?.querySelector('[name*=bodytext]')?.value
 
-                this.updateMarker(uid, fieldTitle, fieldX, fieldY)
+                this.updateMarker(uid, title, bodytext, x, y)
                 this.syncFromMarker(uid)
             }, 250)
         })
@@ -162,6 +167,7 @@ class SetMarkerUi
 
         setMarker.setAttribute('title', marker.title)
         setMarker.setAttribute('data-mark-title', marker.title)
+        setMarker.setAttribute('data-mark-bodytext', marker.bodytext)
         setMarker.setAttribute('data-mark-position-x', marker.x)
         setMarker.setAttribute('data-mark-position-y', marker.y)
         setMarker.style.left = 'calc(' + (marker.x * 100) + '% - 14.5px';
@@ -203,13 +209,14 @@ class SetMarkerUi
     updateDraggedMarkerOnMap(marker, x, y) {
         const uid = marker.dataset['markUid']
         const title = marker.getAttribute('title')
+        const bodytext = marker.dataset['markBodytext']
 
         marker.style.left = 'calc(' + (x * 100) + '% - 14.5px)'
         marker.style.top = 'calc(' + (y * 100) + '% - 14.5px)'
         marker.setAttribute('mark-position-x', x)
         marker.setAttribute('mark-position-y', y)
 
-        this.updateMarker(uid, title, x, y)
+        this.updateMarker(uid, title, bodytext, x, y)
         this.syncFormMarkerOnMap(uid)
     }
 
@@ -235,13 +242,23 @@ class SetMarkerUi
         })
 
         marker.addEventListener('dragend', (e) => {
-            const title = marker.getAttribute('title')
             const X = parseFloat(this.markers[uid].x)
             const Y = parseFloat(this.markers[uid].y)
             const xPercentage = X + parseFloat(parseFloat(e.offsetX / map.offsetWidth).toFixed(2))
             const yPercentage = (Y + parseFloat(parseFloat(e.offsetY / map.offsetHeight).toFixed(2))).toFixed(2)
 
             this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
+        })
+
+        const popover = new Popover(marker, {
+            content: function() {
+                return marker.dataset['markBodytext']
+            },
+            html: true,
+            title: function() {
+                return marker.getAttribute('title')
+            },
+            trigger: 'hover focus',
         })
     }
 }

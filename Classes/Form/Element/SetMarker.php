@@ -103,7 +103,7 @@ class SetMarker extends AbstractFormElement
                     class="setMarkerMarkers set-marker-marker" 
                     data-mark-uid="' . $mark->getUid() . '"
                     data-mark-title="' . htmlentities($mark->getTitle()) . '" 
-                    data-mark-bodytext="' . htmlentities(strip_tags($mark->getBodytext())) . '"
+                    data-mark-bodytext="' . htmlentities($mark->getBodytext()) . '"
                     data-mark-position-x="' . (string)$mark->getPositionX() . '"
                     data-mark-position-y="' . (string)$mark->getPositionY() . '"
                     style="

@@ -1,12 +1,80 @@
-<html
-        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-        data-namespace-typo3-fluid="true"
->
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<div>
-    <f:comment>
-        <f:debug>{interactiveImage}</f:debug>
-    </f:comment>
-</div>
+<body>
+    <div>
+        <f:debug>{interactiveImage.txVncinteractiveimageName}</f:debug>
+        <f:debug>{interactiveImage.txVncinteractiveimageMarks}</f:debug>
+    </div>
+
+    <f:if condition="{interactiveImage}">
+        <f:then>
+            <div class="container">
+                <div class="row heading-block border-bottom-0 mb-2">
+                    <h2>{interactiveImage.txVncinteractiveimageName}</h2>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="img-container">
+                            <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
+                                alt="{interactiveImage.txVncinteractiveimageName}" />
+                            <div class="marks-container">
+                                <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark">
+                                    <div class="marks"
+                                        style="left: {mark.positionX * 100}%; top: {mark.positionY * 100}%;">
+                                        <f:switch expression="{interactiveImage.txVncinteractiveimageIconMode}">
+                                            <f:case value="same">
+                                                <f:image class="mark-icon" data-uid="{mark.uid}"
+                                                    image="{interactiveImage.txVncinteractiveimageIcon}"
+                                                    alt="{mark.text}" />
+                                                <div class="popover" id="popover-{mark.uid}">
+                                                    <h4 class="h4">{mark.title}</h4>
+                                                    <p class="">
+                                                        <f:format.raw>
+                                                        {mark.bodytext}
+                                                        </f:format.raw>
+                                                    </p>
+                                                </div>
+                                            </f:case>
+                                        </f:switch>
+                                    </div>
+                                </f:for>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </f:then>
+    </f:if>
+
+
+    <script>
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const icons = document.querySelectorAll('.mark-icon');
+
+        //     icons.forEach((icon) => {
+        //         const iconId = icon.dataset.uid;
+        //         const popover = document.getElementById(`popover-${iconId}`);
+
+        //         icon.addEventListener('click', (event) => {
+        //             event.stopPropagation();
+        //             popover.classList.toggle('active');
+        //             icon.classList.toggle('active');
+
+        //             document.addEventListener('click', () => {
+        //                 const popovers = document.querySelectorAll('.popover');
+
+        //                 popovers.forEach((popover) => {
+        //                     popover.classList.remove('active');
+        //                     icon.classList.remove('active');
+        //                 });
+        //             });
+        //         });
+        //     });
+        // });
+
+
+    </script>
+</body>
 
 </html>

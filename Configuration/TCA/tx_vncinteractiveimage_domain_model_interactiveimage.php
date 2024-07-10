@@ -22,7 +22,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_interactiveimage.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'name, image, icon_mode, icon, different_icon, marks']
+        '1' => ['showitem' => 'name, image, icon_mode, icon, marks']
     ],
     'columns' => [
         'name' => [
@@ -57,27 +57,14 @@ return [
                     ['same icon', 'same'],
                     ['different icons', 'different'],
                     ['numbers', 'numbers']
-                ]
+                ],
+                'onChange' => 'reload'
             ]
         ],
         'icon' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.icon',
             'displayCond' => 'FIELD:icon_mode:=:same',
-            'config' => [
-                'type' => 'file',
-                'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:media.addFileReference'
-                ],
-                'minitems' => 0,
-                'maxitems' => 1,
-                'allowed' => 'svg'
-            ]
-        ],
-        'different_icon' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.different_icon',
-            'displayCond' => 'FIELD:icon_mode:=:different',
             'config' => [
                 'type' => 'file',
                 'appearance' => [

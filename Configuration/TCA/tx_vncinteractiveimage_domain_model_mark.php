@@ -48,7 +48,7 @@ return [
         'icon' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.icon',
-            'displayCond' => 'FIELD:icon_mode:=:different',
+            'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon')
         ],
         'position_x' => [
@@ -84,4 +84,3 @@ return [
         ]
     ]
 ];
-

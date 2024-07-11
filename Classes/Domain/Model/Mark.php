@@ -23,6 +23,11 @@ class Mark extends AbstractEntity
     protected $icon = null;
 
     /**
+     * @var string
+     */
+    protected $iconFormelement = '';
+
+    /**
      * @var float
      */
     protected $positionX = 0.0;
@@ -60,6 +65,16 @@ class Mark extends AbstractEntity
     public function setIcon(FileReference $icon): void
     {
         $this->icon = $icon;
+    }
+
+    public function getIconFormelement(): string
+    {
+        return $this->iconFormelement;
+    }
+
+    public function setIconFormelement(string $iconFormelement): void
+    {
+        $this->iconFormelement = $iconFormelement;
     }
 
     public function getPositionX(): float

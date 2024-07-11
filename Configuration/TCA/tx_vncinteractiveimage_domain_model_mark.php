@@ -22,7 +22,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'title, bodytext, icon, position_x, position_y']
+        '1' => ['showitem' => 'title, bodytext, icon, icon_formelement, position_x, position_y']
     ],
     'columns' => [
         'title' => [
@@ -50,6 +50,17 @@ return [
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.icon',
             'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon')
+        ],
+        'icon_formelement' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.icon_formelement',
+            'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'selectIcon',
+                'iconset-type' => 'nucleo',
+                'iconset-path' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('vnc_icon_formelement') . 'Resources/Public/Libraries/Nucleo',
+            ]
         ],
         'position_x' => [
             'exclude' => 0,

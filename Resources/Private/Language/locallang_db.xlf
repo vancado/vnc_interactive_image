@@ -48,7 +48,7 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_y">
                 <source>Position Y</source>
             </trans-unit>
-            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon_formelement">
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.tx_vncinteractiveimage_icon_formelement">
                 <source>Icon Formelement</source>
             </trans-unit>
             <trans-unit id="flexform_interactive_image">

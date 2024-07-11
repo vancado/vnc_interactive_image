@@ -32,7 +32,7 @@ class InteractiveImage extends AbstractEntity
     /**
      * @var string
      */
-    protected $iconFormelement = '';
+    protected $txVncinteractiveimageIconFormelement = '';
 
     /**
      * @var ObjectStorage<\Vancado\VncInteractiveImage\Domain\Model\Mark>
@@ -85,14 +85,14 @@ class InteractiveImage extends AbstractEntity
         $this->txVncinteractiveimageIcon = $txVncinteractiveimageIcon;
     }
 
-    public function getIconFormelement(): string
+    public function getTxVncinteractiveimageIconFormelement(): string
     {
-        return $this->iconFormelement;
+        return $this->txVncinteractiveimageIconFormelement;
     }
 
-    public function setIconFormelement(string $iconFormelement): void
+    public function setTxVncinteractiveimageIconFormelement(string $txVncinteractiveimageIconFormelement): void
     {
-        $this->iconFormelement = $iconFormelement;
+        $this->txVncinteractiveimageIconFormelement = $txVncinteractiveimageIconFormelement;
     }
 
     public function getTxVncinteractiveimageMarks(): ?ObjectStorage

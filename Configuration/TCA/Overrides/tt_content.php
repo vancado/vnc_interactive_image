@@ -71,7 +71,7 @@ call_user_func(function () {
     ];
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon_formelement'] = [
-        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.icon_formelement',
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.tx_vncinteractiveimage_icon_formelement',
         'displayCond' => 'FIELD:tx_vncinteractiveimage_icon_mode:=:same',
         'config' => [
             'type' => 'input',

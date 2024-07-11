@@ -22,7 +22,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_interactiveimage.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'name, image, icon_mode, icon, marks']
+        '1' => ['showitem' => 'name, image, icon_mode, icon, icon_formelement, marks']
     ],
     'columns' => [
         'name' => [
@@ -73,6 +73,17 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'allowed' => 'svg'
+            ]
+        ],
+        'icon_formelement' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.icon_formelement',
+            'displayCond' => 'FIELD:icon_mode:=:same',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'selectIcon',
+                'iconset-type' => 'nucleo',
+                'iconset-path' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('vnc_icon_formelement') . 'Resources/Public/Libraries/Nucleo',
             ]
         ],
         'marks' => [

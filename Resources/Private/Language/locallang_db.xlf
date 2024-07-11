@@ -39,11 +39,17 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon">
                 <source>Icon</source>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon_formelement">
+                <source>Icon Formelement</source>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_x">
                 <source>Position X</source>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_y">
                 <source>Position Y</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon_formelement">
+                <source>Icon Formelement</source>
             </trans-unit>
             <trans-unit id="flexform_interactive_image">
                 <source>Interactive Image Configuration</source>

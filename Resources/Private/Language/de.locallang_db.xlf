@@ -51,6 +51,10 @@
                 <source>Icon</source>
                 <target>Icon</target>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon_formelement" approved="yes">
+                <source>Icon Formelement</source>
+                <target>Icon Formelement</target>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_x" approved="yes">
                 <source>Position X</source>
                 <target>Position X</target>
@@ -58,6 +62,10 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.position_y" approved="yes">
                 <source>Position Y</source>
                 <target>Position Y</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon_formelement" approved="yes">
+                <source>Icon Formelement</source>
+                <target>Icon Formelement</target>
             </trans-unit>
             <trans-unit id="flexform_interactive_image" approved="yes">
                 <source>Interactive Image Configuration</source>

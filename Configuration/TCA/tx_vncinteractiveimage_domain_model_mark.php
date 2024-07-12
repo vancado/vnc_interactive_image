@@ -18,6 +18,8 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        'sortby' => 'sorting',
+        'default_sortby' => 'ORDER BY sorting',
         'searchFields' => 'title, bodytext',
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],

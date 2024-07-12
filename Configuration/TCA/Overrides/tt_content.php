@@ -93,7 +93,11 @@ call_user_func(function () {
                 'levelLinksPosition' => 'top',
                 'showSynchronizationLink' => 1,
                 'showPossibleLocalizationRecords' => 1,
-                'showAllLocalizationLink' => 1
+                'showAllLocalizationLink' => 1,
+                'useSortable' => true
+            ],
+            'behaviour' => [
+                'sortable' => 'sorting'
             ]
         ]
     ];

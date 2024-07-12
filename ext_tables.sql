@@ -8,6 +8,7 @@ CREATE TABLE tx_vncinteractiveimage_domain_model_mark
     icon_formelement  varchar(255) DEFAULT ''  NOT NULL,
     position_x        float        DEFAULT '0' NOT NULL,
     position_y        float        DEFAULT '0' NOT NULL,
+    sorting           int(11) DEFAULT '0' NOT NULL,
     interactive_image int(11) DEFAULT '0' NOT NULL,
     PRIMARY KEY (uid)
 );

@@ -1,9 +1,11 @@
 {
   "name": "vnc-interactive-image",
   "version": "1.0.0",
-  "main": "./js/index.js",
+  "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "sass --watch ./scss:../../Public/Css/Frontend",
+    "build": "sass ./scss:../../Public/Css/Frontend"
   },
   "author": "",
   "license": "ISC",

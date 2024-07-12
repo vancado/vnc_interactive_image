@@ -1,99 +1,126 @@
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    /* opacity: 0.7; */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .img-container {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .marks-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .marks {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 .mark-icon {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    padding: 5px;
-    background-color: #fff;
-    animation: pulse 2s infinite;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: pulse 2s infinite;
 }
-
 .mark-icon.active {
-    animation: none;
-    background-color: rgba(56, 56, 235, 0.802);
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.1);
-        /* opacity: 0.7; */
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+  animation: none;
+  background-color: rgba(56, 56, 235, 0.802);
 }
 
 .popover {
-    position: absolute;
-    display: none;
-    overflow: scroll;
-    z-index: 1000;
-    height: 10rem;
-    width: 10rem;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 0.2rem;
-    font-size: 1rem;
-    /* white-space: nowrap; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  display: none;
+  overflow: auto;
+  z-index: 1000;
+  height: auto;
+  max-height: 10rem;
+  width: 12rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 0.2rem;
+  font-size: 1rem;
+  /* white-space: nowrap; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 .popover.active {
-    display: block;
-    animation: fadeIn   0.5s;
+  display: block;
+  animation: fadeIn 0.5s;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.information-box {
+  display: block;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, 0.5);
+  height: fit-content;
+  padding: 30px 22px;
+  width: 100%;
+}
+.information-box.active {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+.information-before::before {
+  background-size: contain;
+  height: 30px;
+  left: 0;
+  position: relative;
+  width: 30px;
+}
+
+.information-after::after {
+  background-size: contain;
+  border-radius: 50%;
+  height: 30px;
+  right: 0;
+  position: relative;
+  width: 30px;
 }
 
 @media (min-width: 1024px) {
-    .mark-icon {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
+  .mark-icon {
+    width: 2rem;
+    height: 2rem;
+  }
 }
-
 @media (min-width: 768px) and (max-width: 1023px) {
-    .mark-icon {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
+  .mark-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+@media (min-width: 360px) and (max-width: 767px) {
+  .mark-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 }
 
-@media (min-width: 360px) and (max-width: 767px) {
-    .mark-icon {
-        width: 1.2rem;
-        height: 1.2rem;
-    }
-}
+/*# sourceMappingURL=interactive-image.css.map */

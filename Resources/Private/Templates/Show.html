@@ -9,40 +9,76 @@
 
     <f:if condition="{interactiveImage}">
         <f:then>
-            <div class="container">
+            <div class="container" data-icon-mode="{interactiveImage.txVncinteractiveimageIconMode}">
                 <div class="row heading-block border-bottom-0 mb-2">
                     <h2>{interactiveImage.txVncinteractiveimageName}</h2>
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="img-container">
-                            <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
-                                alt="{interactiveImage.txVncinteractiveimageName}" />
-                            <div class="marks-container">
-                                <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark">
-                                    <div class="marks"
-                                        style="left: {mark.positionX * 100}%; top: {mark.positionY * 100}%;">
-                                        <f:switch expression="{interactiveImage.txVncinteractiveimageIconMode}">
-                                            <f:case value="same">
-                                                <f:image class="mark-icon" data-uid="{mark.uid}"
-                                                    image="{interactiveImage.txVncinteractiveimageIcon}"
-                                                    alt="{mark.text}" />
-                                                <div class="popover" id="popover-{mark.uid}">
+                        <div class="col-8">
+                            <div class="img-container">
+                                <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
+                                    alt="{interactiveImage.txVncinteractiveimageName}" />
+                                <div class="marks-container">
+                                    <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark">
+                                        <div class="marks"
+                                            style="left: {mark.positionX * 100}%; top: {mark.positionY * 100}%;">
+                                            <f:image class="mark-icon" data-uid="{mark.uid}"
+                                                image="{interactiveImage.txVncinteractiveimageIcon}"
+                                                alt="{mark.title}" />
+                                            <f:if
+                                                condition="{interactiveImage.txVncinteractiveimageIconMode} == 'same'">
+                                                <div class="popover variant" data-variant="information-box"
+                                                    id="popover-{mark.uid}">
                                                     <h4 class="h4">{mark.title}</h4>
-                                                    <p class="">
+                                                    <p class="popover-body">
                                                         <f:format.raw>
-                                                        {mark.bodytext}
+                                                            {mark.bodytext}
                                                         </f:format.raw>
                                                     </p>
                                                 </div>
-                                            </f:case>
-                                        </f:switch>
-                                    </div>
-                                </f:for>
+                                            </f:if>
+                                        </div>
+                                    </f:for>
+                                </div>
                             </div>
                         </div>
+                        <f:if condition="{interactiveImage.txVncinteractiveimageIconMode} == 'different'">
+                            <div class="col-4 variant" data-variant="information-box">
+                                <div class="information-box container ">
+                                    <div class="row mb-4">
+                                        <div class="information-nav justify-content-between">
+                                            <div class="d-flex justify-content-between">
+                                                <button class="btn information-before" type="submit">Vorherige</button>
+                                                <button class="btn information-after" type="submit">Nächste</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark"
+                                        iteration="markIterator">
+                                        <f:if condition="{markIterator.isFirst}">
+                                            <div class="row">
+                                                <div class="information-header d-flex justify-content-start">
+                                                    <f:image class="mark-icon active" data-uid="{mark.uid}"
+                                                        image="{interactiveImage.txVncinteractiveimageIcon}"
+                                                        alt="{mark.title}" />
+                                                    <h4 class="h4 p-1">{mark.title}</h4>
+                                                </div>
+                                                <div class="information-text">
+                                                    <f:format.raw>
+                                                        {mark.bodytext}
+                                                    </f:format.raw>
+                                                </div>
+                                            </div>
+                                        </f:if>
+                                    </f:for>
+                                </div>
+                        </f:if>
                     </div>
                 </div>
+            </div>
+            </div>
             </div>
         </f:then>
     </f:if>

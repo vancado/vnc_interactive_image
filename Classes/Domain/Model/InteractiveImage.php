@@ -30,6 +30,11 @@ class InteractiveImage extends AbstractEntity
     protected $txVncinteractiveimageIcon = null;
 
     /**
+     * @var string
+     */
+    protected $txVncinteractiveimageIconFormelement = '';
+
+    /**
      * @var ObjectStorage<\Vancado\VncInteractiveImage\Domain\Model\Mark>
      * @Extbase\ORM\Cascade("remove")
      */
@@ -78,6 +83,16 @@ class InteractiveImage extends AbstractEntity
     public function setTxVncinteractiveimageIcon(?FileReference $txVncinteractiveimageIcon): void
     {
         $this->txVncinteractiveimageIcon = $txVncinteractiveimageIcon;
+    }
+
+    public function getTxVncinteractiveimageIconFormelement(): string
+    {
+        return $this->txVncinteractiveimageIconFormelement;
+    }
+
+    public function setTxVncinteractiveimageIconFormelement(string $txVncinteractiveimageIconFormelement): void
+    {
+        $this->txVncinteractiveimageIconFormelement = $txVncinteractiveimageIconFormelement;
     }
 
     public function getTxVncinteractiveimageMarks(): ?ObjectStorage

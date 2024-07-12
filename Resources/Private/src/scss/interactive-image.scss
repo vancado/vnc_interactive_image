@@ -64,11 +64,15 @@ $padding: 5px;
 }
 
 .mark-icon {
+  color: black;
+  filter: hue-rotate(90deg);
   width: $mark-icon-size-default;
   height: $mark-icon-size-default;
   border-radius: $border-radius;
-  // padding: $padding;
   background-color: $mark-icon-bg-color;
+  display: flex; /* Flexbox aktivieren */
+  align-items: center; /* Vertikale Zentrierung */
+  justify-content: center; /* Horizontale Zentrierung */
   @include pulse;
 
   &.active {

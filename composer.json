@@ -9,8 +9,19 @@
     }
   ],
   "license": "GPL-2.0-or-later",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://composer.typo3.org/"
+    },
+    {
+      "type": "git",
+      "url": "git@github.com:vancado/vnc-icon-formelement.git"
+    }
+  ],
   "require": {
-    "typo3/cms-core": "^11.5 || ^12.0"
+    "typo3/cms-core": "^11.5 || ^12.0",
+    "vancado/vnc-icon-formelement": "^12.0"
   },
   "require-dev": {
     "typo3/testing-framework": "^6.8"

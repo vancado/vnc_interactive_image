@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Service\ImageService;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use Vancado\VncInteractiveImage\Domain\Model\InteractiveImage;
 use Vancado\VncInteractiveImage\Domain\Model\Mark;
@@ -34,6 +33,8 @@ class SetMarker extends AbstractFormElement
         $row = $this->data['databaseRow'];
         $parameterArray = $this->data['parameterArray'];
         $image = null;
+        $iconUrl = null;
+        $iconFormElement = null;
         /** @var InteractiveImage $interactiveImage */
         $interactiveImage = $interactiveImageRepository->findByUid((int)$row['uid']);
 
@@ -92,12 +93,48 @@ class SetMarker extends AbstractFormElement
         $itemValue = $parameterArray['itemFormElValue'];
         $attributes['class'] = implode(' ', $classes);
 
+        if ($interactiveImage->getTxVncinteractiveimageIconMode() === 'same') {
+            try {
+                /** @var FileReference[] $fileObjects */
+                $fileObjects = $fileRepository->findByRelation(
+                    'tt_content',
+                    'tx_vncinteractiveimage_icon',
+                    (int)$row['uid']
+                );
+            } catch (FileDoesNotExistException $e) {
+                return ['html' => '<div>' . LocalizationUtility::translate(
+                        'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vnc_interactive_image_vncinteractiveimage.error.no_image_file'
+                    ) . '</div>'];
+            }
+
+            if (sizeof($fileObjects) > 0) {
+                $fileObject = $fileObjects[0];
+                $iconUrl = $fileObject->getOriginalFile()->getPublicUrl();
+            }
+
+            if ($interactiveImage->getTxVncinteractiveimageIconFormelement() != '') {
+                $iconUrl = '';
+                $iconFormElement = '<i class="' . $interactiveImage->getTxVncinteractiveimageIconFormelement() . '"></i>';
+            }
+        }
+
         $markers = [];
         if ($interactiveImage) {
             /** @var Mark $mark */
+            $count = 0;
             foreach ($interactiveImage->getTxVncinteractiveimageMarks() as $mark) {
                 $left = $mark->getPositionX() * 100;
                 $top = $mark->getPositionY() * 100;
+
+                $numberDiv = $interactiveImage->getTxVncinteractiveimageIconMode() == 'numbers' ?
+                    '<div class="number">' . (++$count) . '</div>' : '';
+
+                $sameIconContent = $interactiveImage->getTxVncinteractiveimageIconMode() == 'same' && $iconUrl ?
+                    '<img src="' . $iconUrl . '" />' : '';
+
+                $differentIcon = $interactiveImage->getTxVncinteractiveimageIconMode() == 'different' ?
+                    $this->getDifferentIcon($mark) : '';
+
                 $markers[] = '<div 
                     title="' . htmlentities($mark->getTitle()) . '" 
                     class="setMarkerMarkers set-marker-marker" 
@@ -111,7 +148,12 @@ class SetMarker extends AbstractFormElement
                         top: calc(' . $top .'% - 14.5px);
                     "
                     draggable="true"
-                ></div>';
+                >
+                    ' . $numberDiv . '
+                    ' . $sameIconContent . '
+                    ' . $iconFormElement . '
+                    ' . $differentIcon . '
+                </div>';
             }
         }
 
@@ -130,5 +172,37 @@ class SetMarker extends AbstractFormElement
         $resultArray['html'] = implode(LF, $html);
 
         return $resultArray;
+    }
+
+    private function getDifferentIcon(Mark $mark) : string {
+        /** @var FileRepository $fileRepository */
+        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+
+        if (empty($mark->getUid())) {
+            return '';
+        }
+
+        try {
+            /** @var FileReference[] $fileObjects */
+            $fileObjects = $fileRepository->findByRelation(
+                'tx_vncinteractiveimage_domain_model_mark',
+                'icon',
+                (int) $mark->getUid()
+            );
+        } catch (FileDoesNotExistException $e) {
+            return '';
+        }
+
+        if (sizeof($fileObjects) > 0) {
+            $fileObject = $fileObjects[0];
+            $iconUrl = $fileObject->getOriginalFile()->getPublicUrl();
+            return '<img src="' . $iconUrl . '" />';
+        }
+
+        if ($mark->getIconFormelement() != '') {
+            return '<i class="' . $mark->getIconFormelement() . '"></i>';
+        }
+
+        return '';
     }
 }

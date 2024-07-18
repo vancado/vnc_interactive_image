@@ -12,6 +12,7 @@ plugin.tx_vncinteractiveimage_vncinteractive {
 page {
     includeCSS {
         interactiveImageStyles = EXT:vnc_interactive_image/Resources/Public/Css/Frontend/interactive-image.css
+        nucleoIcons = EXT:vnc_icon_formelement/Resources/Public/Libraries/Nucleo/css/icons.css
     }
     includeJS {
         interactiveImageScript = EXT:vnc_interactive_image/Resources/Public/JavaScript/interactive-image.js

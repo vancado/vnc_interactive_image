@@ -7,7 +7,6 @@ namespace Vancado\VncInteractiveImage\Hook;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class PageRendererRenderPreProcess
 {

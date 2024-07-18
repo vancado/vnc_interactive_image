@@ -1,12 +1,82 @@
-<html
-        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-        data-namespace-typo3-fluid="true"
->
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
+<body>
 <div>
-    <f:comment>
-        <f:debug>{interactiveImage}</f:debug>
-    </f:comment>
+    <f:debug>{interactiveImage}</f:debug>
 </div>
+
+<f:if condition="{interactiveImage}">
+    <f:then>
+        <div class="container" data-icon-mode="{interactiveImage.txVncinteractiveimageIconMode}">
+            <div class="row heading-block border-bottom-0 mb-2">
+                <h2>{interactiveImage.txVncinteractiveimageName}</h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="img-container">
+                            <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
+                                     alt="{interactiveImage.txVncinteractiveimageName}" />
+                            <div class="marks-container">
+                                <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark"
+                                       iteration="iterator">
+                                    <div class="marks"
+                                         style="left: {mark.positionX * 100}%; top: {mark.positionY * 100}%;">
+
+                                        <!-- 'same' Mode -->
+                                        <f:if condition="{interactiveImage.txVncinteractiveimageIconMode} === 'same'">
+                                            <div class="mark-icon" data-uid="{mark.uid}" aria-label="{mark.title}">
+                                                <f:if condition="{interactiveImage.txVncinteractiveimageIcon}">
+                                                    <f:image class="mark-icon-image"
+                                                             image="{interactiveImage.txVncinteractiveimageIcon}"
+                                                             alt="{mark.title}" aria-label="{mark.title}" />
+                                                </f:if>
+                                                <f:if condition="{interactiveImage.txVncinteractiveimageIconFormelement}">
+                                                    <i class="{interactiveImage.txVncinteractiveimageIconFormelement}"></i>
+                                                </f:if>
+                                            </div>
+                                        </f:if>
+
+                                        <!-- 'different' Mode -->
+                                        <f:if condition="{interactiveImage.txVncinteractiveimageIconMode} === 'different'">
+                                            <div class="mark-icon" data-uid="{mark.uid}" aria-label="{mark.title}">
+                                                <f:if condition="{mark.iconFormelement}">
+                                                    <i class="{mark.iconFormelement}"></i>
+                                                </f:if>
+                                                <f:if condition="{mark.icon}">
+                                                    <f:image class="mark-icon-image"
+                                                             image="{mark.icon}"
+                                                             alt="{mark.title}" aria-label="{mark.title}" />
+                                                </f:if>
+                                            </div>
+                                        </f:if>
+
+                                        <!-- 'numbers' Mode -->
+                                        <f:if condition="{interactiveImage.txVncinteractiveimageIconMode} === 'numbers'">
+                                            <div class="mark-icon number" data-uid="{mark.uid}"
+                                                 aria-label="{mark.title}">
+                                                {iterator.cycle}
+                                            </div>
+                                        </f:if>
+
+                                        <div class="popover variant" data-variant="information-box"
+                                             id="popover-{mark.uid}">
+                                            <h4 class="h4">{mark.title}</h4>
+                                            <p class="popover-body">
+                                                <f:format.raw>{mark.bodytext}</f:format.raw>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </f:for>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:then>
+</f:if>
+</body>
 
 </html>

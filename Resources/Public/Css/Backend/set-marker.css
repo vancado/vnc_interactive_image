@@ -13,4 +13,30 @@
     outline: 2px solid #fff;
     -webkit-border-radius: 100%;
     cursor: pointer;
+    text-align: center;
+    color: #fff;
+}
+
+.set-marker-marker .number {
+    position: absolute;
+    left: -14px;
+    top: -14px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.set-marker-marker img {
+    position: absolute;
+    left: -12px;
+    top: -12px;
+    width: 24px;
+    height: 24px;
+}
+
+.set-marker-marker i.icon {
+    position: absolute;
+    left: -5.5px;
+    top: -5.5px;
 }

@@ -24,7 +24,9 @@ class IconModeCondition
                 ->execute()
                 ->fetch();
 
-            return $interactiveImage !== false && $interactiveImage['tx_vncinteractiveimage_icon_mode'] === 'different';
+            if ($interactiveImage !== false) {
+                return $interactiveImage['tx_vncinteractiveimage_icon_mode'] === 'different';
+            }
         }
 
         return false;

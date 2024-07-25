@@ -28,6 +28,11 @@ class Mark extends AbstractEntity
     protected $iconFormelement = '';
 
     /**
+     * @var string
+     */
+    protected $iconSelection = '';
+
+    /**
      * @var float
      */
     protected $positionX = 0.0;
@@ -75,6 +80,16 @@ class Mark extends AbstractEntity
     public function setIconFormelement(string $iconFormelement): void
     {
         $this->iconFormelement = $iconFormelement;
+    }
+
+    public function getIconSelection(): string
+    {
+        return $this->iconSelection;
+    }
+
+    public function setIconSelection(string $iconSelection): void
+    {
+        $this->iconSelection = $iconSelection;
     }
 
     public function getPositionX(): float

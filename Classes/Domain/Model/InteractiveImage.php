@@ -5,7 +5,6 @@ namespace Vancado\VncInteractiveImage\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class InteractiveImage extends AbstractEntity
 {
@@ -36,9 +35,9 @@ class InteractiveImage extends AbstractEntity
 
     /**
      * @var ObjectStorage<\Vancado\VncInteractiveImage\Domain\Model\Mark>
-     * @Extbase\ORM\Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected $txVncinteractiveimageMarks = null;
+    protected $txVncinteractiveimageMarks;
 
     public function __construct()
     {
@@ -95,12 +94,12 @@ class InteractiveImage extends AbstractEntity
         $this->txVncinteractiveimageIconFormelement = $txVncinteractiveimageIconFormelement;
     }
 
-    public function getTxVncinteractiveimageMarks(): ?ObjectStorage
+    public function getTxVncinteractiveimageMarks(): ObjectStorage
     {
         return $this->txVncinteractiveimageMarks;
     }
 
-    public function setTxVncinteractiveimageMarks(?ObjectStorage $txVncinteractiveimageMarks): void
+    public function setTxVncinteractiveimageMarks(ObjectStorage $txVncinteractiveimageMarks): void
     {
         $this->txVncinteractiveimageMarks = $txVncinteractiveimageMarks;
     }

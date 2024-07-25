@@ -18,7 +18,7 @@ call_user_func(function () {
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'pages,layout,select_key,recursive';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'tx_vncinteractiveimage_name, tx_vncinteractiveimage_image, tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon, tx_vncinteractiveimage_icon_formelement, tx_vncinteractiveimage_setmarker, tx_vncinteractiveimage_marks';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'tx_vncinteractiveimage_name, tx_vncinteractiveimage_image, tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon_selection, tx_vncinteractiveimage_icon, tx_vncinteractiveimage_icon_formelement, tx_vncinteractiveimage_setmarker, tx_vncinteractiveimage_marks';
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_name'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.name',
@@ -56,9 +56,27 @@ call_user_func(function () {
         ]
     ];
 
+    $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon_selection'] = [
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.icon_selection',
+        'displayCond' => 'FIELD:tx_vncinteractiveimage_icon_mode:=:same',
+        'onChange' => 'reload',
+        'config' => [
+            'type' => 'radio',
+            'items' => [
+                ['Upload Icon', 'upload'],
+                ['Select from Icon Formelement', 'formelement']
+            ]
+        ]
+    ];
+
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.icon',
-        'displayCond' => 'FIELD:tx_vncinteractiveimage_icon_mode:=:same',
+        'displayCond' => [
+            'AND' => [
+                'FIELD:tx_vncinteractiveimage_icon_mode:=:same',
+                'FIELD:tx_vncinteractiveimage_icon_selection:=:upload'
+            ]
+        ],
         'config' => [
             'type' => 'file',
             'appearance' => [
@@ -72,7 +90,12 @@ call_user_func(function () {
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon_formelement'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.tx_vncinteractiveimage_icon_formelement',
-        'displayCond' => 'FIELD:tx_vncinteractiveimage_icon_mode:=:same',
+        'displayCond' => [
+            'AND' => [
+                'FIELD:tx_vncinteractiveimage_icon_mode:=:same',
+                'FIELD:tx_vncinteractiveimage_icon_selection:=:formelement'
+            ]
+        ],
         'config' => [
             'type' => 'input',
             'renderType' => 'selectIcon',

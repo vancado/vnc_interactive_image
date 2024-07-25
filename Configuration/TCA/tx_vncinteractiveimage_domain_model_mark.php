@@ -24,7 +24,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'title, bodytext, icon, icon_formelement, position_x, position_y']
+        '1' => ['showitem' => 'title, bodytext, icon_selection, icon, icon_formelement, position_x, position_y']
     ],
     'columns' => [
         'title' => [
@@ -47,16 +47,39 @@ return [
                 'enableRichtext' => true,
             ]
         ],
+        'icon_selection' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.icon_selection',
+            'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
+            'onChange' => 'reload',
+            'config' => [
+                'type' => 'radio',
+                'items' => [
+                    ['Upload Icon', 'upload'],
+                    ['Select from Icon Formelement', 'formelement']
+                ]
+            ]
+        ],
         'icon' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.icon',
-            'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
+            'displayCond' => [
+                'AND' => [
+                    'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
+                    'FIELD:icon_selection:=:upload'
+                ]
+            ],
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon')
         ],
         'icon_formelement' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.icon_formelement',
-            'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
+            'displayCond' => [
+                'AND' => [
+                    'USER:Vancado\\VncInteractiveImage\\Condition\\IconModeCondition->checkIconMode',
+                    'FIELD:icon_selection:=:formelement'
+                ]
+            ],
             'config' => [
                 'type' => 'input',
                 'renderType' => 'selectIcon',

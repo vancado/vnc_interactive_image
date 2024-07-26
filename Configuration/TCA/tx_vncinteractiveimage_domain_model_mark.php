@@ -24,7 +24,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'title, bodytext, icon_selection, icon, icon_formelement, position_x, position_y']
+        '1' => ['showitem' => 'title, image, bodytext, link, icon_selection, icon, icon_formelement, position_x, position_y']
     ],
     'columns' => [
         'title' => [
@@ -36,6 +36,53 @@ return [
                 'eval' => 'trim'
             ]
         ],
+        'image' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.image',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'sys_file_reference',
+                'foreign_field' => 'uid_foreign',
+                'foreign_sortby' => 'sorting_foreign',
+                'foreign_label' => 'uid_local',
+                'foreign_selector' => 'uid_local',
+                'foreign_selector_fieldTcaOverride' => [
+                    'config' => [
+                        'appearance' => [
+                            'elementBrowserType' => 'file',
+                            'elementBrowserAllowed' => 'jpg,jpeg,png,svg'
+                        ]
+                    ]
+                ],
+                'filter' => [
+                    [
+                        'userFunc' => \TYPO3\CMS\Core\Resource\Filter\FileExtensionFilter::class . '->filterInlineChildren',
+                        'parameters' => [
+                            'allowedFileExtensions' => 'jpg,jpeg,png,svg'
+                        ]
+                    ]
+                ],
+                'appearance' => [
+                    'useSortable' => true,
+                    'headerThumbnail' => [
+                        'field' => 'uid_local',
+                        'width' => '45',
+                        'height' => '45'
+                    ],
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => false,
+                        'dragdrop' => true,
+                        'sort' => true,
+                        'hide' => true,
+                        'delete' => true
+                    ],
+                    'fileUploadAllowed' => true
+                ],
+                'maxitems' => 1,
+                'minitems' => 0
+            ]
+        ],
         'bodytext' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.bodytext',
@@ -45,6 +92,15 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'enableRichtext' => true,
+            ]
+        ],
+        'link' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.link',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'softref' => 'typolink'
             ]
         ],
         'icon_selection' => [

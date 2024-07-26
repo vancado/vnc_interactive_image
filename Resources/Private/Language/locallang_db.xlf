@@ -57,6 +57,18 @@
             <trans-unit id="flexform_interactive_images">
                 <source>Select Interactive Images</source>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon_selection">
+                <source>Icon Selection</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon_selection">
+                <source>Icon Selection</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.image">
+                <source>Image</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.link">
+                <source>Link</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

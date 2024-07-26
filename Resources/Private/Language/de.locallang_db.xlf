@@ -75,6 +75,22 @@
                 <source>Select Interactive Images</source>
                 <target>Interaktive Bilder auswählen</target>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon_selection" approved="yes">
+                <source>Icon Selection</source>
+                <target>Icon Auswahl</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.icon_selection" approved="yes">
+                <source>Icon Selection</source>
+                <target>Icon Auswahl</target>
+            </trans-unit>
+             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.image" approved="yes">
+                 <source>Image</source>
+                 <target>Bild</target>
+             </trans-unit>
+             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.link" approved="yes">
+                 <source>Link</source>
+                 <target>Link</target>
+             </trans-unit>
         </body>
     </file>
 </xliff>

@@ -33,6 +33,16 @@ class Mark extends AbstractEntity
     protected $iconSelection = '';
 
     /**
+     * @var FileReference
+     */
+    protected $image = null;
+
+    /**
+     * @var string
+     */
+    protected $link = '';
+
+    /**
      * @var float
      */
     protected $positionX = 0.0;
@@ -90,6 +100,26 @@ class Mark extends AbstractEntity
     public function setIconSelection(string $iconSelection): void
     {
         $this->iconSelection = $iconSelection;
+    }
+
+    public function getImage(): ?FileReference
+    {
+        return $this->image;
+    }
+
+    public function setImage(FileReference $image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getLink(): string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): void
+    {
+        $this->link = $link;
     }
 
     public function getPositionX(): float

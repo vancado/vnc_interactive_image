@@ -1,16 +1,23 @@
+$primary-color: #0189d9;
 $popover-bg-color: #fff;
 $popover-border-color: #ccc;
+$btn-color: black;
 $popover-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$mark-icon-size-default: 2rem;
+$mark-icon-size-xl: 2rem;
 $mark-icon-size-lg: 2rem;
 $mark-icon-size-md: 1.5rem;
-$mark-icon-size-sm: 1.2rem;
-$mark-icon-size-default: 2rem;
-$mark-icon-bg-color: #fff;
+$mark-icon-size-sm: 1rem;
+$mark-icon-bg-color: #0189d9;
 $mark-icon-active-bg-color: rgba(56, 56, 235, 0.802);
 $pulse-animation-duration: 2s;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
 $padding: 5px;
+
+a {
+  text-decoration: none;
+}
 
 @mixin pulse {
   animation: pulse $pulse-animation-duration infinite;
@@ -23,15 +30,12 @@ $padding: 5px;
 @keyframes pulse {
   0% {
     transform: scale(1);
-    opacity: 1;
   }
   50% {
     transform: scale(1.1);
-    /* opacity: 0.7; */
   }
   100% {
     transform: scale(1);
-    opacity: 1;
   }
 }
 
@@ -41,6 +45,15 @@ $padding: 5px;
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200px;
+  }
+  100% {
+    background-position: calc(200px + 100%);
   }
 }
 
@@ -57,27 +70,51 @@ $padding: 5px;
   height: 100%;
 }
 
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: 0 5px;
+}
+
 .marks {
   position: absolute;
   transform: translate(-50%, -50%);
   cursor: pointer;
 }
 
-.mark-icon {
+.marker {
   color: black;
-  filter: hue-rotate(90deg);
-  width: $mark-icon-size-default;
-  height: $mark-icon-size-default;
   border-radius: $border-radius;
   background-color: $mark-icon-bg-color;
-  display: flex; /* Flexbox aktivieren */
-  align-items: center; /* Vertikale Zentrierung */
-  justify-content: center; /* Horizontale Zentrierung */
-  @include pulse;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.--box {
+    width: $mark-icon-size-md;
+    height: $mark-icon-size-md;
+  }
+}
+
+.mark-icon-image {
+  width: $mark-icon-size-default;
+  height: $mark-icon-size-default;
+  color: black;
+  border-radius: $border-radius;
+  background-color: $mark-icon-bg-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.active {
     animation: none;
     background-color: $mark-icon-active-bg-color;
+  }
+
+  &.number {
+    padding: 10px;
   }
 }
 
@@ -95,7 +132,6 @@ $padding: 5px;
   padding: 10px;
   margin-top: 0.2rem;
   font-size: 1rem;
-  /* white-space: nowrap; */
   box-shadow: $popover-box-shadow;
 
   &.active {
@@ -104,60 +140,136 @@ $padding: 5px;
   }
 }
 
-.information-box {
+.info-box {
   display: block;
   background: #fff;
   border-radius: 0;
   box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, .5);
-  height: fit-content;  
-  // margin-top: 50px;
-  padding: 30px 22px;
+  height: fit-content;
+  padding: 1rem;
   width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px; 
+
+  .info-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .info-link {
+    width: auto;
+    height: auto;
+    background-color: $btn-color;
+    padding: 0.7em;
+    color: white;
+    border-radius: 0;
+    border-color: $btn-color;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    background-size: 200% auto;
+    transition: transform 0.2s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.1);
+      background-image: linear-gradient(90deg, $btn-color 0%, lighten($btn-color, 40%) 50%, $btn-color 100%);
+      animation: shine 0.5s forwards;
+    }
+  }
+}
+
+.info-item {
+  display: none;
 
   &.active {
     display: block;
+    padding: 0.5rem;
     @include fade-in;
   }
 }
 
-.information-before::before {
+.info-before::before {
   background-size: contain;
-  // content: "<";
   height: 30px;
   left: 0;
   position: relative;
   width: 30px;
 }
 
-.information-after::after {
+.info-after::after {
   background-size: contain;
   border-radius: 50%;
-  // content: ">";
   height: 30px;
   right: 0;
   position: relative;
   width: 30px;
-
 }
 
-// Media Queries
-@media (min-width: 1024px) {
-  .mark-icon {
+@media (min-width: 992px) {
+  .info-box {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .mark-icon-image {
     width: $mark-icon-size-lg;
     height: $mark-icon-size-lg;
+
+    &.number {
+      font-size: 1.5rem;
+    }
+  }
+
+  .img-container {
+    width: 100%;
+  }
+
+  .info-box {
+    width: 100%;
+    height: auto;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .mark-icon {
+@media (max-width: 767.98px) {
+  .mark-icon-image {
     width: $mark-icon-size-md;
     height: $mark-icon-size-md;
+
+    &.number {
+      font-size: 1rem;
+    }
+  }
+
+  .img-container {
+    width: 100%;
+  }
+
+  .info-box {
+    width: 100%;
   }
 }
 
-@media (min-width: 360px) and (max-width: 767px) {
-  .mark-icon {
+@media (max-width: 575.98px) {
+  .mark-icon-image {
     width: $mark-icon-size-sm;
     height: $mark-icon-size-sm;
+
+    &.number {
+      font-size: 0.8rem;
+    }
+  }
+
+  .img-container {
+    width: 100%;
+  }
+
+  .info-box {
+    width: 100%;
   }
 }

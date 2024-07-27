@@ -1,15 +1,16 @@
+a {
+  text-decoration: none;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);
-    opacity: 1;
   }
   50% {
     transform: scale(1.1);
-    /* opacity: 0.7; */
   }
   100% {
     transform: scale(1);
-    opacity: 1;
   }
 }
 @keyframes fadeIn {
@@ -18,6 +19,14 @@
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: -200px;
+  }
+  100% {
+    background-position: calc(200px + 100%);
   }
 }
 .img-container {
@@ -33,27 +42,49 @@
   height: 100%;
 }
 
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: 0 5px;
+}
+
 .marks {
   position: absolute;
   transform: translate(-50%, -50%);
   cursor: pointer;
 }
 
-.mark-icon {
+.marker {
   color: black;
-  filter: hue-rotate(90deg);
+  border-radius: 50%;
+  background-color: #0189d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.marker.--box {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.mark-icon-image {
   width: 2rem;
   height: 2rem;
+  color: black;
   border-radius: 50%;
-  background-color: #fff;
-  display: flex; /* Flexbox aktivieren */
-  align-items: center; /* Vertikale Zentrierung */
-  justify-content: center; /* Horizontale Zentrierung */
-  animation: pulse 2s infinite;
+  background-color: #0189d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.mark-icon.active {
+.mark-icon-image.active {
   animation: none;
   background-color: rgba(56, 56, 235, 0.802);
+}
+.mark-icon-image.number {
+  padding: 10px;
 }
 
 .popover {
@@ -70,7 +101,6 @@
   padding: 10px;
   margin-top: 0.2rem;
   font-size: 1rem;
-  /* white-space: nowrap; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .popover.active {
@@ -78,21 +108,56 @@
   animation: fadeIn 0.5s;
 }
 
-.information-box {
+.info-box {
   display: block;
   background: #fff;
   border-radius: 0;
   box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, 0.5);
   height: fit-content;
-  padding: 30px 22px;
+  padding: 1rem;
   width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
 }
-.information-box.active {
+.info-box .info-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.info-box .info-link {
+  width: auto;
+  height: auto;
+  background-color: black;
+  padding: 0.7em;
+  color: white;
+  border-radius: 0;
+  border-color: black;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background-size: 200% auto;
+  transition: transform 0.2s ease-in-out;
+}
+.info-box .info-link:hover {
+  transform: scale(1.1);
+  background-image: linear-gradient(90deg, black 0%, #666666 50%, black 100%);
+  animation: shine 0.5s forwards;
+}
+
+.info-item {
+  display: none;
+}
+.info-item.active {
   display: block;
+  padding: 0.5rem;
   animation: fadeIn 0.5s;
 }
 
-.information-before::before {
+.info-before::before {
   background-size: contain;
   height: 30px;
   left: 0;
@@ -100,7 +165,7 @@
   width: 30px;
 }
 
-.information-after::after {
+.info-after::after {
   background-size: contain;
   border-radius: 50%;
   height: 30px;
@@ -109,22 +174,55 @@
   width: 30px;
 }
 
-@media (min-width: 1024px) {
-  .mark-icon {
+@media (min-width: 992px) {
+  .info-box {
+    margin-top: 0;
+  }
+}
+@media (max-width: 991.98px) {
+  .mark-icon-image {
     width: 2rem;
     height: 2rem;
   }
+  .mark-icon-image.number {
+    font-size: 1.5rem;
+  }
+  .img-container {
+    width: 100%;
+  }
+  .info-box {
+    width: 100%;
+    height: auto;
+  }
 }
-@media (min-width: 768px) and (max-width: 1023px) {
-  .mark-icon {
+@media (max-width: 767.98px) {
+  .mark-icon-image {
     width: 1.5rem;
     height: 1.5rem;
   }
+  .mark-icon-image.number {
+    font-size: 1rem;
+  }
+  .img-container {
+    width: 100%;
+  }
+  .info-box {
+    width: 100%;
+  }
 }
-@media (min-width: 360px) and (max-width: 767px) {
-  .mark-icon {
-    width: 1.2rem;
-    height: 1.2rem;
+@media (max-width: 575.98px) {
+  .mark-icon-image {
+    width: 1rem;
+    height: 1rem;
+  }
+  .mark-icon-image.number {
+    font-size: 0.8rem;
+  }
+  .img-container {
+    width: 100%;
+  }
+  .info-box {
+    width: 100%;
   }
 }
 

@@ -107,6 +107,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   &.active {
     animation: none;

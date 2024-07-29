@@ -44,6 +44,11 @@ class InteractiveImage extends AbstractEntity
      */
     protected $txVncinteractiveimageMarks;
 
+    /**
+     * @var string
+     */
+    protected $txVncinteractiveimageLayout = '';
+
     public function __construct()
     {
         $this->txVncinteractiveimageMarks = new ObjectStorage();
@@ -117,5 +122,15 @@ class InteractiveImage extends AbstractEntity
     public function setTxVncinteractiveimageMarks(ObjectStorage $txVncinteractiveimageMarks): void
     {
         $this->txVncinteractiveimageMarks = $txVncinteractiveimageMarks;
+    }
+
+    public function getTxVncinteractiveimageLayout(): string
+    {
+        return $this->txVncinteractiveimageLayout;
+    }
+
+    public function setTxVncinteractiveimageLayout(string $txVncinteractiveimageLayout): void
+    {
+        $this->txVncinteractiveimageLayout = $txVncinteractiveimageLayout;
     }
 }

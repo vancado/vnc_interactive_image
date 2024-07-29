@@ -69,6 +69,9 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.link">
                 <source>Link</source>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.layout">
+                <source>Layout</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

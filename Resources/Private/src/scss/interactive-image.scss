@@ -4,20 +4,18 @@ $popover-border-color: #ccc;
 $btn-color: black;
 $popover-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $mark-icon-size-default: 2rem;
-$mark-icon-size-xl: 2rem;
-$mark-icon-size-lg: 2rem;
-$mark-icon-size-md: 1.5rem;
-$mark-icon-size-sm: 1rem;
+$mark-icon-size-xl: 2.4rem;
+$mark-icon-size-lg: 2.2rem;
+$mark-icon-size-md: 1.7rem;
+$mark-icon-size-sm: 1.3rem;
 $mark-icon-bg-color: #0189d9;
 $mark-icon-active-bg-color: rgba(56, 56, 235, 0.802);
+$nav-color: #d9d9d9;
+$nav-color-active: #0189d9;
 $pulse-animation-duration: 2s;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
 $padding: 5px;
-
-a {
-  text-decoration: none;
-}
 
 @mixin pulse {
   animation: pulse $pulse-animation-duration infinite;
@@ -31,9 +29,11 @@ a {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -43,6 +43,7 @@ a {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -52,14 +53,49 @@ a {
   0% {
     background-position: -200px;
   }
+
   100% {
     background-position: calc(200px + 100%);
   }
 }
 
+@keyframes close-effect {
+  0% {
+    border-radius: 0 0 0 30px;
+    padding: 5px;
+  }
+
+  50% {
+    // border-radius: 0 0 0 15px;
+  }
+
+  100% {
+    border-radius: 0 0 0 0;
+    padding: 10px;
+  }
+}
+
+@keyframes fillChange {
+  from {
+    fill: $nav-color;
+  }
+
+  to {
+    fill: $nav-color-active;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
 .img-container {
   position: relative;
   width: 100%;
+
+  &.full-width {
+    width: 100%;
+  }
 }
 
 .marks-container {
@@ -70,11 +106,11 @@ a {
   height: 100%;
 }
 
-.dot {
+.nav-point {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: grey;
+  background-color: $nav-color;
   margin: 0 5px;
 }
 
@@ -82,13 +118,38 @@ a {
   position: absolute;
   transform: translate(-50%, -50%);
   cursor: pointer;
+
+  .mark-icon {
+    width: $mark-icon-size-default;
+    height: $mark-icon-size-default;
+    color: black;
+    border-radius: $border-radius;
+    background-color: $mark-icon-bg-color;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &.active {
+      animation: none;
+      background-color: $mark-icon-active-bg-color;
+    }
+
+    &.number {
+      padding: 10px;
+    }
+  }
 }
 
 .marker {
   color: black;
   border-radius: $border-radius;
   background-color: $mark-icon-bg-color;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
 
@@ -98,39 +159,17 @@ a {
   }
 }
 
-.mark-icon-image {
-  width: $mark-icon-size-default;
-  height: $mark-icon-size-default;
-  color: black;
-  border-radius: $border-radius;
-  background-color: $mark-icon-bg-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  &.active {
-    animation: none;
-    background-color: $mark-icon-active-bg-color;
-  }
-
-  &.number {
-    padding: 10px;
-  }
-}
-
 .popover {
   position: absolute;
   display: none;
-  overflow: auto;
-  z-index: 1000;
-  height: auto;
-  max-height: 10rem;
-  width: 12rem;
+  left: 200%;
+  top: 0;
+  cursor: auto;
+  // overflow: auto;
+  z-index: 9999;
+  min-height: 10rem;
+  max-height: auto;
+  min-width: 25rem;
   background-color: $popover-bg-color;
   border: 1px solid $popover-border-color;
   border-radius: 5px;
@@ -143,6 +182,62 @@ a {
     display: block;
     @include fade-in;
   }
+
+  .popover-img {
+    width: 100%;
+    height: 10rem;
+    // aspect-ratio: 3 / 4;
+    object-fit: fill;
+    border-radius: 4px;
+  }
+
+  p {
+    max-width: 95%;
+    margin-bottom: 0 !important;
+  }
+
+  .popover-close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    z-index: 10;
+    background-color: $primary-color;
+    border-radius: 0 0 0 30px;
+    padding: 5px;
+    transition: transform 0.2s ease-in-out;
+
+    svg>path {
+      fill: white;
+    }
+
+    &:hover {
+      animation: close-effect 0.2s forwards;
+    }
+  }
+
+  .popover-link {
+    width: auto;
+    height: auto;
+    background-color: $primary-color;
+    padding: 0.7em;
+    color: white;
+    border-radius: 0;
+    border-color: $primary-color;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    background-size: 200% auto;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+      background-image: linear-gradient(90deg, $primary-color 0%, lighten($primary-color, 10%) 30%, $primary-color 100%);
+      animation: shine 0.5s forwards;
+    }
+  }
 }
 
 .info-box {
@@ -154,7 +249,19 @@ a {
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 20px; 
+  margin-top: 20px;
+
+  .mark-icon {
+    width: $mark-icon-size-default;
+    height: $mark-icon-size-default;
+    color: black;
+    border-radius: $border-radius;
+    background-color: $mark-icon-bg-color;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
 
   .info-img {
     width: 100%;
@@ -167,11 +274,11 @@ a {
   .info-link {
     width: auto;
     height: auto;
-    background-color: $btn-color;
+    background-color: $primary-color;
     padding: 0.7em;
     color: white;
     border-radius: 0;
-    border-color: $btn-color;
+    border-color: $primary-color;
     font-weight: 600;
     cursor: pointer;
     display: inline-block;
@@ -179,11 +286,38 @@ a {
     overflow: hidden;
     background-size: 200% auto;
     transition: transform 0.2s ease-in-out;
-  
+
     &:hover {
       transform: scale(1.1);
-      background-image: linear-gradient(90deg, $btn-color 0%, lighten($btn-color, 40%) 50%, $btn-color 100%);
+      background-image: linear-gradient(90deg, $primary-color 0%, lighten($primary-color, 10%) 30%, $primary-color 100%);
       animation: shine 0.5s forwards;
+    }
+  }
+
+  .info-box-nav {
+
+    .info-before,
+    .info-after {
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
+
+      path {
+        fill: $nav-color;
+        transition: fill 0.3s ease-in-out;
+      }
+
+
+      &:hover {
+        transform: scale(1.3);
+
+        path {
+          animation: fillChange 0.3s forwards;
+        }
+      }
+
+      &:not(:hover) {
+        transform: scale(1);
+      }
     }
   }
 }
@@ -222,12 +356,16 @@ a {
 }
 
 @media (max-width: 991.98px) {
-  .mark-icon-image {
+  .mark-icon {
     width: $mark-icon-size-lg;
     height: $mark-icon-size-lg;
 
     &.number {
       font-size: 1.5rem;
+    }
+
+    &.icon {
+      padding: 5px;
     }
   }
 
@@ -242,12 +380,16 @@ a {
 }
 
 @media (max-width: 767.98px) {
-  .mark-icon-image {
+  .mark-icon {
     width: $mark-icon-size-md;
     height: $mark-icon-size-md;
 
     &.number {
       font-size: 1rem;
+    }
+
+    &.icon {
+      padding: 10px;
     }
   }
 
@@ -261,12 +403,16 @@ a {
 }
 
 @media (max-width: 575.98px) {
-  .mark-icon-image {
+  .mark-icon {
     width: $mark-icon-size-sm;
     height: $mark-icon-size-sm;
 
     &.number {
       font-size: 0.8rem;
+    }
+
+    &.icon {
+      padding: 15px;
     }
   }
 

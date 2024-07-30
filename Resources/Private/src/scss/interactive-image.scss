@@ -1,17 +1,17 @@
-$primary-color: #0189d9;
-$popover-bg-color: #fff;
-$popover-border-color: #ccc;
+$primary-color: black;
+$background-color: #fff;
+$border-color: #ccc;
 $btn-color: black;
-$popover-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $mark-icon-size-default: 2rem;
 $mark-icon-size-xl: 2.4rem;
 $mark-icon-size-lg: 2.2rem;
 $mark-icon-size-md: 1.7rem;
 $mark-icon-size-sm: 1.3rem;
-$mark-icon-bg-color: #0189d9;
+$mark-icon-bg-color: grey;
 $mark-icon-active-bg-color: rgba(56, 56, 235, 0.802);
 $nav-color: #d9d9d9;
-$nav-color-active: #0189d9;
+$nav-color-active: black;
 $pulse-animation-duration: 2s;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
@@ -29,11 +29,9 @@ $padding: 5px;
   0% {
     transform: scale(1);
   }
-
   50% {
     transform: scale(1.1);
   }
-
   100% {
     transform: scale(1);
   }
@@ -43,7 +41,6 @@ $padding: 5px;
   0% {
     opacity: 0;
   }
-
   100% {
     opacity: 1;
   }
@@ -53,7 +50,6 @@ $padding: 5px;
   0% {
     background-position: -200px;
   }
-
   100% {
     background-position: calc(200px + 100%);
   }
@@ -64,11 +60,6 @@ $padding: 5px;
     border-radius: 0 0 0 30px;
     padding: 5px;
   }
-
-  50% {
-    // border-radius: 0 0 0 15px;
-  }
-
   100% {
     border-radius: 0 0 0 0;
     padding: 10px;
@@ -79,11 +70,12 @@ $padding: 5px;
   from {
     fill: $nav-color;
   }
-
   to {
     fill: $nav-color-active;
   }
 }
+
+
 
 a {
   text-decoration: none;
@@ -96,6 +88,10 @@ a {
   &.full-width {
     width: 100%;
   }
+}
+
+p {
+  margin-top: none!important;
 }
 
 .marks-container {
@@ -159,119 +155,57 @@ a {
   }
 }
 
-.popover {
-  position: absolute;
-  display: none;
-  left: 200%;
-  top: 0;
-  cursor: auto;
-  // overflow: auto;
-  z-index: 9999;
-  min-height: 10rem;
-  max-height: auto;
-  min-width: 25rem;
-  background-color: $popover-bg-color;
-  border: 1px solid $popover-border-color;
-  border-radius: 5px;
-  padding: 10px;
-  margin-top: 0.2rem;
-  font-size: 1rem;
-  box-shadow: $popover-box-shadow;
-
-  &.active {
-    display: block;
-    @include fade-in;
-  }
-
-  .popover-img {
-    width: 100%;
-    height: 10rem;
-    // aspect-ratio: 3 / 4;
-    object-fit: fill;
-    border-radius: 4px;
-  }
-
-  p {
-    max-width: 95%;
-    margin-bottom: 0 !important;
-  }
-
-  .popover-close {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    cursor: pointer;
-    z-index: 10;
-    background-color: $primary-color;
-    border-radius: 0 0 0 30px;
-    padding: 5px;
-    transition: transform 0.2s ease-in-out;
-
-    svg>path {
-      fill: white;
-    }
-
-    &:hover {
-      animation: close-effect 0.2s forwards;
-    }
-  }
-
-  .popover-link {
-    width: auto;
-    height: auto;
-    background-color: $primary-color;
-    padding: 0.7em;
-    color: white;
-    border-radius: 0;
-    border-color: $primary-color;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    background-size: 200% auto;
-    transition: transform 0.2s ease-in-out;
-
-    &:hover {
-      transform: scale(1.1);
-      background-image: linear-gradient(90deg, $primary-color 0%, lighten($primary-color, 10%) 30%, $primary-color 100%);
-      animation: shine 0.5s forwards;
-    }
-  }
-}
-
-.info-box {
+// Shared styles for popover and info-box
+.content-box {
   display: block;
-  background: #fff;
+  background: $background-color;
   border-radius: 0;
   box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, .5);
-  height: fit-content;
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
   margin-top: 20px;
 
-  .mark-icon {
-    width: $mark-icon-size-default;
-    height: $mark-icon-size-default;
-    color: black;
-    border-radius: $border-radius;
-    background-color: $mark-icon-bg-color;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
+  &.popover {
+    position: absolute;
+    display: none;
+    left: 200%;
+    top: 0;
+    cursor: auto;
+    min-height: 10rem;
+    max-height: auto;
+    min-width: 25rem;
+    border: 1px solid $border-color;
+    margin-top: 0.2rem;
+
+    &.active {
+      display: block;
+      @include fade-in;
+    }
+
+    .popover-close {
+      position: absolute;
+      right: 0px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 0 0 0 30px;
+      padding: 5px;
+      transition: transform 0.2s ease-in-out;
+
+      svg > path {
+        fill: $primary-color;
+      }
+    }
   }
 
-  .info-img {
+  .content-img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
+    height: 10rem;
     object-fit: cover;
     border-radius: 4px;
   }
 
-  .info-link {
+  .content-link {
     width: auto;
     height: auto;
     background-color: $primary-color;
@@ -289,15 +223,25 @@ a {
 
     &:hover {
       transform: scale(1.1);
-      background-image: linear-gradient(90deg, $primary-color 0%, lighten($primary-color, 10%) 30%, $primary-color 100%);
+      background-image: linear-gradient(
+        90deg,
+        $primary-color 0%,
+        lighten($primary-color, 10%) 30%,
+        $primary-color 100%
+      );
       animation: shine 0.5s forwards;
     }
   }
 
-  .info-box-nav {
+  .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
 
-    .info-before,
-    .info-after {
+    .nav-prev,
+    .nav-next {
       cursor: pointer;
       transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
 
@@ -305,7 +249,6 @@ a {
         fill: $nav-color;
         transition: fill 0.3s ease-in-out;
       }
-
 
       &:hover {
         transform: scale(1.3);
@@ -332,25 +275,8 @@ a {
   }
 }
 
-.info-before::before {
-  background-size: contain;
-  height: 30px;
-  left: 0;
-  position: relative;
-  width: 30px;
-}
-
-.info-after::after {
-  background-size: contain;
-  border-radius: 50%;
-  height: 30px;
-  right: 0;
-  position: relative;
-  width: 30px;
-}
-
 @media (min-width: 992px) {
-  .info-box {
+  .content-box {
     margin-top: 0;
   }
 }
@@ -373,7 +299,7 @@ a {
     width: 100%;
   }
 
-  .info-box {
+  .content-box {
     width: 100%;
     height: auto;
   }
@@ -397,7 +323,7 @@ a {
     width: 100%;
   }
 
-  .info-box {
+  .content-box {
     width: 100%;
   }
 }
@@ -420,7 +346,7 @@ a {
     width: 100%;
   }
 
-  .info-box {
+  .content-box {
     width: 100%;
   }
 }

@@ -30,19 +30,36 @@
 
             <div class="container" data-layout="{layout}" data-frame-layout="{frameLayout}">
                 <div class="row">
-                    <div class="col-lg-8 col-12">
-                        <div class="img-container">
-                            <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
-                                alt="{interactiveImage.txVncinteractiveimageName}" />
-                            <!-- Render Marks Container -->
-                            <f:render partial="MarksContainer"
-                                arguments="{interactiveImage: interactiveImage, layout: layout}" />
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <!-- Render Info Box -->
-                        <f:render partial="InfoBox" arguments="{interactiveImage: interactiveImage}" />
-                    </div>
+                    <f:if condition="{layout} === 'infoBox'">
+                        <f:then>
+                            <div class="col-lg-8 col-12">
+                                <div class="img-container">
+                                    <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
+                                        alt="{interactiveImage.txVncinteractiveimageName}" />
+                                    <!-- Render Marks Container -->
+                                    <f:render partial="MarksContainer"
+                                        arguments="{interactiveImage: interactiveImage, layout: layout}" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-12">
+                                <!-- Render Info Box -->
+                                <f:render partial="InfoBox" arguments="{interactiveImage: interactiveImage}" />
+                            </div>
+                        </f:then>
+                    </f:if>
+                    <f:if condition="{layout} === 'popover'">
+                        <f:then>
+                            <div class="col-12">
+                                <div class="img-container full-width">
+                                    <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
+                                        alt="{interactiveImage.txVncinteractiveimageName}" />
+                                    <!-- Render Marks Container -->
+                                    <f:render partial="MarksContainer"
+                                        arguments="{interactiveImage: interactiveImage, layout: layout}" />
+                                </div>
+                            </div>
+                        </f:then>
+                    </f:if>
                 </div>
             </div>
         </f:then>

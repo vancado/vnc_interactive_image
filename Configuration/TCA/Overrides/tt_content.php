@@ -22,6 +22,7 @@ call_user_func(function () {
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_layout'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.layout',
+        'onChange' => 'reload',
         'config' => [
             'type' => 'select',
             'renderType' => 'selectSingle',

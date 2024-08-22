@@ -1,21 +1,31 @@
 $primary-color: black;
-$background-color: #fff;
-$border-color: #ccc;
+$popover-bg-color: #fff;
+$popover-border-color: #ccc;
 $btn-color: black;
-$box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-$mark-icon-size-default: 2rem;
-$mark-icon-size-xl: 2.4rem;
+$popover-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$mark-icon-size-default: 42px;
 $mark-icon-size-lg: 2.2rem;
 $mark-icon-size-md: 1.7rem;
 $mark-icon-size-sm: 1.3rem;
 $mark-icon-bg-color: grey;
 $mark-icon-active-bg-color: rgba(56, 56, 235, 0.802);
+$font-color-link: white;
 $nav-color: #d9d9d9;
 $nav-color-active: black;
 $pulse-animation-duration: 2s;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
 $padding: 5px;
+$content-box-padding: 1rem;
+$popover-link-padding: 0.7em;
+$popover-close-padding: 1rem;
+$font-size-default: 16px;
+$font-size-title: 18px;
+$font-size-button: 14px;
+
+#page-content{
+  background-color: #D9D9D9;
+}
 
 @mixin pulse {
   animation: pulse $pulse-animation-duration infinite;
@@ -29,9 +39,11 @@ $padding: 5px;
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -41,6 +53,7 @@ $padding: 5px;
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -50,6 +63,7 @@ $padding: 5px;
   0% {
     background-position: -200px;
   }
+
   100% {
     background-position: calc(200px + 100%);
   }
@@ -60,6 +74,7 @@ $padding: 5px;
     border-radius: 0 0 0 30px;
     padding: 5px;
   }
+
   100% {
     border-radius: 0 0 0 0;
     padding: 10px;
@@ -70,28 +85,23 @@ $padding: 5px;
   from {
     fill: $nav-color;
   }
+
   to {
     fill: $nav-color-active;
   }
 }
 
-
-
 a {
   text-decoration: none;
 }
 
-.img-container {
+.image-container {
   position: relative;
   width: 100%;
 
-  &.full-width {
+  &--full-width {
     width: 100%;
   }
-}
-
-p {
-  margin-top: none!important;
 }
 
 .marks-container {
@@ -102,20 +112,14 @@ p {
   height: 100%;
 }
 
-.nav-point {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: $nav-color;
-  margin: 0 5px;
-}
-
-.marks {
+.mark {
   position: absolute;
   transform: translate(-50%, -50%);
+  background-color: transparent;
   cursor: pointer;
 
-  .mark-icon {
+
+  &-icon {
     width: $mark-icon-size-default;
     height: $mark-icon-size-default;
     color: black;
@@ -125,144 +129,209 @@ p {
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease;
+    z-index: 1;
 
     &:hover {
       transform: scale(1.2);
     }
 
-    &.active {
+    &--active {
       animation: none;
       background-color: $mark-icon-active-bg-color;
     }
 
-    &.number {
+    &--number {
       padding: 10px;
+    }
+
+    &--no-hover {
+      transition: none;
+      transform: none;
+
+      &:hover {
+        transform: none;
+      }
     }
   }
 }
 
-.marker {
-  color: black;
-  border-radius: $border-radius;
-  background-color: $mark-icon-bg-color;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-
-  &.--box {
-    width: $mark-icon-size-md;
-    height: $mark-icon-size-md;
-  }
-}
-
-// Shared styles for popover and info-box
 .content-box {
-  display: block;
-  background: $background-color;
+  // display: block;
+  background: #fff;
   border-radius: 0;
-  box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, .5);
+  // box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, 0.5);
+  // height: fit-content;
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
   margin-top: 20px;
 
-  &.popover {
+  &__info {
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    // display: grid;
+    // grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+
+  &__popover {
     position: absolute;
     display: none;
-    left: 200%;
-    top: 0;
     cursor: auto;
-    min-height: 10rem;
-    max-height: auto;
-    min-width: 25rem;
-    border: 1px solid $border-color;
-    margin-top: 0.2rem;
+    z-index: 9999;
+    width: 460px;
+    height: auto;
+    flex-shrink: 0;
+    font-size: 1rem;
 
     &.active {
       display: block;
       @include fade-in;
     }
-
-    .popover-close {
-      position: absolute;
-      right: 0px;
-      cursor: pointer;
-      z-index: 10;
-      border-radius: 0 0 0 30px;
-      padding: 5px;
-      transition: transform 0.2s ease-in-out;
-
-      svg > path {
-        fill: $primary-color;
-      }
+    
+    &.top {
+      bottom: 10%;
+    }
+    
+    &.bottom {
+      top: 10%;
+    }
+    
+    &.left {
+      right: 100%;
+    }
+    
+    &.right {
+      left: 100%;
     }
   }
 
-  .content-img {
+  &__text {
+    // font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    margin: 0;
+  }
+
+  &__image {
     width: 100%;
-    height: 10rem;
+    height: auto;
+    max-height: 13rem;
     object-fit: cover;
     border-radius: 4px;
   }
 
-  .content-link {
-    width: auto;
-    height: auto;
-    background-color: $primary-color;
-    padding: 0.7em;
-    color: white;
-    border-radius: 0;
-    border-color: $primary-color;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    background-size: 200% auto;
+  &__link {
+    display: inline-flex;
+    padding: 13px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: var(--02-Web-Black, #0F0F0F);
+    color: $font-color-link;
     transition: transform 0.2s ease-in-out;
 
     &:hover {
-      transform: scale(1.1);
-      background-image: linear-gradient(
-        90deg,
-        $primary-color 0%,
-        lighten($primary-color, 10%) 30%,
-        $primary-color 100%
-      );
+      transform: scale(1.02);
       animation: shine 0.5s forwards;
     }
   }
 
-  .nav {
+  &__nav {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    // width: 244px;
+    // height: 48px;
+    // padding: 8px 26px 8px 22px;
     align-items: center;
-    padding-top: 1rem;
+    justify-content: center;
+    gap: 24px;
+    flex-shrink: 0;
 
+    .nav-points {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+
+      .nav-point {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background-color: $nav-color;
+        margin: 0 5px;
+      
+        &.active {
+          scale: 1.4;
+          background-color: $primary-color;
+        }
+      }
+    }
+    
     .nav-prev,
     .nav-next {
       cursor: pointer;
       transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
-
+    
       path {
         fill: $nav-color;
         transition: fill 0.3s ease-in-out;
       }
-
+    
       &:hover {
         transform: scale(1.3);
-
+    
         path {
           animation: fillChange 0.3s forwards;
         }
       }
-
+    
       &:not(:hover) {
         transform: scale(1);
       }
     }
   }
+  
+  &__close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    z-index: 10;
+    padding: 1rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+
+  // &--popover {
+  //   width: auto;
+  //   height: auto;
+  //   background-color: $primary-color;
+  //   padding: 0.7em;
+  //   color: white;
+  //   border-radius: 0;
+  //   border-color: $primary-color;
+  //   font-weight: 600;
+  //   cursor: pointer;
+  //   display: inline-block;
+  //   position: relative;
+  //   overflow: hidden;
+  //   background-size: 200% auto;
+  //   transition: transform 0.2s ease-in-out;
+
+  //   &:hover {
+  //     transform: scale(1.1);
+  //     background-image: linear-gradient(90deg, $primary-color 0%, lighten($primary-color, 10%) 30%, $primary-color 100%);
+  //     animation: shine 0.5s forwards;
+  //   }
+
+}
+
+p {
+  max-width: 100%;
+  margin-bottom: 0 !important;
+  line-break: auto;
 }
 
 .info-item {
@@ -276,7 +345,7 @@ p {
 }
 
 @media (min-width: 992px) {
-  .content-box {
+  .content-box__info {
     margin-top: 0;
   }
 }
@@ -286,67 +355,111 @@ p {
     width: $mark-icon-size-lg;
     height: $mark-icon-size-lg;
 
-    &.number {
+    &--number {
       font-size: 1.5rem;
     }
 
-    &.icon {
+    &--icon {
       padding: 5px;
     }
   }
 
-  .img-container {
+  .image-container {
     width: 100%;
   }
 
   .content-box {
-    width: 100%;
-    height: auto;
+    &__info {
+      width: 100%;
+      height: auto;
+    }
+
+    &__popover {
+      width: 90%;
+      max-width: 400px;
+    }
   }
 }
 
 @media (max-width: 767.98px) {
+  .conent-box {
+    &__popover {
+      padding: $content-box-padding;
+      width: 90%;
+      font-size: $font-size-default;
+    }
+
+    &__text {
+      font-size: $font-size-title;
+    }
+
+    &__image {
+      max-height: 10rem;
+    }
+
+    &__link {
+      padding: $popover-link-padding;
+      font-size: $font-size-button;
+      text-align: center;
+    }
+
+    &__close {
+      padding: $popover-close-padding;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
   .mark-icon {
     width: $mark-icon-size-md;
     height: $mark-icon-size-md;
-
-    &.number {
-      font-size: 1rem;
-    }
-
-    &.icon {
-      padding: 10px;
-    }
-  }
-
-  .img-container {
-    width: 100%;
-  }
-
-  .content-box {
-    width: 100%;
   }
 }
 
 @media (max-width: 575.98px) {
+  .content-box {
+    &__popover {
+      padding: 0.5rem;
+      width: 180px;
+      font-size: 14px;
+      max-height: 250px;
+      overflow: auto;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+    &__image {
+      max-height: 8rem;
+    }
+
+    &__link {
+      padding: 1em;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    &__close {
+      padding: 0.5rem;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
   .mark-icon {
     width: $mark-icon-size-sm;
     height: $mark-icon-size-sm;
-
-    &.number {
-      font-size: 0.8rem;
-    }
-
-    &.icon {
-      padding: 15px;
-    }
-  }
-
-  .img-container {
-    width: 100%;
-  }
-
-  .content-box {
-    width: 100%;
   }
 }
+
+// .mark-icon {
+//   width: $mark-icon-size-sm;
+//   height: $mark-icon-size-sm;
+// }

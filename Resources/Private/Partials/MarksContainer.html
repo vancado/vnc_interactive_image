@@ -1,14 +1,11 @@
 <div class="marks-container">
     <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark" iteration="iterator">
-        <div class="marks" data-selection="{interactiveImage.txVncinteractiveimageIconSelection}"
-            style="left: {mark.positionX * 100}%; top: {mark.positionY * 100}%;">
+        <div class="mark" data-selection="{interactiveImage.txVncinteractiveimageIconSelection}" style="left: {mark.positionX * 100}%; top: {mark.positionY * 100}%;">
             <!-- Render Mark Icon -->
-            <f:render partial="MarkIcon"
-                arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />
+            <f:render partial="MarkIcon" arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />
             <f:if condition="{layout} === 'popover'">
                 <f:then>
-                    <f:render partial="Popover"
-                    arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />
+                    <f:render partial="Popover" arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />
                 </f:then>
             </f:if>
         </div>

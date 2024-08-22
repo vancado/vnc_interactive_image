@@ -91,6 +91,10 @@
                  <source>Link</source>
                  <target>Link</target>
              </trans-unit>
+             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.layout" approved="yes">
+                 <source>Layout</source>
+                 <target>Layout</target>
+             </trans-unit>
         </body>
     </file>
 </xliff>

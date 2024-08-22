@@ -25,5 +25,6 @@ CREATE TABLE tt_content
     tx_vncinteractiveimage_icon_formelement varchar(255) DEFAULT '' NOT NULL,
     tx_vncinteractiveimage_icon_selection   varchar(255) DEFAULT '' NOT NULL,
     tx_vncinteractiveimage_marks            int(11) DEFAULT '0' NOT NULL,
-    tx_vncinteractiveimage_setmarker        int(11) DEFAULT '0' NOT NULL
+    tx_vncinteractiveimage_setmarker        int(11) DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_layout           varchar(255) DEFAULT '' NOT NULL
 );

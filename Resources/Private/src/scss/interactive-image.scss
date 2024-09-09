@@ -6,12 +6,12 @@ $popover-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $mark-icon-size-default: 42px;
 $mark-icon-size-lg: 2.2rem;
 $mark-icon-size-md: 1.7rem;
-$mark-icon-size-sm: 1.3rem;
-$mark-icon-bg-color: grey;
-$mark-icon-active-bg-color: rgba(56, 56, 235, 0.802);
+$mark-icon-size-sm: 0.8rem;
+$mark-icon-color: white;
+$mark-icon-bg-color: black;
 $font-color-link: white;
 $nav-color: #d9d9d9;
-$nav-color-active: black;
+$nav-color-active: grey;
 $pulse-animation-duration: 2s;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
@@ -23,8 +23,8 @@ $font-size-default: 16px;
 $font-size-title: 18px;
 $font-size-button: 14px;
 
-#page-content{
-  background-color: #D9D9D9;
+#page-content {
+  background-color: #d9d9d9;
 }
 
 @mixin pulse {
@@ -96,16 +96,71 @@ a {
 }
 
 .image-container {
+  overflow: hidden;
   position: relative;
   width: 100%;
+  height: auto;
+  cursor: grab;
 
-  &--full-width {
+  img {
     width: 100%;
+    // transform: scale(1.1);
+  }
+
+  &.panning {
+    cursor: grabbing;
+  }
+
+  .zoom-controls {
+    position: absolute;  
+    bottom: 10px;     
+    right: 10px;      
+    z-index: 10;        
+    gap: 5px;
+
+    button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken(black, 10%);
+      }
+
+      i {
+        font-size: 16px;
+      }
+    }
   }
 }
 
+.img-fluid {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: top left;
+}
+
+.zoomable-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.2s ease;
+  transform-origin: 0 0;
+  user-select: none;
+  cursor: inherit;
+}
+
 .marks-container {
-  position: absolute;
+  position: static;
   top: 0;
   left: 0;
   width: 100%;
@@ -114,15 +169,15 @@ a {
 
 .mark {
   position: absolute;
+  transform-origin: top left;
   transform: translate(-50%, -50%);
   background-color: transparent;
   cursor: pointer;
 
-
   &-icon {
     width: $mark-icon-size-default;
     height: $mark-icon-size-default;
-    color: black;
+    color: $mark-icon-color !important;
     border-radius: $border-radius;
     background-color: $mark-icon-bg-color;
     display: flex !important;
@@ -133,11 +188,6 @@ a {
 
     &:hover {
       transform: scale(1.2);
-    }
-
-    &--active {
-      animation: none;
-      background-color: $mark-icon-active-bg-color;
     }
 
     &--number {
@@ -156,52 +206,46 @@ a {
 }
 
 .content-box {
-  // display: block;
   background: #fff;
   border-radius: 0;
-  // box-shadow: 0 2px 12px 6px hsla(0, 0%, 87%, 0.5);
-  // height: fit-content;
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
   margin-top: 20px;
 
   &__info {
-    width: auto;
-    height: auto;
+    width: 100%;
     flex-shrink: 0;
-    // display: grid;
-    // grid-template-columns: 1fr 2fr;
     gap: 1rem;
   }
 
   &__popover {
     position: absolute;
     display: none;
+    overflow: hidden;
     cursor: auto;
     z-index: 9999;
-    width: 460px;
-    height: auto;
-    flex-shrink: 0;
+    width: 330px;
+    max-height: 400px;
     font-size: 1rem;
 
     &.active {
       display: block;
       @include fade-in;
     }
-    
+
     &.top {
       bottom: 10%;
     }
-    
+
     &.bottom {
       top: 10%;
     }
-    
+
     &.left {
       right: 100%;
     }
-    
+
     &.right {
       left: 100%;
     }
@@ -218,7 +262,7 @@ a {
 
   &__image {
     width: 100%;
-    height: auto;
+    height: 15vh;
     max-height: 13rem;
     object-fit: cover;
     border-radius: 4px;
@@ -230,7 +274,7 @@ a {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background: var(--02-Web-Black, #0F0F0F);
+    background: var(--02-Web-Black, #0f0f0f);
     color: $font-color-link;
     transition: transform 0.2s ease-in-out;
 
@@ -242,9 +286,6 @@ a {
 
   &__nav {
     display: flex;
-    // width: 244px;
-    // height: 48px;
-    // padding: 8px 26px 8px 22px;
     align-items: center;
     justify-content: center;
     gap: 24px;
@@ -261,38 +302,38 @@ a {
         border-radius: 50%;
         background-color: $nav-color;
         margin: 0 5px;
-      
+
         &.active {
           scale: 1.4;
           background-color: $primary-color;
         }
       }
     }
-    
+
     .nav-prev,
     .nav-next {
       cursor: pointer;
       transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
-    
+
       path {
         fill: $nav-color;
         transition: fill 0.3s ease-in-out;
       }
-    
+
       &:hover {
         transform: scale(1.3);
-    
+
         path {
           animation: fillChange 0.3s forwards;
         }
       }
-    
+
       &:not(:hover) {
         transform: scale(1);
       }
     }
   }
-  
+
   &__close {
     position: absolute;
     top: 0px;
@@ -302,30 +343,6 @@ a {
     padding: 1rem;
     transition: transform 0.2s ease-in-out;
   }
-  
-
-  // &--popover {
-  //   width: auto;
-  //   height: auto;
-  //   background-color: $primary-color;
-  //   padding: 0.7em;
-  //   color: white;
-  //   border-radius: 0;
-  //   border-color: $primary-color;
-  //   font-weight: 600;
-  //   cursor: pointer;
-  //   display: inline-block;
-  //   position: relative;
-  //   overflow: hidden;
-  //   background-size: 200% auto;
-  //   transition: transform 0.2s ease-in-out;
-
-  //   &:hover {
-  //     transform: scale(1.1);
-  //     background-image: linear-gradient(90deg, $primary-color 0%, lighten($primary-color, 10%) 30%, $primary-color 100%);
-  //     animation: shine 0.5s forwards;
-  //   }
-
 }
 
 p {
@@ -335,13 +352,8 @@ p {
 }
 
 .info-item {
-  display: none;
-
-  &.active {
-    display: block;
-    padding: 0.5rem;
-    @include fade-in;
-  }
+  min-height: 450px;
+  max-height: auto;
 }
 
 @media (min-width: 992px) {
@@ -365,14 +377,15 @@ p {
   }
 
   .image-container {
+    position: relative;
     width: 100%;
   }
 
   .content-box {
-    &__info {
-      width: 100%;
-      height: auto;
-    }
+    // &__info {
+    //   width: 100%;
+    //   height: auto;
+    // }
 
     &__popover {
       width: 90%;
@@ -456,10 +469,6 @@ p {
   .mark-icon {
     width: $mark-icon-size-sm;
     height: $mark-icon-size-sm;
+    padding: 12px;
   }
 }
-
-// .mark-icon {
-//   width: $mark-icon-size-sm;
-//   height: $mark-icon-size-sm;
-// }

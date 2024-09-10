@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showNextItem = () => {
     currentIndex = currentIndex === infoItems.length - 1 ? 0 : currentIndex + 1;
-    console.log(currentIndex);
     showCurrentInfoItem();
   };
 
@@ -181,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const zoomOutButton = document.getElementById("zoom-out");
   const fullscreenButton = document.getElementById("fullscreen");
   const imageContainer = document.querySelector(".image-container");
+  const marksContainer = document.querySelector('.marks-container');
+  const markersOriginalPosition = [];
+  let fullscreenMode = false;
 
   // Disable dragging of the image
   image.setAttribute("draggable", false);
@@ -188,9 +190,26 @@ document.addEventListener("DOMContentLoaded", () => {
   let scale = 1;
   const scaleStep = 0.1;
 
+  markers.forEach((marker, i) => {
+    markersOriginalPosition[i] = [
+      marker.offsetLeft,
+      marker.offsetTop,
+      parseInt(marker.style.left) / 100,
+      parseInt(marker.style.top) / 100,
+    ];
+  });
+
   const updateMarkers = () => {
-    markers.forEach((marker) => {
-      marker.style.transform = `scale(${scale})`;
+    markers.forEach((marker, i) => {
+      marker.style.left = (scale * markersOriginalPosition[i][0]) + 'px';
+      marker.style.top = (scale * markersOriginalPosition[i][1]) + 'px';
+    });
+  };
+
+  const updateMarkersForFullscreen = () => {
+    markers.forEach((marker, i) => {
+      marker.style.left = (scale * markersOriginalPosition[i][2] * image.clientWidth) + 'px';
+      marker.style.top = (scale * markersOriginalPosition[i][3] * image.clientHeight) + 'px';
     });
   };
 
@@ -198,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomInButton.addEventListener("click", () => {
       scale += scaleStep;
       image.style.transform = `scale(${scale})`;
-      updateMarkers();
+      fullscreenMode ? updateMarkersForFullscreen() : updateMarkers();
     });
   }
 
@@ -206,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomOutButton.addEventListener("click", () => {
       scale = Math.max(1, scale - scaleStep);
       image.style.transform = `scale(${scale})`;
-      updateMarkers();
+      fullscreenMode ? updateMarkersForFullscreen() : updateMarkers();
     });
   }
 
@@ -226,9 +245,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
+      fullscreenMode = true;
       document.addEventListener("keydown", handleFullscreenZoom);
+      marksContainer.style.position = 'absolute';
+      marksContainer.style.height = image.clientHeight + 'px';
+      updateMarkersForFullscreen();
     } else {
+      fullscreenMode = false;
       document.removeEventListener("keydown", handleFullscreenZoom);
+      marksContainer.style.position = 'static';
+      marksContainer.style.height = '100%';
+      updateMarkers();
     }
   });
 

@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showNextItem = () => {
     currentIndex = currentIndex === infoItems.length - 1 ? 0 : currentIndex + 1;
+    console.log(currentIndex);
     showCurrentInfoItem();
   };
 
@@ -132,14 +133,18 @@ document.addEventListener("DOMContentLoaded", () => {
     generateNavPoints();
   }
 
-  const prevButton = document.querySelector(".nav-prev");
-  if (prevButton) {
-    prevButton.addEventListener("click", showPreviousItem);
+  const prevButtons = document.querySelectorAll(".nav-prev");
+  if (prevButtons) {
+    prevButtons.forEach((button) => {
+      button.addEventListener("click", showPreviousItem);
+    });
   }
 
-  const nextButton = document.querySelector(".nav-next");
-  if (nextButton) {
-    nextButton.addEventListener("click", showNextItem);
+  const nextButtons = document.querySelectorAll(".nav-next");
+  if (nextButtons) {
+    nextButtons.forEach((button) => {
+      button.addEventListener("click", showNextItem);
+    });
   }
 
   document.addEventListener("click", (event) => {
@@ -265,8 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const x = e.pageX - imageContainer.offsetLeft;
     const y = e.pageY - imageContainer.offsetTop;
-    const walkX = (x - startX) * 1; 
-    const walkY = (y - startY) * 1; 
+    const walkX = (x - startX) * 1;
+    const walkY = (y - startY) * 1;
     imageContainer.scrollLeft = scrollLeft - walkX;
     imageContainer.scrollTop = scrollTop - walkY;
   });

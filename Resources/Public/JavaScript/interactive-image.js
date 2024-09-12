@@ -192,8 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   markers.forEach((marker, i) => {
     markersOriginalPosition[i] = [
-      marker.offsetLeft,
-      marker.offsetTop,
       parseInt(marker.style.left) / 100,
       parseInt(marker.style.top) / 100,
     ];
@@ -201,15 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateMarkers = () => {
     markers.forEach((marker, i) => {
-      marker.style.left = (scale * markersOriginalPosition[i][0]) + 'px';
-      marker.style.top = (scale * markersOriginalPosition[i][1]) + 'px';
-    });
-  };
-
-  const updateMarkersForFullscreen = () => {
-    markers.forEach((marker, i) => {
-      marker.style.left = (scale * markersOriginalPosition[i][2] * image.clientWidth) + 'px';
-      marker.style.top = (scale * markersOriginalPosition[i][3] * image.clientHeight) + 'px';
+      marker.style.left = (scale * markersOriginalPosition[i][0] * image.clientWidth) + 'px';
+      marker.style.top = (scale * markersOriginalPosition[i][1] * image.clientHeight) + 'px';
     });
   };
 
@@ -217,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomInButton.addEventListener("click", () => {
       scale += scaleStep;
       image.style.transform = `scale(${scale})`;
-      fullscreenMode ? updateMarkersForFullscreen() : updateMarkers();
+      updateMarkers();
     });
   }
 
@@ -225,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomOutButton.addEventListener("click", () => {
       scale = Math.max(1, scale - scaleStep);
       image.style.transform = `scale(${scale})`;
-      fullscreenMode ? updateMarkersForFullscreen() : updateMarkers();
+      updateMarkers();
     });
   }
 
@@ -249,14 +240,17 @@ document.addEventListener("DOMContentLoaded", () => {
       document.addEventListener("keydown", handleFullscreenZoom);
       marksContainer.style.position = 'absolute';
       marksContainer.style.height = image.clientHeight + 'px';
-      updateMarkersForFullscreen();
     } else {
       fullscreenMode = false;
       document.removeEventListener("keydown", handleFullscreenZoom);
       marksContainer.style.position = 'static';
       marksContainer.style.height = '100%';
-      updateMarkers();
     }
+    updateMarkers();
+  });
+
+  window.addEventListener("resize", () => {
+    updateMarkers();
   });
 
   const handleFullscreenZoom = (event) => {

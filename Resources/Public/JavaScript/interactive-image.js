@@ -176,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Zoom and Pan Logic
+  const zoomControls = document.querySelector('.zoom-controls');
   const zoomInButton = document.getElementById("zoom-in");
   const zoomOutButton = document.getElementById("zoom-out");
   const fullscreenButton = document.getElementById("fullscreen");
@@ -204,10 +205,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // const moveZoomControls = () => {
+  //   zoomControls.style.right = (10 - imageContainer.scrollLeft) + 'px';
+  //   zoomControls.style.bottom = (10 - imageContainer.scrollTop) + 'px';
+  // };
+
   if (zoomInButton) {
     zoomInButton.addEventListener("click", () => {
       scale += scaleStep;
       image.style.transform = `scale(${scale})`;
+      
       updateMarkers();
     });
   }
@@ -216,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zoomOutButton.addEventListener("click", () => {
       scale = Math.max(1, scale - scaleStep);
       image.style.transform = `scale(${scale})`;
+      
       updateMarkers();
     });
   }
@@ -231,6 +239,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (imageContainer.msRequestFullscreen) {
         imageContainer.msRequestFullscreen();
       }
+      console.log(window.screen.width);
+      
     });
   }
 
@@ -275,6 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollLeft = imageContainer.scrollLeft;
     scrollTop = imageContainer.scrollTop;
   });
+  
 
   imageContainer.addEventListener("mouseup", () => {
     isPanning = false;
@@ -286,14 +297,17 @@ document.addEventListener("DOMContentLoaded", () => {
     imageContainer.classList.remove("panning");
   });
 
-  imageContainer.addEventListener("mousemove", (e) => {
+
+
+  imageContainer.addEventListener("mousemove" , (e) => {
     if (!isPanning) return;
     e.preventDefault();
     const x = e.pageX - imageContainer.offsetLeft;
     const y = e.pageY - imageContainer.offsetTop;
-    const walkX = (x - startX) * 1;
+    const walkX = (x - startX) * 1; 
     const walkY = (y - startY) * 1;
     imageContainer.scrollLeft = scrollLeft - walkX;
     imageContainer.scrollTop = scrollTop - walkY;
   });
+  
 });

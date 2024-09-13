@@ -183,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const imageContainer = document.querySelector(".image-container");
   const marksContainer = document.querySelector('.marks-container');
   const markersOriginalPosition = [];
-  let fullscreenMode = false;
 
   // Disable dragging of the image
   image.setAttribute("draggable", false);
@@ -205,31 +204,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // const moveZoomControls = () => {
-  //   zoomControls.style.right = (10 - imageContainer.scrollLeft) + 'px';
-  //   zoomControls.style.bottom = (10 - imageContainer.scrollTop) + 'px';
-  // };
-
-  if (zoomInButton) {
-    zoomInButton.addEventListener("click", () => {
-      scale += scaleStep;
-      image.style.transform = `scale(${scale})`;
-      
-      updateMarkers();
-    });
+  const updateZoomControls = () => {
+    if (document.fullscreenElement) {
+      zoomControls.style.position = 'fixed';
+      zoomControls.style.bottom = '10px';
+      zoomControls.style.right = '10px';
+      imageContainer.append(zoomControls);
+    } else {
+      zoomControls.style = null;
+      imageContainer.parentNode.prepend(zoomControls);
+    }
   }
 
-  if (zoomOutButton) {
-    zoomOutButton.addEventListener("click", () => {
-      scale = Math.max(1, scale - scaleStep);
-      image.style.transform = `scale(${scale})`;
-      
-      updateMarkers();
-    });
-  }
+  zoomInButton?.addEventListener("click", () => {
+    scale += scaleStep;
+    image.style.transform = `scale(${scale})`;
+    updateMarkers();
+  });
 
-  if (fullscreenButton) {
-    fullscreenButton.addEventListener("click", () => {
+  zoomOutButton?.addEventListener("click", () => {
+    scale = Math.max(1, scale - scaleStep);
+    image.style.transform = `scale(${scale})`;
+    updateMarkers();
+  });
+
+  fullscreenButton?.addEventListener("click", () => {
+    if (document.fullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozExitFullscreen) {
+        document.mozExitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    } else {
       if (imageContainer.requestFullscreen) {
         imageContainer.requestFullscreen();
       } else if (imageContainer.mozRequestFullScreen) {
@@ -239,23 +249,21 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (imageContainer.msRequestFullscreen) {
         imageContainer.msRequestFullscreen();
       }
-      console.log(window.screen.width);
-      
-    });
-  }
+    }
+  });
 
   document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
-      fullscreenMode = true;
       document.addEventListener("keydown", handleFullscreenZoom);
       marksContainer.style.position = 'absolute';
       marksContainer.style.height = image.clientHeight + 'px';
     } else {
-      fullscreenMode = false;
       document.removeEventListener("keydown", handleFullscreenZoom);
       marksContainer.style.position = 'static';
       marksContainer.style.height = '100%';
+      imageContainer.scrollIntoView();
     }
+    updateZoomControls();
     updateMarkers();
   });
 
@@ -285,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollLeft = imageContainer.scrollLeft;
     scrollTop = imageContainer.scrollTop;
   });
-  
 
   imageContainer.addEventListener("mouseup", () => {
     isPanning = false;
@@ -296,8 +303,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isPanning = false;
     imageContainer.classList.remove("panning");
   });
-
-
 
   imageContainer.addEventListener("mousemove" , (e) => {
     if (!isPanning) return;

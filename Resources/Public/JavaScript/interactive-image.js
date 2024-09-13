@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const popover = document.getElementById(`popover-${markerId}`);
       if (popover) {
+        const popovers = document.querySelectorAll('.content-box__popover');
         const markerRect = marker.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
 
@@ -104,6 +105,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         popover.classList.toggle("active");
         marker.classList.toggle("active");
+
+        popovers?.forEach((item) => {
+          if (item !== popover) {
+            item.classList.remove('active');
+            item.parentElement.classList.remove('active');
+          }
+        })
+        markers?.forEach(item => item.style.zIndex = 1);
+        marker.style.zIndex = 2;
       }
     }
   };

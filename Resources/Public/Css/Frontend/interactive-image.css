@@ -130,6 +130,7 @@ a {
   transform: translate(-50%, -50%);
   background-color: transparent;
   cursor: pointer;
+  z-index: 1;
 }
 .mark-icon {
   width: 42px;

@@ -10,9 +10,6 @@ categories:
   - title: '🛠 Tasks'
     labels:
       - 'task'
-  - title: '🔐 Security Fixes'
-    labels:
-      - 'security'
 
 version-resolver:
   major:

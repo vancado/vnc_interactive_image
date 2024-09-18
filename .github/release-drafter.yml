@@ -23,7 +23,7 @@ version-resolver:
       - '[!!!]'
   minor:
     labels:
-      - '[FEATURE]'
+      - 'bug'
   patch:
     labels:
       - '[BUGFIX]'

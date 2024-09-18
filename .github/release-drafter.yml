@@ -3,32 +3,28 @@ tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
     labels:
-      - '[FEATURE]'
+      - 'feature'
   - title: '🐛 Bug Fixes'
     labels:
-      - '[BUGFIX]'
-  - title: '📚 Documentation'
-    labels:
-      - '[DOCS]'
+      - 'bugfix'
   - title: '🛠 Tasks'
     labels:
-      - '[TASK]'
+      - 'task'
   - title: '🔐 Security Fixes'
     labels:
-      - '[SECURITY]'
+      - 'security'
 
 version-resolver:
   major:
     labels:
-      - '[!!!]'
+      - 'breaking'
   minor:
     labels:
-      - 'bug'
+      - 'feature'
   patch:
     labels:
-      - '[BUGFIX]'
-      - '[TASK]'
-      - '[DOCS]'
+      - 'task'
+      - 'bugfix'
   default: patch
 
 template: |

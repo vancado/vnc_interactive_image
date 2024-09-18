@@ -29,7 +29,7 @@ version-resolver:
       - '[BUGFIX]'
       - '[TASK]'
       - '[DOCS]'
-  default: patch
+  default: minor
 
 template: |
   ## Changes

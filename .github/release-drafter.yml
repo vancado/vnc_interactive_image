@@ -23,31 +23,13 @@ version-resolver:
       - '[!!!]'
   minor:
     labels:
-      - '[FEATURE]'
+      - 'bug'
   patch:
     labels:
       - '[BUGFIX]'
       - '[TASK]'
       - '[DOCS]'
   default: patch
-
-autolabeler:
-  - label: 'feature'
-    branch: '/feature\/.+/'
-
-  - label: 'bugfix'
-    branch: '/bugfix\/.+/'
-
-  - label: 'docs'
-    branch: '/docs\/.+/'
-
-  - label: 'docs'
-    files:
-      - '*.md'
-
-  - label: 'feature'
-    files:
-      - '*.js'
 
 template: |
   ## Changes

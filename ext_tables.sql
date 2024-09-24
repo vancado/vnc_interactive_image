@@ -6,7 +6,7 @@ CREATE TABLE tx_vncinteractiveimage_domain_model_mark
     bodytext          text,
     icon              int(11) DEFAULT '0' NOT NULL,
     icon_formelement  varchar(255) DEFAULT ''  NOT NULL,
-    icon_selection    varchar(255) DEFAULT '' NOT NULL,
+    icon_selection    varchar(255) DEFAULT ''  NOT NULL,
     image             int(11) DEFAULT '0' NOT NULL,
     link              varchar(255) DEFAULT ''  NOT NULL,
     position_x        float        DEFAULT '0' NOT NULL,

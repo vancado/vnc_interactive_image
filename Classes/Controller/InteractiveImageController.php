@@ -22,7 +22,7 @@ class InteractiveImageController extends ActionController
     public function showAction(): ResponseInterface
     {
         // get content element uid
-        $uid = (int) $this->request->getAttribute('currentContentObject')->data['uid'];
+        $uid = (int)$this->request->getAttribute('currentContentObject')->data['uid'];
 
         // load content item via interactive image repository
         /** @var InteractiveImage $interactiveImage */

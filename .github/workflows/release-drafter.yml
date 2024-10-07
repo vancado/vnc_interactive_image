@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Draft release notes
         uses: release-drafter/release-drafter@v6
@@ -30,10 +32,13 @@ jobs:
           echo >> CHANGELOG.md
           echo "${{ github.event.release.body }}" >> CHANGELOG.md
           echo >> CHANGELOG.md
+          
+          # Switch to the target branch before committing
+          git checkout master
 
           # Commit and push the updated CHANGELOG.md back to the repository
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md for release v${{ github.event.release.tag_name }}"
-          git push
+          git push origin master

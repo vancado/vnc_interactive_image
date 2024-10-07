@@ -1,29 +1,22 @@
-name: Update CHANGELOG on Release Publish
+name: Release Drafter
 
 on:
-  release:
-    types: [ published ]
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
 
 jobs:
-  update_changelog:
+  update_release_draft:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Get Release Info
-        run: |
-          echo "## $(date +'%Y-%m-%d') - ${{ github.event.release.tag_name }}" >> CHANGELOG.md
-          echo >> CHANGELOG.md
-          echo "${{ github.event.release.body }}" >> CHANGELOG.md
-          echo >> CHANGELOG.md
-
-      - name: Commit and push CHANGELOG.md
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md for release ${{ github.event.release.tag_name }}"
-          git push
+      - uses: release-drafter/release-drafter@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

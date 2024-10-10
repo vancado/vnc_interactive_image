@@ -13,17 +13,36 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Create Documentation folder if it doesn't exist
+        run: |
+          mkdir -p Documentation
+
       - name: Get Release Info
         run: |
-          echo "## $(date +'%Y-%m-%d') - ${{ github.event.release.tag_name }}" >> CHANGELOG.md
-          echo >> CHANGELOG.md
-          echo "${{ github.event.release.body }}" >> CHANGELOG.md
-          echo >> CHANGELOG.md
+          echo "## $(date +'%Y-%m-%d') - Version ${{ github.event.release.tag_name }}" >> Documentation/CHANGELOG.md
+          echo "### Release Notes" >> Documentation/CHANGELOG.md
+          echo "${{ github.event.release.body }}" >> Documentation/CHANGELOG.md
+          echo "" >> Documentation/CHANGELOG.md
+          echo "---" >> Documentation/CHANGELOG.md
+          echo "" >> Documentation/CHANGELOG.md
 
       - name: Commit and push CHANGELOG.md
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md for release ${{ github.event.release.tag_name }}"
-          git push origin HEAD:master
+          git add Documentation/CHANGELOG.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Update CHANGELOG.md for release ${{ github.event.release.tag_name }}"
+            git push origin HEAD:master
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Create a pull request for CHANGELOG.md
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Update CHANGELOG.md for release ${{ github.event.release.tag_name }}"
+          title: "Update CHANGELOG.md for release ${{ github.event.release.tag_name }}"
+          body: "This pull request updates the CHANGELOG.md with the details of the release ${{ github.event.release.tag_name }}."
+          branch: update-changelog-${{ github.event.release.tag_name }}
+          base: master

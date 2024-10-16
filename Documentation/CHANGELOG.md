@@ -23,3 +23,16 @@ Related: #VAWS-64
 
 ---
 
+## 2024-10-16 - Version v1.3.0
+### Release Notes
+## Changes
+
+## 🚀 Features
+
+- [FEATURE] Refactor release-drafter.yml @vnc-stel (#42) - Tasks:
+
+Related: #VAWS-64
+
+
+---
+

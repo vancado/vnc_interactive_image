@@ -1,49 +1,104 @@
-<!DOCTYPE html>
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
-</head>
-<body>
-<div>
-    <f:debug>{interactiveImage}</f:debug>
-    <f:debug>{interactiveImage.txVncinteractiveimageMarks}</f:debug>
-</div>
+<html
+  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+  data-namespace-typo3-fluid="true"
+>
 
 <f:if condition="{interactiveImage}">
-    <f:then>
-        <div class="row heading-block border-bottom-0 mb-2">
-            <h2>{interactiveImage.txVncinteractiveimageName}</h2>
-        </div>
+  <f:then>
+    <div class="row heading-block border-bottom-0 mb-2">
+      <h2>{interactiveImage.txVncinteractiveimageName}</h2>
+    </div>
 
-        <f:variable name="layout"
-                    value="{interactiveImage.txVncinteractiveimageLayout -> f:if(condition: '{interactiveImage.txVncinteractiveimageLayout}', then: interactiveImage.txVncinteractiveimageLayout, else: 'infoBox')}"/>
+    <!-- Check frame_layout -->
+    <f:variable
+      name="layout"
+      value="{interactiveImage.txVncinteractiveimageLayout}"
+    />
 
-        <!-- Check frame_layout -->
-        <f:variable name="frameLayout" value="{interactiveImage.frame_layout}"/>
-        <f:if condition="{frameLayout} === 'default'">
-            <f:then>
-                <f:variable name="layout" value="popover"/>
-            </f:then>
-        </f:if>
-
-        <div class="container" data-layout="{layout}" data-frame-layout="{frameLayout}">
-            <div class="row">
-                <div class="col-lg-8 col-12">
-                    <div class="img-container">
-                        <f:image class="img-fluid" image="{interactiveImage.txVncinteractiveimageImage}"
-                                 alt="{interactiveImage.txVncinteractiveimageName}"/>
-                        <!-- Render Marks Container -->
-                        <f:render partial="MarksContainer"
-                                  arguments="{interactiveImage: interactiveImage, layout: layout}"/>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-12">
-                    <!-- Render Info Box -->
-                    <f:render partial="InfoBox" arguments="{interactiveImage: interactiveImage}"/>
-                </div>
+    <div class="container" data-layout="{layout}">
+      <div class="row">
+        <f:if condition="{layout} === 'infoBox'">
+          <f:then>
+            <div class="col-lg-8 col-12">
+              <div class="image-container">
+                <f:image
+                  class="img-fluid"
+                  image="{interactiveImage.txVncinteractiveimageImage}"
+                  alt="{interactiveImage.txVncinteractiveimageName}"
+                />
+                <!-- Render Marks Container -->
+                <f:render
+                  partial="MarksContainer"
+                  arguments="{interactiveImage: interactiveImage, layout: layout}"
+                />
+              </div>
             </div>
-        </div>
-    </f:then>
+            <div class="col-lg-4 col-12">
+              <!-- Render Info Box -->
+              <f:render
+                partial="InfoBox"
+                arguments="{interactiveImage: interactiveImage}"
+              />
+            </div>
+          </f:then>
+        </f:if>
+        <f:if condition="{layout} === 'popover'">
+          <f:then>
+            <div class="col-12">
+              <div class="zoom-controls">
+                <button class="btn btn-primary" id="zoom-in">+</button>
+                <button class="btn btn-primary" id="zoom-out">-</button>
+                <button class="btn btn-primary" id="fullscreen">
+                  <i class="fa fa-expand"
+                    ><svg
+                      width="24"
+                      height="20"
+                      viewBox="0 0 24 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="Group 20">
+                        <path
+                          id="Vector"
+                          d="M21 0H3C1.35 0 0 1.35 0 3V17C0 18.65 1.35 20 3 20H21C22.65 20 24 18.65 24 17V3C24 1.35 22.65 0 21 0ZM22 17C22 17.55 21.55 18 21 18H3C2.45 18 2 17.55 2 17V3C2 2.45 2.45 2 3 2H21C21.55 2 22 2.45 22 3V17Z"
+                          fill="white"
+                          style="fill: white; fill-opacity: 1"
+                        />
+                        <path
+                          id="Vector_2"
+                          d="M6 10H4V16H10V14H6V10Z"
+                          fill="white"
+                          style="fill: white; fill-opacity: 1"
+                        />
+                        <path
+                          id="Vector_3"
+                          d="M14 6H18V10H20V4H14V6Z"
+                          fill="white"
+                          style="fill: white; fill-opacity: 1"
+                        />
+                      </g>
+                    </svg>
+                  </i>
+                </button>
+              </div>
+              <div class="image-container image-container--full-width">
+                <f:image
+                  class="img-fluid"
+                  image="{interactiveImage.txVncinteractiveimageImage}"
+                  alt="{interactiveImage.txVncinteractiveimageName}"
+                />
+
+                <f:render
+                  partial="MarksContainer"
+                  arguments="{interactiveImage: interactiveImage, layout: layout}"
+                />
+              </div>
+            </div>
+          </f:then>
+        </f:if>
+      </div>
+    </div>
+  </f:then>
 </f:if>
-</body>
+
 </html>

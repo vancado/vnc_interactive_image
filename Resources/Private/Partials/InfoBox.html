@@ -1,31 +1,25 @@
-<div class="info-box">
+<div class="content-box content-box__info d-flex flex-column">
     <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark">
-        <div class="info-item" id="info-{mark.uid}" class="info-item">
-            <div class="d-flex">
-                <f:image class="marker --box" data-uid="{mark.uid}" image="{interactiveImage.txVncinteractiveimageIcon}"
-                         alt="{mark.title}" aria-label="{mark.title}"/>
-                <p class="col-auto mx-4 fw-bold">{mark.title}</p>
+        <div class="info-item d-none " id="{mark.uid}">
+            <div class="d-flex align-items-center">
+                <f:render partial="MarkIcon"
+                    arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator, context: 'infoBox'}" />
+                <p class="content-box__text col-auto mx-4 fw-bold">{mark.title}</p>
             </div>
             <div class="mt-3">
-                <f:if condition="{mark.image}">
-                    <f:then>
-                        <f:image class="info-img" image="{mark.image}" alt="{mark.title}"/>
-                    </f:then>
-                    <f:else>
-                        <p>Kein Bild verfügbar</p>
-                    </f:else>
-                </f:if>
+                <f:image class="content-box__image" image="{mark.image}" />
             </div>
-            <div class="mt-2">
-                <p class="info-body">
-                    <f:format.raw>{mark.bodytext}</f:format.raw>
-                </p>
+            <div class="mt-3 flex-grow-1">
+                <f:format.raw>{mark.bodytext}</f:format.raw>
             </div>
-            <div class="mt-4">
-                <a class="info-link" href="{mark.link}">Mehr erfahren</a>
-            </div>
-            <div class="mt-4">
-                <f:render partial="InfoboxNav" arguments="{interactiveImage: interactiveImage, mark:mark}"/>
+            <f:if condition="{mark.link}">
+                <div class="mt-3">
+                    <a class="content-box__link" href="{mark.link}" target="_blank">Mehr erfahren</a>
+                </div>
+            </f:if>
+            <div class="mt-3 mt-md-4 mt-lg-4">
+                <f:render partial="InfoBoxNav"
+                    arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />
             </div>
         </div>
     </f:for>

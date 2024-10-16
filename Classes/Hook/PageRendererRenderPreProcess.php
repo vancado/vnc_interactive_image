@@ -11,9 +11,10 @@ use TYPO3\CMS\Core\Page\PageRenderer;
 final class PageRendererRenderPreProcess
 {
     public function addJavaScript(
-        array $params = [],
+        array        $params = [],
         PageRenderer $pageRenderer = null,
-    ): void {
+    ): void
+    {
         if (($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface
             && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
         ) {

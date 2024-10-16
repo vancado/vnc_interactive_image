@@ -145,7 +145,7 @@ class SetMarker extends AbstractFormElement
                     data-mark-position-y="' . (string)$mark->getPositionY() . '"
                     style="
                         left: calc(' . $left . '% - 14.5px);
-                        top: calc(' . $top .'% - 14.5px);
+                        top: calc(' . $top . '% - 14.5px);
                     "
                     draggable="true"
                 >
@@ -174,7 +174,8 @@ class SetMarker extends AbstractFormElement
         return $resultArray;
     }
 
-    private function getDifferentIcon(Mark $mark) : string {
+    private function getDifferentIcon(Mark $mark): string
+    {
         /** @var FileRepository $fileRepository */
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
 
@@ -187,7 +188,7 @@ class SetMarker extends AbstractFormElement
             $fileObjects = $fileRepository->findByRelation(
                 'tx_vncinteractiveimage_domain_model_mark',
                 'icon',
-                (int) $mark->getUid()
+                (int)$mark->getUid()
             );
         } catch (FileDoesNotExistException $e) {
             return '';

@@ -1,4 +1,5 @@
 <?php
+
 namespace Vancado\VncInteractiveImage\Condition;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;

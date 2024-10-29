@@ -11,11 +11,15 @@
           arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator, context: 'infoBox'}" />
         <p class="content-box__text col-auto mx-4 fw-bold">{mark.title}</p>
       </div>
+      <f:if condition="{mark.image}">
+        <f:then>
       <div class="mt-3">
         <f:image
           class="content-box__image"
           image="{mark.image}" />
       </div>
+    </f:then>
+      </f:if>
       <div class="mt-3 flex-grow-1">
         <f:format.raw>{mark.bodytext}</f:format.raw>
       </div>

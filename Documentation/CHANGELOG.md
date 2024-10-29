@@ -89,3 +89,12 @@ Related: #VAWS-64
 
 ---
 
+## 2024-10-29 - Version v12.5.4
+### Release Notes
+## Changes
+
+* No changes
+
+
+---
+

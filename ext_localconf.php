@@ -7,7 +7,7 @@ use Vancado\VncInteractiveImage\Controller\InteractiveImageController;
 use Vancado\VncInteractiveImage\Form\Element\SetMarker;
 
 call_user_func(function () {
-    
+
     ExtensionUtility::registerPlugin(
         'VncInteractiveImage',
         'Vncinteractive',
@@ -61,7 +61,7 @@ call_user_func(function () {
         'priority' => 40,
         'class' => SetMarker::class,
     ];
-    
+
     /**
      * Register hooks
      */

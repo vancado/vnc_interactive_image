@@ -1,0 +1,32 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bugfix'
+  - title: '🛠 Tasks'
+    labels:
+      - 'task'
+
+version-resolver:
+  major:
+    labels:
+      - 'breaking'
+  minor:
+    labels:
+      - 'feature'
+  patch:
+    labels:
+      - 'task'
+      - 'bugfix'
+  default: patch
+
+template: |
+  ## Changes
+
+  $CHANGES
+
+change-template: '- $TITLE @$AUTHOR (#$NUMBER) - $BODY'

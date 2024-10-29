@@ -49,3 +49,14 @@ Related: #VAWS-64
 
 ---
 
+## 2024-10-29 - Version v12.5.0
+### Release Notes
+## Changes
+
+## 🚀 Features
+
+- [TASK] Remove fullscreen mode @vnc-cmue (#44) -
+
+
+---
+

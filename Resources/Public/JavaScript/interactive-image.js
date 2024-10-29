@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     showCurrentInfoItem();
   };
 
-const generateNavPoints = () => {
-    navPointsContainer.innerHTML = ""; 
+  const generateNavPoints = () => {
+    navPointsContainer.innerHTML = "";
 
     infoItems.forEach((_, index) => {
       const point = document.createElement("div");
@@ -46,9 +46,8 @@ const generateNavPoints = () => {
       navPointsContainer.appendChild(point);
     });
 
-    showCurrentInfoItem(); 
+    showCurrentInfoItem();
   };
-
 
   const handleMarkerClick = (marker, markerId) => {
     if (layout === "infoBox") {
@@ -75,7 +74,7 @@ const generateNavPoints = () => {
         const containerRect = container.getBoundingClientRect();
 
         popover.classList.remove("top", "bottom", "left", "right");
-        
+
         const markerCenterY = markerRect.top + markerRect.height / 2;
         const markerCenterX = markerRect.left + markerRect.width / 2;
 
@@ -110,7 +109,7 @@ const generateNavPoints = () => {
           if (document.fullscreenElement) {
             popover.style.bottom = "0";
             popover.style.right = "0";
-            
+
             if (popover.parentNode !== imageContainer) {
               imageContainer.parentNode.prepend(popover);
             }
@@ -161,14 +160,13 @@ const generateNavPoints = () => {
     });
   }
 
-
   document.addEventListener("click", (event) => {
     const closeIcon = event.target.closest(".content-box__close");
     const activePopover = document.querySelector(".content-box__popover.active");
-  
+
     if (closeIcon) {
       console.log("Popover close clicked");
-      
+
       const popover = closeIcon.closest(".content-box__popover");
       if (popover) {
         const marker = popover.closest(".mark");
@@ -179,13 +177,13 @@ const generateNavPoints = () => {
       }
       return;
     }
-  
+
     if (!event.target.closest(".mark") && !event.target.closest(".content-box__popover")) {
       console.log("Clicked outside of mark and popover");
-  
+
       if (activePopover) {
         activePopover.classList.remove("active");
-  
+
         const activeMarker = activePopover.closest(".mark");
         if (activeMarker) {
           activeMarker.classList.remove("active");
@@ -193,7 +191,7 @@ const generateNavPoints = () => {
       }
     }
   });
-  
+
   // Zoom and Pan Logic
   const zoomControls = document.querySelector(".zoom-controls");
   const zoomInButton = document.getElementById("zoom-in");
@@ -211,8 +209,8 @@ const generateNavPoints = () => {
   const scaleStep = 0.1;
 
   const innerWidth = window.innerWidth;
-  if(innerWidth<768) {
-    scale = 1.4
+  if (innerWidth < 768) {
+    scale = 1.4;
   }
 
   markers.forEach((marker, i) => {
@@ -221,14 +219,14 @@ const generateNavPoints = () => {
 
   const updateMarkers = () => {
     markers.forEach((marker, i) => {
-      console.log('MARKERSCALE', scale)
+      console.log("MARKERSCALE", scale);
       marker.style.left = scale * markersOriginalPosition[i][0] * image.clientWidth + "px";
       marker.style.top = scale * markersOriginalPosition[i][1] * image.clientHeight + "px";
     });
   };
 
-  window.addEventListener('load', updateMarkers);
-  window.addEventListener('resize', updateMarkers);
+  window.addEventListener("load", updateMarkers);
+  window.addEventListener("resize", updateMarkers);
 
   const updateZoomControls = () => {
     if (document.fullscreenElement) {

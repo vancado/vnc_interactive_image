@@ -15,7 +15,7 @@
       value="{interactiveImage.txVncinteractiveimageLayout}"
     />
 
-    <div class="container" data-layout="{layout}">
+    <div class="container my-5" data-layout="{layout}">
       <div class="row">
         <f:if condition="{layout} === 'infoBox'">
           <f:then>
@@ -42,13 +42,15 @@
             </div>
           </f:then>
         </f:if>
-        <f:if condition="{layout} === 'popover'">
+      </div>
+    </div>
+    <f:if condition="{layout} === 'popover'">
           <f:then>
             <div class="col-12">
               <div class="zoom-controls">
                 <button class="btn btn-primary" id="zoom-in">+</button>
                 <button class="btn btn-primary" id="zoom-out">-</button>
-                <button class="btn btn-primary" id="fullscreen">
+                <!-- <button class="btn btn-primary" id="fullscreen">
                   <i class="fa fa-expand"
                     ><svg
                       width="24"
@@ -79,7 +81,7 @@
                       </g>
                     </svg>
                   </i>
-                </button>
+                </button> -->
               </div>
               <div class="image-container image-container--full-width">
                 <f:image
@@ -96,8 +98,6 @@
             </div>
           </f:then>
         </f:if>
-      </div>
-    </div>
   </f:then>
 </f:if>
 

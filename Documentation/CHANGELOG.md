@@ -80,3 +80,12 @@ Related: #VAWS-64
 
 ---
 
+## 2024-10-29 - Version v12.5.3
+### Release Notes
+## Changes
+
+- [BUGFIX] Fix image condition @vnc-cmue (#46) -
+
+
+---
+

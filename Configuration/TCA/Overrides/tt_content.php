@@ -98,7 +98,7 @@ call_user_func(function () {
             ],
             'minitems' => 0,
             'maxitems' => 1,
-            'allowed' => 'svg'
+            'allowed' => 'gif,svg'
         ]
     ];
 

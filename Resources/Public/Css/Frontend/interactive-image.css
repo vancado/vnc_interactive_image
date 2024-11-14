@@ -154,6 +154,15 @@ a {
   transform: none;
 }
 
+.mark-title {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #ffaa00;
+  color: black;
+  z-index: -1;
+}
+
 .content-box {
   background: #F4F4F4;
   border-radius: 0;

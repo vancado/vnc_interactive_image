@@ -31,6 +31,10 @@
                 <source>Icon</source>
                 <target>Icon</target>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.label.show" approved="yes">
+                <source>show</source>
+                <target>anzeigen</target>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.marks" approved="yes">
                 <source>Marks</source>
                 <target>Markierungen</target>
@@ -38,6 +42,18 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.set_marker" approved="yes">
                 <source>Set Marker</source>
                 <target>Marker setzen</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_fullscreen" approved="yes">
+                <source>Show fullscreen button</source>
+                <target>Vollbildschirm Button anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_title_next_to_marker" approved="yes">
+                <source>Show title next to marker</source>
+                <target>Titel neben dem Marker anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_zoom" approved="yes">
+                <source>Show zoom buttons</source>
+                <target>Vergrößern/Verkleinern Buttons anzeigen</target>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title" approved="yes">
                 <source>Title</source>

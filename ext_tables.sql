@@ -13,18 +13,22 @@ CREATE TABLE tx_vncinteractiveimage_domain_model_mark
     position_y        float        DEFAULT '0' NOT NULL,
     sorting           int(11) DEFAULT '0' NOT NULL,
     interactive_image int(11) DEFAULT '0' NOT NULL,
+    show_zoom         tinyint(4) unsigned DEFAULT '0' NOT NULL,
     PRIMARY KEY (uid)
 );
 
 CREATE TABLE tt_content
 (
-    tx_vncinteractiveimage_name             varchar(255) DEFAULT '' NOT NULL,
-    tx_vncinteractiveimage_image            int(11) DEFAULT '0' NOT NULL,
-    tx_vncinteractiveimage_icon_mode        varchar(255) DEFAULT '' NOT NULL,
-    tx_vncinteractiveimage_icon             int(11) DEFAULT '0' NOT NULL,
-    tx_vncinteractiveimage_icon_formelement varchar(255) DEFAULT '' NOT NULL,
-    tx_vncinteractiveimage_icon_selection   varchar(255) DEFAULT '' NOT NULL,
-    tx_vncinteractiveimage_marks            int(11) DEFAULT '0' NOT NULL,
-    tx_vncinteractiveimage_setmarker        int(11) DEFAULT '0' NOT NULL,
-    tx_vncinteractiveimage_layout           varchar(255) DEFAULT '' NOT NULL
+    tx_vncinteractiveimage_name                      varchar(255) DEFAULT '' NOT NULL,
+    tx_vncinteractiveimage_image                     int(11) DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_icon_mode                 varchar(255) DEFAULT '' NOT NULL,
+    tx_vncinteractiveimage_icon                      int(11) DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_icon_formelement          varchar(255) DEFAULT '' NOT NULL,
+    tx_vncinteractiveimage_icon_selection            varchar(255) DEFAULT '' NOT NULL,
+    tx_vncinteractiveimage_marks                     int(11) DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_setmarker                 int(11) DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_layout                    varchar(255) DEFAULT '' NOT NULL,
+    tx_vncinteractiveimage_show_fullscreen           tinyint(4) unsigned DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_show_title_next_to_marker tinyint(4) unsigned DEFAULT '0' NOT NULL,
+    tx_vncinteractiveimage_show_zoom                 tinyint(4) unsigned DEFAULT '0' NOT NULL,
 );

@@ -18,7 +18,12 @@ call_user_func(function () {
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'pages,layout,select_key,recursive';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'tx_vncinteractiveimage_name, tx_vncinteractiveimage_layout, tx_vncinteractiveimage_image, tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon_selection, tx_vncinteractiveimage_icon, tx_vncinteractiveimage_icon_formelement, tx_vncinteractiveimage_setmarker, tx_vncinteractiveimage_marks';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = '
+        tx_vncinteractiveimage_name, tx_vncinteractiveimage_layout, tx_vncinteractiveimage_show_fullscreen,
+        tx_vncinteractiveimage_show_title_next_to_marker, tx_vncinteractiveimage_show_zoom, tx_vncinteractiveimage_image, 
+        tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon_selection, tx_vncinteractiveimage_icon, 
+        tx_vncinteractiveimage_icon_formelement, tx_vncinteractiveimage_setmarker, tx_vncinteractiveimage_marks
+    ';
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_layout'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.layout',
@@ -147,6 +152,42 @@ call_user_func(function () {
             'renderType' => 'setMarker',
             'parameters' => [],
         ],
+    ];
+
+    $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_show_fullscreen'] = [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.show_fullscreen',
+        'config' => [
+            'type' => 'check',
+            'items' => [
+                // label, value
+                ['LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.label.show', ''],
+            ],
+        ]
+    ];
+
+    $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_show_title_next_to_marker'] = [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.show_title_next_to_marker',
+        'config' => [
+            'type' => 'check',
+            'items' => [
+                // label, value
+                ['LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.label.show', ''],
+            ],
+        ]
+    ];
+
+    $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_show_zoom'] = [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.show_zoom',
+        'config' => [
+            'type' => 'check',
+            'items' => [
+                // label, value
+                ['LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.label.show', ''],
+            ],
+        ]
     ];
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] .= ',frame_layout,frame_options,background_color_class,background_image,background_image_options';

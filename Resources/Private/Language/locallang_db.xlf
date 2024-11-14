@@ -24,11 +24,23 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.icon">
                 <source>Icon</source>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.label.show">
+                <source>show</source>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.marks">
                 <source>Marks</source>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.set_marker">
                 <source>Set Marker</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_fullscreen">
+                <source>Show fullscreen button</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_title_next_to_marker">
+                <source>Show title next to marker</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_zoom">
+                <source>Show zoom buttons</source>
             </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title">
                 <source>Title</source>

@@ -48,6 +48,21 @@ class InteractiveImage extends AbstractEntity
      * @var string
      */
     protected $txVncinteractiveimageLayout = '';
+    
+    /**
+     * @var bool
+     */
+    protected $txVncinteractiveimageShowFullscreen = false;
+
+    /**
+     * @var bool
+     */
+    protected $txVncinteractiveimageShowTitleNextToMarker = false;
+
+    /**
+     * @var bool
+     */
+    protected $txVncinteractiveimageShowZoom = false;
 
     public function __construct()
     {
@@ -132,5 +147,35 @@ class InteractiveImage extends AbstractEntity
     public function setTxVncinteractiveimageLayout(string $txVncinteractiveimageLayout): void
     {
         $this->txVncinteractiveimageLayout = $txVncinteractiveimageLayout;
+    }
+
+    public function isTxVncinteractiveimageShowFullscreen(): bool
+    {
+        return $this->txVncinteractiveimageShowFullscreen;
+    }
+
+    public function setTxVncinteractiveimageShowFullscreen(bool $txVncinteractiveimageShowFullscreen): void
+    {
+        $this->txVncinteractiveimageShowFullscreen = $txVncinteractiveimageShowFullscreen;
+    }
+
+    public function isTxVncinteractiveimageShowTitleNextToMarker(): bool
+    {
+        return $this->txVncinteractiveimageShowTitleNextToMarker;
+    }
+
+    public function setTxVncinteractiveimageShowTitleNextToMarker(bool $txVncinteractiveimageShowTitleNextToMarker): void
+    {
+        $this->txVncinteractiveimageShowTitleNextToMarker = $txVncinteractiveimageShowTitleNextToMarker;
+    }
+
+    public function isTxVncinteractiveimageShowZoom(): bool
+    {
+        return $this->txVncinteractiveimageShowZoom;
+    }
+
+    public function setTxVncinteractiveimageShowZoom(bool $txVncinteractiveimageShowZoom): void
+    {
+        $this->txVncinteractiveimageShowZoom = $txVncinteractiveimageShowZoom;
     }
 }

@@ -5,6 +5,7 @@ defined('TYPO3') || die();
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 call_user_func(function () {
+
     $pluginSignature = 'vncinteractiveimage_vncinteractive';
 
     ExtensionManagementUtility::addPlugin(
@@ -20,8 +21,8 @@ call_user_func(function () {
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'pages,layout,select_key,recursive';
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = '
         tx_vncinteractiveimage_name, tx_vncinteractiveimage_layout, tx_vncinteractiveimage_show_fullscreen,
-        tx_vncinteractiveimage_show_title_next_to_marker, tx_vncinteractiveimage_show_zoom, tx_vncinteractiveimage_image, 
-        tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon_selection, tx_vncinteractiveimage_icon, 
+        tx_vncinteractiveimage_show_title_next_to_marker, tx_vncinteractiveimage_show_zoom, tx_vncinteractiveimage_image,
+        tx_vncinteractiveimage_icon_mode, tx_vncinteractiveimage_icon_selection, tx_vncinteractiveimage_icon,
         tx_vncinteractiveimage_icon_formelement, tx_vncinteractiveimage_setmarker, tx_vncinteractiveimage_marks
     ';
 
@@ -57,7 +58,79 @@ call_user_func(function () {
             ],
             'minitems' => 0,
             'maxitems' => 1,
-            'allowed' => 'jpg,jpeg,png,svg'
+            'allowed' => 'jpg,jpeg,png,svg',
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'crop' => [
+                        'config' => [
+                            'cropVariants' => [
+                                'default' => [
+                                    'title' => 'Default',
+                                    'disabled' => false,
+                                    'allowedAspectRatios' => [
+                                        '3:1' => [
+                                            'title' => 'Ultraweit 3:1',
+                                            'value' => 3.0
+                                        ],
+                                        '5:2' => [
+                                            'title' => 'Weit 5:2',
+                                            'value' => 2.5
+                                        ],
+                                        '2:0' => [
+                                            'title' => 'Univisium 2:1',
+                                            'value' => 2.0
+                                        ],
+                                        '16:9' => [
+                                            'title' => '16:9 Breitbild',
+                                            'value' => 1.77
+                                        ],
+                                        '2:3' => [
+                                            'title' => '2:3 Hochkant',
+                                            'value' => 0.66
+                                        ],
+                                        '4:3' => [
+                                            'title' => '4:3 Klassischer Fernseher',
+                                            'value' => 1.33
+                                        ],
+                                        '5:4' => [
+                                            'title' => '5:4 klassisches Monitorformat',
+                                            'value' => 1.25
+                                        ],
+                                        '1:1' => [
+                                            'title' => '1:1 Quadrat',
+                                            'value' => 1.0
+                                        ],
+                                        'NaN' => [
+                                            'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
+                                            'value' => 0.0
+                                        ],
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
         ]
     ];
 
@@ -103,8 +176,38 @@ call_user_func(function () {
             ],
             'minitems' => 0,
             'maxitems' => 1,
-            'allowed' => 'gif,svg'
-        ]
+            'allowed' => 'gif,svg',
+
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'crop' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon_formelement'] = [

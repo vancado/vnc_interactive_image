@@ -60,6 +60,7 @@ class SetMarker extends AbstractFormElement
                 $fileObject = $fileObjects[0];
                 $image = $imageService->getImage($fileObject->getOriginalFile()->getPublicUrl(), null, false);
                 $cropVariantCollection = CropVariantCollection::create((string)$fileObject->getReferenceProperty('crop'));
+
                 $cropArea = $cropVariantCollection->getCropArea('default');
                 $processingInstructions = [
                     'crop' => $cropArea->makeAbsoluteBasedOnFile($image),
@@ -135,11 +136,11 @@ class SetMarker extends AbstractFormElement
                 $differentIcon = $interactiveImage->getTxVncinteractiveimageIconMode() == 'different' ?
                     $this->getDifferentIcon($mark) : '';
 
-                $markers[] = '<div 
-                    title="' . htmlentities($mark->getTitle()) . '" 
-                    class="setMarkerMarkers set-marker-marker" 
+                $markers[] = '<div
+                    title="' . htmlentities($mark->getTitle()) . '"
+                    class="setMarkerMarkers set-marker-marker"
                     data-mark-uid="' . $mark->getUid() . '"
-                    data-mark-title="' . htmlentities($mark->getTitle()) . '" 
+                    data-mark-title="' . htmlentities($mark->getTitle()) . '"
                     data-mark-bodytext="' . htmlentities($mark->getBodytext()) . '"
                     data-mark-position-x="' . (string)$mark->getPositionX() . '"
                     data-mark-position-y="' . (string)$mark->getPositionY() . '"

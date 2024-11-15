@@ -25,12 +25,9 @@
       </div>
       <f:if condition="{mark.link}">
         <div class="mt-3">
-          <a
-            class="content-box__link"
-            href="{mark.link}"
-            target="_blank"
-            >Mehr erfahren</a
-          >
+          <f:link.typolink parameter="{mark.link}" class="content-box__link">
+            Mehr erfahren
+          </f:link.typolink>
         </div>
       </f:if>
     </div>

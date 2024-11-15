@@ -6,7 +6,15 @@
     {
       "name": "Sajan Telrejah",
       "email": "Sajan.Telrejah@Vancado.de"
-    }
+    },
+    {
+      "name": "Christian Müller",
+      "email": "christian.mueller@Vancado.de"
+    },
+    {
+      "name": "Johannes Böttcher",
+      "email": "johannes.boettcher@Vancado.de"
+    },
   ],
   "license": "GPL-2.0-or-later",
   "repositories": [

@@ -49,7 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     showCurrentInfoItem();
   };
 
-  const handleMarkerClick = (marker, markerId) => {
+  const handleMarkerClick = (marker, markerId, event) => {
+    if (event.target.closest('.content-box')) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
     if (layout === "infoBox") {
       infoItems.forEach((infoItem) => infoItem.classList.remove("active"));
       const infoItem = document.getElementById(markerId);
@@ -132,9 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     marker.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      handleMarkerClick(marker, markerId);
+      handleMarkerClick(marker, markerId, event);
     });
 
     if (layout === "infoBox" && index === 0) {
@@ -161,26 +166,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("click", (event) => {
-    const closeIcon = event.target.closest(".content-box__close");
     const activePopover = document.querySelector(".content-box__popover.active");
 
-    if (closeIcon) {
-      console.log("Popover close clicked");
-
-      const popover = closeIcon.closest(".content-box__popover");
-      if (popover) {
-        const marker = popover.closest(".mark");
-        if (marker) {
-          marker.classList.remove("active");
-        }
-        popover.classList.remove("active");
-      }
-      return;
-    }
-
     if (!event.target.closest(".mark") && !event.target.closest(".content-box__popover")) {
-      console.log("Clicked outside of mark and popover");
-
       if (activePopover) {
         activePopover.classList.remove("active");
 
@@ -190,6 +178,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
+  });
+
+  document.querySelectorAll('.content-box__close')?.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const popover = e.target.closest(".content-box__popover");
+      if (popover) {
+        const marker = popover.closest(".mark");
+        if (marker) {
+          marker.classList.remove("active");
+        }
+        popover.classList.remove("active");
+      }
+    });
   });
 
   // Zoom and Pan Logic

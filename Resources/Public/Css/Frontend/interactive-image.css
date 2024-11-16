@@ -43,40 +43,39 @@
     fill: #101010;
   }
 }
-a {
+.vncInteractiveImage a {
   text-decoration: none;
 }
-
-.outer-container {
+.vncInteractiveImage .outer-container {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-
-.image-container {
+.vncInteractiveImage .image-container {
   overflow: hidden;
   position: relative;
   width: 100%;
   height: auto;
-  cursor: grab;
   z-index: 1;
 }
-.image-container img {
+.vncInteractiveImage .image-container img {
   width: 100%;
 }
-.image-container.panning {
+.vncInteractiveImage .image-container.panning {
   cursor: grabbing;
 }
-
-.zoom-controls {
+.vncInteractiveImage[data-show-zoom="1"] .image-container {
+  cursor: grab;
+}
+.vncInteractiveImage .zoom-controls {
   position: absolute;
   bottom: 10px;
   right: 28px;
   z-index: 999;
   gap: 5px;
 }
-.zoom-controls button {
+.vncInteractiveImage .zoom-controls button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -90,21 +89,19 @@ a {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.zoom-controls button:hover {
+.vncInteractiveImage .zoom-controls button:hover {
   background-color: black;
 }
-.zoom-controls button i {
+.vncInteractiveImage .zoom-controls button i {
   font-size: 16px;
 }
-
-.img-fluid {
+.vncInteractiveImage .img-fluid {
   display: block;
   width: 100%;
   height: auto;
   transform-origin: top left;
 }
-
-.zoomable-image {
+.vncInteractiveImage .zoomable-image {
   width: 100%;
   height: auto;
   transition: transform 0.2s ease;
@@ -112,23 +109,21 @@ a {
   user-select: none;
   cursor: inherit;
 }
-
-.marks-container {
+.vncInteractiveImage .marks-container {
   position: static;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-
-.mark {
+.vncInteractiveImage .mark {
   position: absolute;
   transform-origin: top left;
   transform: translate(-50%, -50%);
   background-color: transparent;
   cursor: pointer;
 }
-.mark-icon {
+.vncInteractiveImage .mark-icon {
   width: 42px;
   height: 42px;
   color: white !important;
@@ -140,30 +135,20 @@ a {
   transition: transform 0.2s ease;
   z-index: 1;
 }
-.mark-icon:hover {
+.vncInteractiveImage .mark-icon:hover {
   transform: scale(1.2);
 }
-.mark-icon--number {
+.vncInteractiveImage .mark-icon--number {
   padding: 10px;
 }
-.mark-icon--no-hover {
+.vncInteractiveImage .mark-icon--no-hover {
   transition: none;
   transform: none;
 }
-.mark-icon--no-hover:hover {
+.vncInteractiveImage .mark-icon--no-hover:hover {
   transform: none;
 }
-
-.mark-title {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  background-color: #ffaa00;
-  color: black;
-  z-index: -1;
-}
-
-.content-box {
+.vncInteractiveImage .content-box {
   background: #F4F4F4;
   border-radius: 0;
   padding: 1rem;
@@ -172,12 +157,12 @@ a {
   box-sizing: border-box;
   margin-top: 20px;
 }
-.content-box__info {
+.vncInteractiveImage .content-box__info {
   width: 100%;
   flex-shrink: 0;
   gap: 1rem;
 }
-.content-box__popover {
+.vncInteractiveImage .content-box__popover {
   position: absolute;
   display: none;
   overflow: hidden;
@@ -189,40 +174,40 @@ a {
   max-height: auto;
   font-size: 1rem;
 }
-.content-box__popover.active {
+.vncInteractiveImage .content-box__popover.active {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   z-index: 1000;
   animation: fadeIn 0.5s;
 }
-.content-box__popover.top {
+.vncInteractiveImage .content-box__popover.top {
   bottom: 10%;
 }
-.content-box__popover.bottom {
+.vncInteractiveImage .content-box__popover.bottom {
   top: 10%;
 }
-.content-box__popover.left {
+.vncInteractiveImage .content-box__popover.left {
   right: 100%;
 }
-.content-box__popover.right {
+.vncInteractiveImage .content-box__popover.right {
   left: 100%;
 }
-.content-box__text {
+.vncInteractiveImage .content-box__text {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 40px;
   margin: 0;
 }
-.content-box__image {
+.vncInteractiveImage .content-box__image {
   width: 100%;
   height: auto;
   max-height: 13rem;
   aspect-ratio: 16/9;
   object-fit: cover;
 }
-.content-box__link {
+.vncInteractiveImage .content-box__link {
   display: inline-flex;
   padding: 13px 16px;
   justify-content: center;
@@ -232,23 +217,23 @@ a {
   color: white;
   transition: transform 0.2s ease-in-out;
 }
-.content-box__link:hover {
+.vncInteractiveImage .content-box__link:hover {
   transform: scale(1.02);
   animation: shine 0.5s forwards;
 }
-.content-box__nav {
+.vncInteractiveImage .content-box__nav {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
   flex-shrink: 0;
 }
-.content-box__nav .nav-points {
+.vncInteractiveImage .content-box__nav .nav-points {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-.content-box__nav .nav-points .nav-point {
+.vncInteractiveImage .content-box__nav .nav-points .nav-point {
   width: 11px;
   height: 11px;
   border-radius: 50%;
@@ -256,34 +241,34 @@ a {
   margin: 0 5px;
   cursor: pointer;
 }
-.content-box__nav .nav-points .nav-point.active {
+.vncInteractiveImage .content-box__nav .nav-points .nav-point.active {
   scale: 1.4;
   background-color: black;
 }
-.content-box__nav .nav-prev,
-.content-box__nav .nav-next {
+.vncInteractiveImage .content-box__nav .nav-prev,
+.vncInteractiveImage .content-box__nav .nav-next {
   cursor: pointer;
   transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
 }
-.content-box__nav .nav-prev path,
-.content-box__nav .nav-next path {
+.vncInteractiveImage .content-box__nav .nav-prev path,
+.vncInteractiveImage .content-box__nav .nav-next path {
   fill: #F4F4F4;
   transition: fill 0.3s ease-in-out;
   padding: 6px 9.001px 6.001px 9px;
 }
-.content-box__nav .nav-prev:hover,
-.content-box__nav .nav-next:hover {
+.vncInteractiveImage .content-box__nav .nav-prev:hover,
+.vncInteractiveImage .content-box__nav .nav-next:hover {
   transform: scale(1);
 }
-.content-box__nav .nav-prev:hover path,
-.content-box__nav .nav-next:hover path {
+.vncInteractiveImage .content-box__nav .nav-prev:hover path,
+.vncInteractiveImage .content-box__nav .nav-next:hover path {
   animation: fillChange 0.3s forwards;
 }
-.content-box__nav .nav-prev:not(:hover),
-.content-box__nav .nav-next:not(:hover) {
+.vncInteractiveImage .content-box__nav .nav-prev:not(:hover),
+.vncInteractiveImage .content-box__nav .nav-next:not(:hover) {
   transform: scale(1);
 }
-.content-box__close {
+.vncInteractiveImage .content-box__close {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -292,24 +277,21 @@ a {
   padding: 1rem;
   transition: transform 0.2s ease-in-out;
 }
-
-p {
+.vncInteractiveImage p {
   max-width: 100%;
   margin-bottom: 0 !important;
   line-break: auto;
 }
-
-.info-item {
+.vncInteractiveImage .info-item {
   min-height: auto;
 }
-
 @media (min-width: 992px) {
-  .content-box__info {
+  .vncInteractiveImage .content-box__info {
     margin-top: 0;
   }
 }
 @media (max-width: 1200px) {
-  .content-box__popover {
+  .vncInteractiveImage .content-box__popover {
     padding: 1.5rem;
     width: 100%;
     max-width: 100%;
@@ -317,43 +299,43 @@ p {
     max-height: 100%;
     bottom: 0%;
   }
-  .content-box__popover__image {
+  .vncInteractiveImage .content-box__popover__image {
     object-fit: scale-down;
   }
-  .content-box p {
+  .vncInteractiveImage .content-box p {
     font-size: 14px;
   }
-  .content-box__text {
+  .vncInteractiveImage .content-box__text {
     font-size: 14px;
   }
-  .content-box__image {
+  .vncInteractiveImage .content-box__image {
     max-height: 6rem;
   }
-  .content-box__link {
+  .vncInteractiveImage .content-box__link {
     padding: 0.8em;
     font-size: 14px;
     text-align: center;
   }
-  .content-box__close {
+  .vncInteractiveImage .content-box__close {
     padding: 1.5rem;
   }
 }
 @media (max-width: 991.98px) {
-  .mark-icon {
+  .vncInteractiveImage .mark-icon {
     width: 2.2rem;
     height: 2.2rem;
   }
-  .mark-icon--number {
+  .vncInteractiveImage .mark-icon--number {
     font-size: 1.5rem;
   }
-  .mark-icon--icon {
+  .vncInteractiveImage .mark-icon--icon {
     padding: 5px;
   }
-  .image-container {
+  .vncInteractiveImage .image-container {
     position: relative;
     width: 100%;
   }
-  .content-box__popover {
+  .vncInteractiveImage .content-box__popover {
     padding: 1.5rem;
     width: 100%;
     max-width: 100%;
@@ -361,33 +343,33 @@ p {
     max-height: 100%;
     bottom: 0%;
   }
-  .content-box p {
+  .vncInteractiveImage .content-box p {
     font-size: 14px;
   }
-  .content-box__text {
+  .vncInteractiveImage .content-box__text {
     font-size: 14px;
   }
-  .content-box__image {
+  .vncInteractiveImage .content-box__image {
     max-height: 6rem;
   }
-  .content-box__link {
+  .vncInteractiveImage .content-box__link {
     padding: 0.8em;
     font-size: 14px;
     text-align: center;
   }
-  .content-box__close {
+  .vncInteractiveImage .content-box__close {
     padding: 1.5rem;
   }
-  .content-box__close svg {
+  .vncInteractiveImage .content-box__close svg {
     width: 30px;
     height: 30px;
   }
 }
 @media (max-width: 767.98px) {
-  .img-fluid {
+  .vncInteractiveImage .img-fluid {
     transform: scale(1.4);
   }
-  .content-box__popover {
+  .vncInteractiveImage .content-box__popover {
     padding: 0.8rem;
     width: 100%;
     max-width: 100%;
@@ -395,45 +377,45 @@ p {
     max-height: 100%;
     bottom: 0%;
   }
-  .content-box p {
+  .vncInteractiveImage .content-box p {
     font-size: 12px;
   }
-  .content-box__text {
+  .vncInteractiveImage .content-box__text {
     font-size: 14px;
   }
-  .content-box__image {
+  .vncInteractiveImage .content-box__image {
     max-height: 3rem;
   }
-  .content-box__link {
+  .vncInteractiveImage .content-box__link {
     padding: 0.8em;
     font-size: 12px;
     text-align: center;
   }
-  .content-box__close {
+  .vncInteractiveImage .content-box__close {
     padding: 0.5rem;
   }
-  .content-box__close svg {
+  .vncInteractiveImage .content-box__close svg {
     width: 25px;
     height: 25px;
   }
-  .zoom-controls button {
+  .vncInteractiveImage .zoom-controls button {
     width: 25px;
     height: 25px;
   }
-  .zoom-controls button i > svg {
+  .vncInteractiveImage .zoom-controls button i > svg {
     height: 25px;
     width: 16px;
   }
-  .mark-icon {
+  .vncInteractiveImage .mark-icon {
     width: 1.7rem;
     height: 1.7rem;
   }
 }
 @media (max-width: 575.98px) {
-  .img-fluid {
+  .vncInteractiveImage .img-fluid {
     transform: scale(1.4);
   }
-  .content-box__popover {
+  .vncInteractiveImage .content-box__popover {
     padding: 0.4rem;
     width: 100%;
     max-width: 100%;
@@ -441,37 +423,37 @@ p {
     max-height: 100%;
     bottom: 0%;
   }
-  .content-box p {
+  .vncInteractiveImage .content-box p {
     font-size: 11px;
   }
-  .content-box__text {
+  .vncInteractiveImage .content-box__text {
     font-size: 12px;
   }
-  .content-box__image {
+  .vncInteractiveImage .content-box__image {
     max-height: 2rem;
   }
-  .content-box__link {
+  .vncInteractiveImage .content-box__link {
     padding: 0.6em;
     margin-top: 0.3rem;
     font-size: 12px;
     text-align: center;
   }
-  .content-box__close {
+  .vncInteractiveImage .content-box__close {
     padding: 0.3rem;
   }
-  .content-box__close svg {
+  .vncInteractiveImage .content-box__close svg {
     width: 25px;
     height: 25px;
   }
-  .zoom-controls button {
+  .vncInteractiveImage .zoom-controls button {
     width: 15px;
     height: 25px;
   }
-  .zoom-controls button i > svg {
+  .vncInteractiveImage .zoom-controls button i > svg {
     height: 25px;
     width: 16px;
   }
-  .mark-icon {
+  .vncInteractiveImage .mark-icon {
     width: 0.8rem;
     height: 0.8rem;
     padding: 12px;

@@ -95,517 +95,524 @@ $font-size-button: 14px;
   }
 }
 
-a {
-  text-decoration: none;
-}
+.vncInteractiveImage {
+  a {
+    text-decoration: none;
+  }
 
-.outer-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.image-container {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  height: auto;
-  cursor: grab;
-  z-index: 1;
-
-  img {
+  .outer-container {
+    position: relative;
     width: 100%;
-  }
-
-  &.panning {
-    cursor: grabbing;
-  }
-}
-
-.zoom-controls {
-  position: absolute;
-  bottom: 10px;
-  right: 28px;
-  z-index: 999;
-  gap: 5px;
-
-  button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: darken(black, 10%);
-    }
-
-    i {
-      font-size: 16px;
-    }
-  }
-}
-
-.img-fluid {
-  display: block;
-  width: 100%;
-  height: auto;
-  transform-origin: top left;
-}
-
-.zoomable-image {
-  width: 100%;
-  height: auto;
-  transition: transform 0.2s ease;
-  transform-origin: 0 0;
-  user-select: none;
-  cursor: inherit;
-}
-
-.marks-container {
-  position: static;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.mark {
-  position: absolute;
-  transform-origin: top left;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  cursor: pointer;
-
-  &-icon {
-    width: $mark-icon-size-default;
-    height: $mark-icon-size-default;
-    color: $mark-icon-color !important;
-    border-radius: $border-radius;
-    background-color: $mark-icon-bg-color;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
-    z-index: 1;
-
-    &:hover {
-      transform: scale(1.2);
-    }
-
-    &--number {
-      padding: 10px;
-    }
-
-    &--no-hover {
-      transition: none;
-      transform: none;
-
-      &:hover {
-        transform: none;
-      }
-    }
-  }
-}
-
-.content-box {
-  background: $secondary-color;
-  border-radius: 0;
-  padding: 1rem;
-  width: 100%;
-  height: auto;
-  box-sizing: border-box;
-  margin-top: 20px;
-
-  &__info {
-    width: 100%;
-    flex-shrink: 0;
-    gap: 1rem;
-  }
-
-  &__popover {
-    position: absolute;
-    display: none;
+    height: 100%;
     overflow: hidden;
-    padding: 1rem;
-    cursor: auto;
-    z-index: 10;
-    width: 448px;
-    height: auto;
-    max-height: auto;
-    font-size: 1rem;
-
-    &.active {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      z-index: 1000;
-      @include fade-in;
-    }
-
-    &.top {
-      bottom: 10%;
-    }
-
-    &.bottom {
-      top: 10%;
-    }
-
-    &.left {
-      right: 100%;
-    }
-
-    &.right {
-      left: 100%;
-    }
-  }
-
-  &__text {
-    // font-family: Roboto;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 40px;
-    margin: 0;
-  }
-
-  &__image {
-    width: 100%;
-    height: auto;
-    max-height: 13rem;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    // border-radius: 4px;
-  }
-
-  &__link {
-    display: inline-flex;
-    padding: 13px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background: var(--02-Web-Black, #0f0f0f);
-    color: $font-color-link;
-    transition: transform 0.2s ease-in-out;
-
-    &:hover {
-      transform: scale(1.02);
-      animation: shine 0.5s forwards;
-    }
-  }
-
-  &__nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    flex-shrink: 0;
-
-    .nav-points {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-
-      .nav-point {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: $nav-color;
-        margin: 0 5px;
-        cursor: pointer;
-
-        &.active {
-          scale: 1.4;
-          background-color: $primary-color;
-        }
-      }
-    }
-
-    .nav-prev,
-    .nav-next {
-      cursor: pointer;
-      transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
-      
-
-      path {
-        fill: $prev-next-color;
-        transition: fill 0.3s ease-in-out;
-        padding: 6px 9.001px 6.001px 9px;
-      }
-
-      &:hover {
-        transform: scale(1);
-
-        path {
-          animation: fillChange 0.3s forwards;
-        }
-      }
-
-      &:not(:hover) {
-        transform: scale(1);
-      }
-    }
-  }
-
-  &__close {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    cursor: pointer;
-    z-index: 10;
-    padding: 1rem;
-    transition: transform 0.2s ease-in-out;
-  }
-}
-
-p {
-  max-width: 100%;
-  margin-bottom: 0 !important;
-  line-break: auto;
-}
-
-.info-item {
-  min-height: auto;
-}
-
-@media (min-width: 992px) {
-  .content-box__info {
-    margin-top: 0;
-  }
-}
-
-@media (max-width: 1200px) {
-  .content-box {
-    &__popover {
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      max-height: 100%;
-      bottom: 0%;
-
-      &__image {
-        object-fit: scale-down;
-      }
-    }
-
-    p {
-      font-size: 14px;
-    }
-
-    &__text {
-      font-size: 14px;
-    }
-
-    &__image {
-      max-height: 6rem;
-    }
-
-    &__link {
-      padding: 0.8em;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    &__close {
-      padding: 1.5rem;
-    }
-  }
-}
-
-@media (max-width: 991.98px) {
-
-  // .img-fluid {
-  //   transform: scale(1.2);
-  //   transform-origin: center;
-  // }
-
-  .mark-icon {
-    width: $mark-icon-size-lg;
-    height: $mark-icon-size-lg;
-
-    &--number {
-      font-size: 1.5rem;
-    }
-
-    &--icon {
-      padding: 5px;
-    }
   }
 
   .image-container {
+    overflow: hidden;
     position: relative;
     width: 100%;
-  }
+    height: auto;
+    z-index: 1;
 
-  .content-box {
-    &__popover {
-      padding: 1.5rem;
+    img {
       width: 100%;
-      max-width: 100%;
-      height: auto;
-      max-height: 100%;
-      bottom: 0%;
     }
 
-    p {
-      font-size: 14px;
-    }
-
-    &__text {
-      font-size: 14px;
-    }
-
-    &__image {
-      max-height: 6rem;
-    }
-
-    &__link {
-      padding: 0.8em;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    &__close {
-      padding: 1.5rem;
-
-      svg {
-        width: 30px;
-        height: 30px;
-      }
+    &.panning {
+      cursor: grabbing;
     }
   }
-}
 
-@media (max-width: 767.98px) {
-
-  .img-fluid {
-    transform: scale(1.4);
-  }
-
-  .content-box {
-    &__popover {
-      padding: 0.8rem;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      max-height: 100%;
-      bottom: 0%;
-    }
-
-    p {
-      font-size: 12px;
-    }
-
-    &__text {
-      font-size: 14px;
-    }
-
-    &__image {
-      max-height: 3rem;
-    }
-
-    &__link {
-      padding: 0.8em;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    &__close {
-      padding: 0.5rem;
-
-      svg {
-        width: 25px;
-        height: 25px;
-      }
+  &[data-show-zoom="1"] {
+    .image-container {
+      cursor: grab;
     }
   }
 
   .zoom-controls {
-    button {
-      width: 25px;
-      height: 25px;
+    position: absolute;
+    bottom: 10px;
+    right: 28px;
+    z-index: 999;
+    gap: 5px;
 
-      i > svg {
-        height: 25px;
-        width: 16px;
+    button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken(black, 10%);
+      }
+
+      i {
+        font-size: 16px;
       }
     }
   }
 
-  .mark-icon {
-    width: $mark-icon-size-md;
-    height: $mark-icon-size-md;
-  }
-}
-
-@media (max-width: 575.98px) {
-
   .img-fluid {
-    transform: scale(1.4);
-    // transform-origin: center;
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: top left;
+  }
+
+  .zoomable-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.2s ease;
+    transform-origin: 0 0;
+    user-select: none;
+    cursor: inherit;
+  }
+
+  .marks-container {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mark {
+    position: absolute;
+    transform-origin: top left;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    cursor: pointer;
+
+    &-icon {
+      width: $mark-icon-size-default;
+      height: $mark-icon-size-default;
+      color: $mark-icon-color !important;
+      border-radius: $border-radius;
+      background-color: $mark-icon-bg-color;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+      z-index: 1;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &--number {
+        padding: 10px;
+      }
+
+      &--no-hover {
+        transition: none;
+        transform: none;
+
+        &:hover {
+          transform: none;
+        }
+      }
+    }
   }
 
   .content-box {
-    &__popover {
-      padding: 0.4rem;
+    background: $secondary-color;
+    border-radius: 0;
+    padding: 1rem;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    margin-top: 20px;
+
+    &__info {
       width: 100%;
-      max-width: 100%;
-      height: auto;
-      max-height: 100%;
-      bottom: 0%;
+      flex-shrink: 0;
+      gap: 1rem;
     }
 
-    p {
-      font-size: 11px;
+    &__popover {
+      position: absolute;
+      display: none;
+      overflow: hidden;
+      padding: 1rem;
+      cursor: auto;
+      z-index: 10;
+      width: 448px;
+      height: auto;
+      max-height: auto;
+      font-size: 1rem;
+
+      &.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        z-index: 1000;
+        @include fade-in;
+      }
+
+      &.top {
+        bottom: 10%;
+      }
+
+      &.bottom {
+        top: 10%;
+      }
+
+      &.left {
+        right: 100%;
+      }
+
+      &.right {
+        left: 100%;
+      }
     }
 
     &__text {
-      font-size: 12px;
+      // font-family: Roboto;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 40px;
+      margin: 0;
     }
 
     &__image {
-      max-height: 2rem;
+      width: 100%;
+      height: auto;
+      max-height: 13rem;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      // border-radius: 4px;
     }
 
     &__link {
-      padding: 0.6em;
-      margin-top: 0.3rem;
-      font-size: 12px;
-      text-align: center;
+      display: inline-flex;
+      padding: 13px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background: var(--02-Web-Black, #0f0f0f);
+      color: $font-color-link;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.02);
+        animation: shine 0.5s forwards;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-shrink: 0;
+
+      .nav-points {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .nav-point {
+          width: 11px;
+          height: 11px;
+          border-radius: 50%;
+          background-color: $nav-color;
+          margin: 0 5px;
+          cursor: pointer;
+
+          &.active {
+            scale: 1.4;
+            background-color: $primary-color;
+          }
+        }
+      }
+
+      .nav-prev,
+      .nav-next {
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, fill 0.3s ease-in-out;
+
+
+        path {
+          fill: $prev-next-color;
+          transition: fill 0.3s ease-in-out;
+          padding: 6px 9.001px 6.001px 9px;
+        }
+
+        &:hover {
+          transform: scale(1);
+
+          path {
+            animation: fillChange 0.3s forwards;
+          }
+        }
+
+        &:not(:hover) {
+          transform: scale(1);
+        }
+      }
     }
 
     &__close {
-      padding: 0.3rem;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      cursor: pointer;
+      z-index: 10;
+      padding: 1rem;
+      transition: transform 0.2s ease-in-out;
+    }
+  }
 
-      svg {
+  p {
+    max-width: 100%;
+    margin-bottom: 0 !important;
+    line-break: auto;
+  }
+
+  .info-item {
+    min-height: auto;
+  }
+
+  @media (min-width: 992px) {
+    .content-box__info {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .content-box {
+      &__popover {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        bottom: 0%;
+
+        &__image {
+          object-fit: scale-down;
+        }
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      &__text {
+        font-size: 14px;
+      }
+
+      &__image {
+        max-height: 6rem;
+      }
+
+      &__link {
+        padding: 0.8em;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      &__close {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  @media (max-width: 991.98px) {
+
+    // .img-fluid {
+    //   transform: scale(1.2);
+    //   transform-origin: center;
+    // }
+
+    .mark-icon {
+      width: $mark-icon-size-lg;
+      height: $mark-icon-size-lg;
+
+      &--number {
+        font-size: 1.5rem;
+      }
+
+      &--icon {
+        padding: 5px;
+      }
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .content-box {
+      &__popover {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        bottom: 0%;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      &__text {
+        font-size: 14px;
+      }
+
+      &__image {
+        max-height: 6rem;
+      }
+
+      &__link {
+        padding: 0.8em;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      &__close {
+        padding: 1.5rem;
+
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767.98px) {
+
+    .img-fluid {
+      transform: scale(1.4);
+    }
+
+    .content-box {
+      &__popover {
+        padding: 0.8rem;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        bottom: 0%;
+      }
+
+      p {
+        font-size: 12px;
+      }
+
+      &__text {
+        font-size: 14px;
+      }
+
+      &__image {
+        max-height: 3rem;
+      }
+
+      &__link {
+        padding: 0.8em;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      &__close {
+        padding: 0.5rem;
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
+    .zoom-controls {
+      button {
         width: 25px;
         height: 25px;
-      }
-    }
-  }
-  .zoom-controls {
-    button {
-      width: 15px;
-      height: 25px;
 
-      i > svg {
-        height: 25px;
-        width: 16px;
+        i > svg {
+          height: 25px;
+          width: 16px;
+        }
       }
     }
+
+    .mark-icon {
+      width: $mark-icon-size-md;
+      height: $mark-icon-size-md;
+    }
   }
-  .mark-icon {
-    width: $mark-icon-size-sm;
-    height: $mark-icon-size-sm;
-    padding: 12px;
+
+  @media (max-width: 575.98px) {
+
+    .img-fluid {
+      transform: scale(1.4);
+      // transform-origin: center;
+    }
+
+    .content-box {
+      &__popover {
+        padding: 0.4rem;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        bottom: 0%;
+      }
+
+      p {
+        font-size: 11px;
+      }
+
+      &__text {
+        font-size: 12px;
+      }
+
+      &__image {
+        max-height: 2rem;
+      }
+
+      &__link {
+        padding: 0.6em;
+        margin-top: 0.3rem;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      &__close {
+        padding: 0.3rem;
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+    .zoom-controls {
+      button {
+        width: 15px;
+        height: 25px;
+
+        i > svg {
+          height: 25px;
+          width: 16px;
+        }
+      }
+    }
+    .mark-icon {
+      width: $mark-icon-size-sm;
+      height: $mark-icon-size-sm;
+      padding: 12px;
+    }
   }
 }

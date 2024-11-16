@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const vncInteractiveImage = document.querySelector('.vncInteractiveImage');
   const markers = document.querySelectorAll(".mark");
   const container = document.querySelector(".container[data-layout]");
   const layout = container ? container.dataset.layout : "popover";
+  const showZoom = vncInteractiveImage?.dataset.showZoom;
   const image = document.querySelector(".img-fluid");
 
   const infoItems = document.querySelectorAll(".info-item");
@@ -332,6 +334,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let startX, startY, scrollLeft, scrollTop;
 
   imageContainer.addEventListener("mousedown", (e) => {
+    if (showZoom !== '1') {
+      return;
+    }
     isPanning = true;
     imageContainer.classList.add("panning");
     startX = e.pageX - imageContainer.offsetLeft;
@@ -363,6 +368,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // touch event listeners for mobile zoom and pan functionality
   imageContainer.addEventListener("touchstart", (e) => {
+    if (showZoom !== '1') {
+      return;
+    }
     if (e.touches.length === 2) {
       initialPinchDistance = getPinchDistance(e.touches);
       lastScale = scale;

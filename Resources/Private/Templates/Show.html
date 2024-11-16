@@ -5,18 +5,16 @@
 
 <f:if condition="{interactiveImage}">
     <f:then>
-        <div class="vncInteractiveImage">
+        <!-- Check frame_layout -->
+        <f:variable name="layout">{interactiveImage.txVncinteractiveimageLayout}</f:variable>
+        <f:variable name="showZoom">{interactiveImage.txVncinteractiveimageShowZoom}</f:variable>
+
+        <div class="vncInteractiveImage" data-show-zoom="{showZoom}">
             <f:if condition="{interactiveImage.txVncinteractiveimageName}">
                 <div class="row heading-block border-bottom-0 mb-2">
                     <h2>{interactiveImage.txVncinteractiveimageName}</h2>
                 </div>
             </f:if>
-
-            <!-- Check frame_layout -->
-            <f:variable
-                    name="layout"
-                    value="{interactiveImage.txVncinteractiveimageLayout}"
-            />
 
             <div class="container my-5" data-layout="{layout}">
                 <div class="row">

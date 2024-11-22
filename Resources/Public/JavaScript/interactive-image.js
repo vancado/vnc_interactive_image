@@ -81,17 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const popovers = document.querySelectorAll(".content-box__popover");
         const markerRect = marker.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
+        const vncInteractiveImageRect = vncInteractiveImage.getBoundingClientRect();
 
-        popover.classList.remove("top", "bottom", "left", "right");
+        popover.classList.remove("left", "right");
 
-        const markerCenterY = markerRect.top + markerRect.height / 2;
         const markerCenterX = markerRect.left + markerRect.width / 2;
-
-        if (markerCenterY > window.innerHeight / 2) {
-          popover.classList.add("top");
-        } else {
-          popover.classList.add("bottom");
-        }
 
         if (markerCenterX > window.innerWidth / 2) {
           popover.classList.add("left");
@@ -101,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         popover.classList.toggle("active");
         marker.classList.toggle("active");
+        const popoverRect = popover.getBoundingClientRect();
 
         popovers?.forEach((item) => {
           if (item !== popover) {
@@ -110,6 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         markers?.forEach((item) => (item.style.zIndex = 1));
         marker.style.zIndex = 2;
+
+        popover.style = null;
+        const y1 = Math.round((vncInteractiveImageRect.height - popoverRect.height) / 2);
+        const y2 = parseInt(marker.style.top);
+        popover.style.top = (y1 - y2) + "px";
 
         const isMobile = window.matchMedia("(max-width: 1024px)").matches;
         if (isMobile) {

@@ -367,7 +367,7 @@ $font-size-button: 14px;
       right: 0px;
       cursor: pointer;
       z-index: 10;
-      padding: 1rem;
+      padding: 12px 1rem 1rem 1rem;
       transition: transform 0.2s ease-in-out;
     }
   }
@@ -391,13 +391,6 @@ $font-size-button: 14px;
   @media (max-width: 1200px) {
     .content-box {
       &__popover {
-        padding: 1.5rem;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
-        bottom: 0%;
-
         &__image {
           object-fit: scale-down;
         }
@@ -419,10 +412,6 @@ $font-size-button: 14px;
         padding: 0.8em;
         font-size: 14px;
         text-align: center;
-      }
-
-      &__close {
-        padding: 1.5rem;
       }
     }
   }

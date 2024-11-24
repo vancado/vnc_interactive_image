@@ -213,20 +213,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let scale = 1;
   const scaleStep = 0.1;
 
-  const innerWidth = window.innerWidth;
-  if (innerWidth < 768) {
-    scale = 1.4;
-  }
-
   markers.forEach((marker, i) => {
     markersOriginalPosition[i] = [parseInt(marker.style.left) / 100, parseInt(marker.style.top) / 100];
   });
 
   const updateMarkers = () => {
+    // set scale for marker positions depending on image scale
+    let markerScale = 1;
+    const imageTransform = getComputedStyle(image).transform;
+    if (imageTransform !== 'none') {
+      markerScale = parseFloat(imageTransform.replace('matrix(', '').replace(')', ''))
+    }
+
     markers.forEach((marker, i) => {
-      console.log("MARKERSCALE", scale);
-      marker.style.left = scale * markersOriginalPosition[i][0] * image.clientWidth + "px";
-      marker.style.top = scale * markersOriginalPosition[i][1] * image.clientHeight + "px";
+      marker.style.left = markerScale * markersOriginalPosition[i][0] * image.clientWidth + "px";
+      marker.style.top = markerScale * markersOriginalPosition[i][1] * image.clientHeight + "px";
     });
   };
 

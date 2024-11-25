@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const vncInteractiveImage = document.querySelector('.vncInteractiveImage');
   const markers = document.querySelectorAll(".mark");
   const container = document.querySelector(".container[data-layout]");
+  const marksContainer = document.querySelector(".marks-container");
   const layout = container ? container.dataset.layout : "popover";
   const showZoom = vncInteractiveImage?.dataset.showZoom;
   const image = document.querySelector(".img-fluid");
@@ -9,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoItems = document.querySelectorAll(".info-item");
   const navPointsContainer = document.querySelector(".nav-points");
   let currentIndex = 0;
+
+  const eventAfterShowMobilePopover = new Event('afterShowMobilePopover');
+  const eventAfterHidePopover = new Event('afterHidePopover');
 
   const showCurrentInfoItem = () => {
     infoItems.forEach((item, index) => {
@@ -101,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (item !== popover) {
             item.classList.remove("active");
             item.parentElement.classList.remove("active");
+            item.dispatchEvent(eventAfterHidePopover);
           }
         });
         markers?.forEach((item) => (item.style.zIndex = 1));
@@ -125,6 +130,11 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             popover.style = null;
             imageContainer.append(popover);
+            popover.dispatchEvent(eventAfterShowMobilePopover);
+          }
+        } else {
+          if (popover.parentNode === imageContainer) {
+            marker.querySelector('.mark-title').after(popover);
           }
         }
       }
@@ -173,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!event.target.closest(".mark") && !event.target.closest(".content-box__popover")) {
       if (activePopover) {
         activePopover.classList.remove("active");
+        activePopover.dispatchEvent(eventAfterHidePopover);
 
         const activeMarker = activePopover.closest(".mark");
         if (activeMarker) {
@@ -193,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
           marker.classList.remove("active");
         }
         popover.classList.remove("active");
+        popover.dispatchEvent(eventAfterHidePopover);
       }
     });
   });
@@ -204,7 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let initialPinchDistance = null;
   const fullscreenButton = document.getElementById("fullscreen");
   const imageContainer = document.querySelector(".image-container");
-  const marksContainer = document.querySelector(".marks-container");
   const markersOriginalPosition = [];
 
   // Disable dragging of the image

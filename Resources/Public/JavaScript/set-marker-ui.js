@@ -49,12 +49,14 @@ class SetMarkerUi
                 this.addMarker(uid, '', '', xPercentage, yPercentage)
                 this.addObserver(uid, newIrreMarker)
 
+                console.log(uid, newIrreMarker);
+
                 fieldX.value = xPercentage
                 fieldX.dispatchEvent(new Event('change'))
                 fieldY.value = yPercentage
                 fieldY.dispatchEvent(new Event('change'))
                 fieldTitle.focus()
-            }, 50)
+            }, 150)
         })
 
         // add existing markers on map and set event listener for each one
@@ -149,6 +151,9 @@ class SetMarkerUi
                 const y = panel?.querySelector('[name*=position_y]')?.value
                 const title = panel?.querySelector('[name*=title]')?.value
                 const bodytext = panel?.querySelector('[name*=bodytext]')?.value
+
+                console.log(uid, title)
+                console.log(panel?.querySelector('[name*=title]'))
 
                 this.updateMarker(uid, title, bodytext, x, y)
                 this.syncFromMarker(uid)

@@ -26,37 +26,62 @@ class SetMarkerUi
 
     init() {
         // click on map creates a new marker on map and in irre panel
-        document.querySelector('#setMarkerImage')?.addEventListener('click', (e) => {
+        document.querySelector('#setMarkerImage')?.addEventListener('click', async(e) => {
             const newButton = document.querySelector(this.cssSelectors.newButton)
             const xPercentage = parseFloat(e.offsetX / e.target.offsetWidth).toFixed(2)
             const yPercentage = parseFloat(e.offsetY / e.target.offsetHeight).toFixed(2)
+            const maxTrials = 100;
+            const that = this;
+
+            let trial = 0;
+            let markerAdded = false;
+            let result;
 
             newButton.click()
 
-            setTimeout(() => {
-                const newIrreMarker = document.querySelector(this.cssSelectors.panel + ':last-child');
-                const fieldX = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_x]')
-                const fieldY = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_y]')
-                const fieldTitle = document.querySelector(this.cssSelectors.panel + ':last-child [data-formengine-input-name*=title]')
-                const uid = newIrreMarker.dataset.objectUid
+            function addMarkerInternal() {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(() => {
+                        const newIrreMarker = document.querySelector(that.cssSelectors.panel + ':last-child');
+                        const fieldX = document.querySelector(that.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_x]')
+                        const fieldY = document.querySelector(that.cssSelectors.panel + ':last-child [data-formengine-input-name*=position_y]')
+                        const fieldTitle = document.querySelector(that.cssSelectors.panel + ':last-child [data-formengine-input-name*=title]')
+                        const uid = newIrreMarker.dataset.objectUid
 
-                this.addMarkerOnMap(
-                    e.target.parentElement,
-                    uid,
-                    xPercentage,
-                    yPercentage
-                )
-                this.addMarker(uid, '', '', xPercentage, yPercentage)
-                this.addObserver(uid, newIrreMarker)
+                        if (!fieldX) {
+                            resolve(false);
+                            return;
+                        }
 
-                console.log(uid, newIrreMarker);
+                        that.addMarkerOnMap(
+                            e.target.parentElement,
+                            uid,
+                            xPercentage,
+                            yPercentage
+                        )
+                        that.addMarker(uid, '', '', xPercentage, yPercentage)
+                        that.addObserver(uid, newIrreMarker)
 
-                fieldX.value = xPercentage
-                fieldX.dispatchEvent(new Event('change'))
-                fieldY.value = yPercentage
-                fieldY.dispatchEvent(new Event('change'))
-                fieldTitle.focus()
-            }, 150)
+                        fieldX.value = xPercentage
+                        fieldX.dispatchEvent(new Event('change'))
+                        fieldY.value = yPercentage
+                        fieldY.dispatchEvent(new Event('change'))
+                        fieldTitle.focus()
+
+                        resolve(true);
+                    }, 50)
+                });
+            }
+
+            while (trial < maxTrials) {
+                if (markerAdded === false) {
+                    result = await addMarkerInternal();
+                    if (result === true) {
+                        markerAdded = true;
+                    }
+                }
+                trial++;
+            }
         })
 
         // add existing markers on map and set event listener for each one
@@ -151,9 +176,6 @@ class SetMarkerUi
                 const y = panel?.querySelector('[name*=position_y]')?.value
                 const title = panel?.querySelector('[name*=title]')?.value
                 const bodytext = panel?.querySelector('[name*=bodytext]')?.value
-
-                console.log(uid, title)
-                console.log(panel?.querySelector('[name*=title]'))
 
                 this.updateMarker(uid, title, bodytext, x, y)
                 this.syncFromMarker(uid)

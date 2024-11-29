@@ -11,6 +11,10 @@ class SetMarkerUi
 
     intervalRemoveMarker = null
 
+    actionAddMarkerByMap = false;
+
+    map = null;
+
     cssSelectors = {
         localField: null,
         newButton: null,
@@ -22,9 +26,16 @@ class SetMarkerUi
         this.initCssSelectors()
         this.init()
         this.initIntervalRemoveMarker()
+        this.configMarkerLayout()
     }
 
     init() {
+        this.map = document.querySelector('#setMarkerImage');
+
+        window.addEventListener('resize', () => {
+            this.setPositionsOfAllMarkers()
+        })
+
         // click on map creates a new marker on map and in irre panel
         document.querySelector('#setMarkerImage')?.addEventListener('click', async(e) => {
             const newButton = document.querySelector(this.cssSelectors.newButton)
@@ -33,10 +44,14 @@ class SetMarkerUi
             const maxTrials = 100;
             const that = this;
 
+
             let trial = 0;
             let markerAdded = false;
             let result;
 
+            this.addMarkerByMap = true;
+
+            // add irre element
             newButton.click()
 
             function addMarkerInternal() {
@@ -62,9 +77,9 @@ class SetMarkerUi
                         that.addMarker(uid, '', '', xPercentage, yPercentage)
                         that.addObserver(uid, newIrreMarker)
 
-                        fieldX.value = xPercentage
+                        fieldX.value = xPercentage * 100
                         fieldX.dispatchEvent(new Event('change'))
-                        fieldY.value = yPercentage
+                        fieldY.value = yPercentage * 100
                         fieldY.dispatchEvent(new Event('change'))
                         fieldTitle.focus()
 
@@ -82,6 +97,8 @@ class SetMarkerUi
                 }
                 trial++;
             }
+
+            this.addMarkerByMap = false;
         })
 
         // add existing markers on map and set event listener for each one
@@ -104,6 +121,9 @@ class SetMarkerUi
 
         // Add a new marker on map if new button is clicked
         document.querySelector(this.cssSelectors.newButton)?.addEventListener('click', () => {
+            if (this.addMarkerByMap === true) {
+                return;
+            }
             setTimeout(() => {
                 const map = document.querySelector('#setMarkerImage')
                 const newIrreMarker = document.querySelector(this.cssSelectors.panel + ':last-child')
@@ -168,6 +188,32 @@ class SetMarkerUi
         }
     }
 
+    calcStyleLeft(x) {
+        return (Math.round(this.map.offsetWidth * x) - 21) + 'px'
+    }
+
+    calcStyleTop(y) {
+        return (Math.round(this.map.offsetHeight * y) - 21) + 'px'
+    }
+
+    configMarkerLayout() {
+        document.querySelectorAll('#setMarkerImageMap .setMarkerMarkers')?.forEach((marker) => {
+            if (null !== marker.querySelector('img')) {
+                marker.style.backgroundColor = 'transparent';
+                marker.style.borderColor = 'transparent';
+            }
+        });
+    }
+
+    setPositionsOfAllMarkers() {
+        const uids = Object.keys(this.markers)
+        uids.forEach((uid) => {
+            const marker = document.querySelector('[data-mark-uid="' + uid + '"]')
+            marker.style.left = this.calcStyleLeft(this.markers[uid].x)
+            marker.style.top = this.calcStyleTop(this.markers[uid].y)
+        })
+    }
+
     addObserver(uid, panel) {
         this.observers[uid] = new MutationObserver((mutationList, observers) => {
             setTimeout(() => {
@@ -177,7 +223,7 @@ class SetMarkerUi
                 const title = panel?.querySelector('[name*=title]')?.value
                 const bodytext = panel?.querySelector('[name*=bodytext]')?.value
 
-                this.updateMarker(uid, title, bodytext, x, y)
+                this.updateMarker(uid, title, bodytext, x / 100, y / 100)
                 this.syncFromMarker(uid)
             }, 250)
         })
@@ -192,13 +238,13 @@ class SetMarkerUi
         const marker = this.markers[uid]
         const setMarker = document.querySelector('[data-mark-uid="' + uid + '"]')
 
-        setMarker.setAttribute('title', marker.title)
-        setMarker.setAttribute('data-mark-title', marker.title)
-        setMarker.setAttribute('data-mark-bodytext', marker.bodytext)
+        if (marker.title !== undefined) setMarker.setAttribute('title', marker.title)
+        if (marker.title !== undefined) setMarker.setAttribute('data-mark-title', marker.title)
+        if (marker.bodytext !== undefined) setMarker.setAttribute('data-mark-bodytext', marker.bodytext)
         setMarker.setAttribute('data-mark-position-x', marker.x)
         setMarker.setAttribute('data-mark-position-y', marker.y)
-        setMarker.style.left = 'calc(' + (marker.x * 100) + '% - 14.5px';
-        setMarker.style.top = 'calc(' + (marker.y * 100) + '% - 14.5px';
+        setMarker.style.left = this.calcStyleLeft(marker.x)
+        setMarker.style.top = this.calcStyleTop(marker.y)
     }
 
     syncFormMarkerOnMap(uid) {
@@ -212,9 +258,9 @@ class SetMarkerUi
             const fieldY = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_y]')
             const fieldTitle = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=title]')
 
-            fieldX.value = this.markers[uid].x
+            fieldX.value = this.markers[uid].x * 100
             fieldX.dispatchEvent(new Event('change'))
-            fieldY.value = this.markers[uid].y
+            fieldY.value = this.markers[uid].y * 100
             fieldY.dispatchEvent(new Event('change'))
             fieldTitle.value = this.markers[uid].title
         }, 250)
@@ -224,8 +270,8 @@ class SetMarkerUi
         const newMarker = document.createElement('div')
 
         newMarker.classList.add('set-marker-marker')
-        newMarker.style.left = 'calc(' + (x * 100) + '% - 14.5px)'
-        newMarker.style.top = 'calc(' + (y * 100) + '% - 14.5px)'
+        newMarker.style.left = this.calcStyleLeft(x)
+        newMarker.style.top = this.calcStyleTop(y)
         newMarker.setAttribute('data-mark-uid', uid)
         newMarker.setAttribute('draggable', true)
 
@@ -238,8 +284,8 @@ class SetMarkerUi
         const title = marker.getAttribute('title')
         const bodytext = marker.dataset['markBodytext']
 
-        marker.style.left = 'calc(' + (x * 100) + '% - 14.5px)'
-        marker.style.top = 'calc(' + (y * 100) + '% - 14.5px)'
+        marker.style.left = this.calcStyleLeft(x)
+        marker.style.top = this.calcStyleTop(y)
         marker.setAttribute('mark-position-x', x)
         marker.setAttribute('mark-position-y', y)
 
@@ -271,8 +317,8 @@ class SetMarkerUi
         marker.addEventListener('dragend', (e) => {
             const X = parseFloat(this.markers[uid].x)
             const Y = parseFloat(this.markers[uid].y)
-            const xPercentage = X + parseFloat(parseFloat(e.offsetX / map.offsetWidth).toFixed(2))
-            const yPercentage = (Y + parseFloat(parseFloat(e.offsetY / map.offsetHeight).toFixed(2))).toFixed(2)
+            const xPercentage = X + parseFloat(parseFloat((e.offsetX - 20) / map.offsetWidth).toFixed(4))
+            const yPercentage = (Y + parseFloat(parseFloat((e.offsetY - 20) / map.offsetHeight).toFixed(4))).toFixed(4)
 
             this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
         })
@@ -291,5 +337,5 @@ class SetMarkerUi
 }
 
 DocumentService.ready().then(() => {
-    window.VncSetMarkerUi = new SetMarkerUi();
+    window.VncSetMarkerUi = new SetMarkerUi()
 });

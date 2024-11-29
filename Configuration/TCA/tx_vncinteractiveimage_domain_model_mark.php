@@ -24,7 +24,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'title, image, bodytext, link, icon_selection, icon, icon_formelement, position_x, position_y']
+        '1' => ['showitem' => 'position_x, position_y, title, image, bodytext, link, icon_selection, icon, icon_formelement']
     ],
     'columns' => [
         'title' => [
@@ -221,11 +221,12 @@ return [
             'config' => [
                 'range' => [
                     'lower' => 0,
-                    'upper' => 1
+                    'upper' => 100
                 ],
-                'type' => 'input',
-                'size' => 4,
-                'eval' => 'double2'
+                'type' => 'number',
+                'format' => 'decimal',
+                'size' => 5,
+                'eval' => 'double2',
             ]
         ],
         'position_y' => [
@@ -234,11 +235,12 @@ return [
             'config' => [
                 'range' => [
                     'lower' => 0,
-                    'upper' => 1
+                    'upper' => 100
                 ],
-                'type' => 'input',
-                'size' => 4,
-                'eval' => 'double2'
+                'type' => 'number',
+                'format' => 'decimal',
+                'size' => 5,
+                'eval' => 'double2',
             ]
         ],
         'interactive_image' => [

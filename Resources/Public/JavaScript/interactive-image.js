@@ -225,8 +225,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const scaleStep = 0.1;
 
   markers.forEach((marker, i) => {
-    markersOriginalPosition[i] = [parseInt(marker.style.left) / 100, parseInt(marker.style.top) / 100];
-  });
+    const computedStyle = getComputedStyle(marker);
+    markersOriginalPosition[i] = [parseFloat(marker.style.left) / 100, parseFloat(marker.style.top) / 100];
+  })
 
   const updateMarkers = () => {
     // set scale for marker positions depending on image scale
@@ -237,8 +238,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     markers.forEach((marker, i) => {
-      marker.style.left = markerScale * markersOriginalPosition[i][0] * image.clientWidth + "px";
-      marker.style.top = markerScale * markersOriginalPosition[i][1] * image.clientHeight + "px";
+      marker.style.left = ((markerScale * markersOriginalPosition[i][0] * image.clientWidth)) + "px";
+      marker.style.top = ((markerScale * markersOriginalPosition[i][1] * image.clientHeight)) + "px";
     });
   };
 

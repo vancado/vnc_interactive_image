@@ -124,8 +124,8 @@ class SetMarker extends AbstractFormElement
             /** @var Mark $mark */
             $count = 0;
             foreach ($interactiveImage->getTxVncinteractiveimageMarks() as $mark) {
-                $left = $mark->getPositionX() * 100;
-                $top = $mark->getPositionY() * 100;
+                $left = $mark->getPositionX();
+                $top = $mark->getPositionY();
 
                 $numberDiv = $interactiveImage->getTxVncinteractiveimageIconMode() == 'numbers' ?
                     '<div class="number">' . (++$count) . '</div>' : '';
@@ -142,11 +142,11 @@ class SetMarker extends AbstractFormElement
                     data-mark-uid="' . $mark->getUid() . '"
                     data-mark-title="' . htmlentities($mark->getTitle()) . '"
                     data-mark-bodytext="' . htmlentities($mark->getBodytext()) . '"
-                    data-mark-position-x="' . (string)$mark->getPositionX() . '"
-                    data-mark-position-y="' . (string)$mark->getPositionY() . '"
+                    data-mark-position-x="' . (string)($mark->getPositionX() / 100) . '"
+                    data-mark-position-y="' . (string)($mark->getPositionY() / 100) . '"
                     style="
-                        left: calc(' . $left . '% - 14.5px);
-                        top: calc(' . $top . '% - 14.5px);
+                        left: calc(' . $left . '% - 22px);
+                        top: calc(' . $top . '% - 22px);
                     "
                     draggable="true"
                 >

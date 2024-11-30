@@ -15,6 +15,11 @@ class Mark extends AbstractEntity
     /**
      * @var string
      */
+    protected $titlePosition = '';
+
+    /**
+     * @var string
+     */
     protected $bodytext = '';
 
     /**
@@ -60,6 +65,16 @@ class Mark extends AbstractEntity
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getTitlePosition(): string
+    {
+        return $this->titlePosition;
+    }
+
+    public function setTitlePosition(string $titlePosition): void
+    {
+        $this->titlePosition = $titlePosition;
     }
 
     public function getBodytext(): string

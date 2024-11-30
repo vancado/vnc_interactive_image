@@ -3,6 +3,7 @@ CREATE TABLE tx_vncinteractiveimage_domain_model_mark
     uid               int(11) NOT NULL auto_increment,
     pid               int(11) DEFAULT '0' NOT NULL,
     title             varchar(255) DEFAULT ''  NOT NULL,
+    title_position    varchar(8)   DEFAULT 'right'  NOT NULL,
     bodytext          text,
     icon              int(11) DEFAULT '0' NOT NULL,
     icon_formelement  varchar(255) DEFAULT ''  NOT NULL,

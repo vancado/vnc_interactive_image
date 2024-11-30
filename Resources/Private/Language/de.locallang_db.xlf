@@ -59,6 +59,18 @@
                 <source>Title</source>
                 <target>Titel</target>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title_position" approved="yes">
+                <source>Title position</source>
+                <target>Position des Titels</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title_position.left" approved="yes">
+                <source>Left</source>
+                <target>Links</target>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title_position.right" approved="yes">
+                <source>Right</source>
+                <target>Rechts</target>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.bodytext" approved="yes">
                 <source>Bodytext</source>
                 <target>Text</target>

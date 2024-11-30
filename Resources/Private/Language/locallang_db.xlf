@@ -45,6 +45,15 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title">
                 <source>Title</source>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title_position">
+                <source>Title position</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title_position.left">
+                <source>Left</source>
+            </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title_position.right">
+                <source>Right</source>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.bodytext">
                 <source>Bodytext</source>
             </trans-unit>

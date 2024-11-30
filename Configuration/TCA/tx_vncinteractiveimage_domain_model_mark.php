@@ -24,7 +24,7 @@ return [
         'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'position_x, position_y, title, image, bodytext, link, icon_selection, icon, icon_formelement']
+        '1' => ['showitem' => 'position_x, position_y, title, title_position, image, bodytext, link, icon_selection, icon, icon_formelement']
     ],
     'columns' => [
         'title' => [
@@ -35,6 +35,25 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ]
+        ],
+        'title_position' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.title_position',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    [
+                        'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.title_position.left',
+                        'left',
+                    ],
+                    [
+                        'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.title_position.right',
+                        'right',
+                    ],
+                ],
+                'default' => 'right',
+            ],
         ],
         'image' => [
             'exclude' => 0,

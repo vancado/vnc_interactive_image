@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const eventAfterShowMobilePopover = new Event('afterShowMobilePopover');
   const eventAfterHidePopover = new Event('afterHidePopover');
+  const eventAfterPositioning = new Event('afterPositioning');
 
   const showCurrentInfoItem = () => {
     infoItems.forEach((item, index) => {
@@ -226,7 +227,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   markers.forEach((marker, i) => {
     const computedStyle = getComputedStyle(marker);
-    markersOriginalPosition[i] = [parseFloat(marker.style.left) / 100, parseFloat(marker.style.top) / 100];
+    markersOriginalPosition[i] = [
+        parseFloat(marker.style.left) / 100,
+        parseFloat(marker.style.top) / 100,
+        parseFloat(computedStyle.paddingLeft),
+        parseFloat(computedStyle.paddingTop),
+    ];
   })
 
   const updateMarkers = () => {
@@ -239,7 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     markers.forEach((marker, i) => {
       marker.style.left = ((markerScale * markersOriginalPosition[i][0] * image.clientWidth)) + "px";
-      marker.style.top = ((markerScale * markersOriginalPosition[i][1] * image.clientHeight)) + "px";
+      marker.style.top = ((markerScale * markersOriginalPosition[i][1] * image.clientHeight) - markersOriginalPosition[i][3]) + "px";
+      marker.dispatchEvent(eventAfterPositioning);
     });
   };
 

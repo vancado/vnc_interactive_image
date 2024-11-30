@@ -1,6 +1,8 @@
 #setMarkerImageMap {
     position: relative;
     overflow: hidden;
+    max-width: 1280px;
+    margin: 0.5rem auto;
 }
 
 .set-marker-marker {

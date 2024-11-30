@@ -38,6 +38,7 @@ return [
         ],
         'title_position' => [
             'exclude' => 0,
+            'displayCond' => 'USER:Vancado\\VncInteractiveImage\\Condition\\MarkerTitleCondition->isTitleEnabled',
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.title_position',
             'config' => [
                 'type' => 'select',

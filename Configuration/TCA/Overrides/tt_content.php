@@ -272,6 +272,7 @@ call_user_func(function () {
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_show_title_next_to_marker'] = [
         'exclude' => 1,
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.show_title_next_to_marker',
+        'onChange' => 'reload',
         'config' => [
             'type' => 'check',
             'items' => [

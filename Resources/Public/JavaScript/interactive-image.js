@@ -235,8 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
   })
 
-  console.log(markersOriginalPosition)
-
   const updateMarkers = () => {
     // set scale for marker positions depending on image scale
     let markerScale = 1;

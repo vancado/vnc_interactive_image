@@ -9,7 +9,9 @@
         <f:render
           partial="MarkIcon"
           arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator, context: 'infoBox'}" />
-        <p class="content-box__text col-auto mx-4 fw-bold">{mark.title}</p>
+        <p class="content-box__text col-auto mx-4 fw-bold">
+          <f:format.stripTags>{mark.title}</f:format.stripTags>
+        </p>
       </div>
       <f:if condition="{mark.image}">
         <f:then>

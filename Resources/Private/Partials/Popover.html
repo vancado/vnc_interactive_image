@@ -7,7 +7,9 @@
       <f:render
         partial="MarkIcon"
         arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator, context: 'popover'}" />
-      <p class="col-auto mx-4 fw-bold">{mark.title}</p>
+      <p class="col-auto mx-4 fw-bold">
+        <f:format.stripTags>{mark.title}</f:format.stripTags>
+      </p>
       <i class="content-box__close">
         <svg
           width="32"

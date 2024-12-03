@@ -119,7 +119,7 @@
 .vncInteractiveImage .mark {
   position: absolute;
   transform-origin: top left;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(-50% - 1px), calc(-50% - 1px));
   background-color: transparent;
   cursor: pointer;
 }

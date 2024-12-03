@@ -5,7 +5,9 @@
             <div>
                 <f:render partial="MarkIcon" arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />
                 <f:if condition="{interactiveImage.txVncinteractiveimageShowTitleNextToMarker}">
-                    <div class="mark-title" data-position="{mark.titlePosition}">{mark.title}</div>
+                    <div class="mark-title" data-position="{mark.titlePosition}">
+                        <f:format.raw>{mark.title}</f:format.raw>
+                    </div>
                 </f:if>
             </div>
             <f:if condition="{layout} === 'popover'">

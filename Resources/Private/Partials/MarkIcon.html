@@ -10,7 +10,7 @@
         <f:if condition="{interactiveImage.txVncinteractiveimageIconSelection} === 'formelement'">
             <f:then>
                 <f:if condition="{interactiveImage.txVncinteractiveimageIconFormelement}">
-                    <i class="mark-icon {f:if(condition: context, then: 'mark-icon--no-hover')} {interactiveImage.txVncinteractiveimageIconFormelement}" data-uid="{mark.uid}"></i>
+                    <i class="mark-icon mark-icon--formelement {f:if(condition: context, then: 'mark-icon--no-hover')} {interactiveImage.txVncinteractiveimageIconFormelement}" data-uid="{mark.uid}"></i>
                 </f:if>
             </f:then>
         </f:if>
@@ -28,7 +28,7 @@
         <f:if condition="{mark.iconSelection} === 'formelement'">
             <f:then>
                 <f:if condition="{mark.iconFormelement}">
-                    <i class="mark-icon {f:if(condition: context, then: 'mark-icon--no-hover')} {mark.iconFormelement}" data-uid="{mark.uid}"></i>
+                    <i class="mark-icon mark-icon--formelement {f:if(condition: context, then: 'mark-icon--no-hover')} {mark.iconFormelement}" data-uid="{mark.uid}"></i>
                 </f:if>
             </f:then>
         </f:if>

@@ -38,6 +38,14 @@
 
 .set-marker-marker i.icon {
     position: absolute;
-    left: -5.5px;
-    top: -5.5px;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    left: 0px;
+    top: 6px;
+    text-align: center;
+}
+
+.set-marker-marker i.icon::before {
+    width: 100%;
 }

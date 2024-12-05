@@ -4,6 +4,8 @@ namespace Vancado\VncInteractiveImage\Condition;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use Vancado\VncInteractiveImage\Domain\Model\InteractiveImage;
+use Vancado\VncInteractiveImage\Domain\Repository\InteractiveImageRepository;
 
 class IconModeCondition
 {
@@ -13,20 +15,13 @@ class IconModeCondition
 
         if (!empty($record['interactive_image'])) {
             $interactiveImageUid = (int)$record['interactive_image'];
-            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-                ->getQueryBuilderForTable('tt_content');
 
-            $interactiveImage = $queryBuilder
-                ->select('tx_vncinteractiveimage_icon_mode')
-                ->from('tt_content')
-                ->where(
-                    $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($interactiveImageUid, \PDO::PARAM_INT))
-                )
-                ->execute()
-                ->fetch();
+            $interactiveImageRepository = GeneralUtility::makeInstance(InteractiveImageRepository::class);
+            /** @var InteractiveImage $interactiveImage */
+            $interactiveImage = $interactiveImageRepository->findByUidAndIgnoreHidden($interactiveImageUid);
 
-            if ($interactiveImage !== false) {
-                return $interactiveImage['tx_vncinteractiveimage_icon_mode'] === 'different';
+            if ($interactiveImage !== null) {
+                return $interactiveImage->getTxVncinteractiveimageIconMode() === 'different';
             }
         }
 

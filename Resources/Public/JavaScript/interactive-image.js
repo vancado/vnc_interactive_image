@@ -219,6 +219,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const imageContainer = document.querySelector(".image-container");
   const markersOriginalPosition = [];
 
+  zoomControlsOriginalPosition = [
+      getComputedStyle(zoomControls).right,
+      getComputedStyle(zoomControls).bottom,
+  ];
+
   // Disable dragging of the image
   image.setAttribute("draggable", false);
 
@@ -256,14 +261,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateZoomControls = () => {
     if (document.fullscreenElement) {
       zoomControls.style.position = "fixed";
-      zoomControls.style.bottom = "10px";
       zoomControls.style.right = "10px";
+      zoomControls.style.bottom = "10px";
+      zoomControls.style.marginRight = '0';
+      zoomControls.style.marginBottom = '0';
       imageContainer.append(zoomControls);
     } else {
-      zoomControls.style = null;
-      imageContainer.parentNode.prepend(zoomControls);
+      zoomControls.style.position = 'absolute';
+      zoomControls.style.right = zoomControlsOriginalPosition[0];
+      zoomControls.style.bottom = zoomControlsOriginalPosition[1];
+      zoomControls.style.marginRight = Math.round((-1) * parseFloat(imageContainer.scrollLeft), 2) + 'px';
+      zoomControls.style.marginBottom = Math.round((-1) * parseFloat(imageContainer.scrollTop), 2) + 'px';
+      imageContainer.prepend(zoomControls);
     }
   };
+
+  imageContainer.addEventListener('scrollstart', updateZoomControls);
+  imageContainer.addEventListener('scroll', updateZoomControls);
+  imageContainer.addEventListener('scrollend', updateZoomControls);
+  imageContainer.addEventListener('dragstart', updateZoomControls);
+  imageContainer.addEventListener('drag', updateZoomControls);
+  imageContainer.addEventListener('dragend', updateZoomControls);
 
   zoomInButton?.addEventListener("click", () => {
     scale += scaleStep;
@@ -275,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scale = Math.max(1, scale - scaleStep);
     image.style.transform = `scale(${scale})`;
     updateMarkers();
+    updateZoomControls();
   });
 
   fullscreenButton?.addEventListener("click", () => {
@@ -384,6 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const walkY = (y - startY) * 1;
     imageContainer.scrollLeft = scrollLeft - walkX;
     imageContainer.scrollTop = scrollTop - walkY;
+    updateZoomControls();
   });
 
   // touch event listeners for mobile zoom and pan functionality
@@ -418,6 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const walkY = (y - startY) * 1;
       imageContainer.scrollLeft = scrollLeft - walkX;
       imageContainer.scrollTop = scrollTop - walkY;
+      updateZoomControls();
     }
   });
 

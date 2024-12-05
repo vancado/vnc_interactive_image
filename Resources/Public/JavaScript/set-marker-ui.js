@@ -213,17 +213,28 @@ class SetMarkerUi
     }
 
     addObserver(uid, panel) {
+        if (this.observers[uid]) {
+            return;
+        }
         this.observers[uid] = new MutationObserver((mutationList, observers) => {
+            const that = this
             setTimeout(() => {
                 const uid = panel?.dataset?.objectUid
                 const x = panel?.querySelector('[name*=position_x]')?.value
                 const y = panel?.querySelector('[name*=position_y]')?.value
                 const title = panel?.querySelector('[name*=title]')?.value
+                const fieldShowTitle = panel?.querySelector('[data-formengine-input-name*=title]')
                 const bodytext = panel?.querySelector('[name*=bodytext]')?.value
 
-                if (!x || !y ||!title || !bodytext) {
+
+                if (!x || !y || !title || !bodytext) {
                     return
                 }
+
+                if (fieldShowTitle?.value === '') {
+                    fieldShowTitle.value = title
+                }
+
                 this.updateMarker(uid, title, bodytext, x / 100, y / 100)
                 this.syncFromMarker(uid)
             }, 250)

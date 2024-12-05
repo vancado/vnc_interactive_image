@@ -46,6 +46,9 @@
 .vncInteractiveImage a {
   text-decoration: none;
 }
+.vncInteractiveImage .fw-bold {
+  font-weight: 600;
+}
 .vncInteractiveImage .outer-container {
   position: relative;
   width: 100%;

@@ -108,12 +108,12 @@ class SetMarker extends AbstractFormElement
                     ) . '</div>'];
             }
 
-            if (sizeof($fileObjects) > 0) {
+            if (sizeof($fileObjects) > 0 && $interactiveImage->getTxVncinteractiveimageIconSelection() === 'upload') {
                 $fileObject = $fileObjects[0];
                 $iconUrl = $fileObject->getOriginalFile()->getPublicUrl();
             }
 
-            if ($interactiveImage->getTxVncinteractiveimageIconFormelement() != '') {
+            if ($interactiveImage->getTxVncinteractiveimageIconFormelement() != '' && $interactiveImage->getTxVncinteractiveimageIconSelection() === 'formelement') {
                 $iconUrl = '';
                 $iconFormElement = '<i class="' . $interactiveImage->getTxVncinteractiveimageIconFormelement() . '"></i>';
             }
@@ -127,13 +127,13 @@ class SetMarker extends AbstractFormElement
                 $left = $mark->getPositionX();
                 $top = $mark->getPositionY();
 
-                $numberDiv = $interactiveImage->getTxVncinteractiveimageIconMode() == 'numbers' ?
+                $numberDiv = $interactiveImage->getTxVncinteractiveimageIconMode() === 'numbers' ?
                     '<div class="number">' . (++$count) . '</div>' : '';
 
-                $sameIconContent = $interactiveImage->getTxVncinteractiveimageIconMode() == 'same' && $iconUrl ?
+                $sameIconContent = $interactiveImage->getTxVncinteractiveimageIconMode() === 'same' && $iconUrl ?
                     '<img src="' . $iconUrl . '" />' : '';
 
-                $differentIcon = $interactiveImage->getTxVncinteractiveimageIconMode() == 'different' ?
+                $differentIcon = $interactiveImage->getTxVncinteractiveimageIconMode() === 'different' ?
                     $this->getDifferentIcon($mark) : '';
 
                 $markers[] = '<div

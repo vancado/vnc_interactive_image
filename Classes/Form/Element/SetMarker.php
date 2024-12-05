@@ -36,7 +36,7 @@ class SetMarker extends AbstractFormElement
         $iconUrl = null;
         $iconFormElement = null;
         /** @var InteractiveImage $interactiveImage */
-        $interactiveImage = $interactiveImageRepository->findByUid((int)$row['uid']);
+        $interactiveImage = $interactiveImageRepository->findByUidAndIgnoreHidden((int)$row['uid']);
 
         try {
             /** @var FileReference[] $fileObjects */

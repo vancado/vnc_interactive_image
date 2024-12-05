@@ -11,8 +11,6 @@ class SetMarkerUi
 
     intervalRemoveMarker = null
 
-    actionAddMarkerByMap = false;
-
     map = null;
 
     cssSelectors = {
@@ -41,11 +39,9 @@ class SetMarkerUi
             const newButton = document.querySelector(this.cssSelectors.newButton)
             const xPercentage = parseFloat(e.offsetX / e.target.offsetWidth).toFixed(2)
             const yPercentage = parseFloat(e.offsetY / e.target.offsetHeight).toFixed(2)
-            const maxTrials = 100;
             const that = this;
 
 
-            let trial = 0;
             let markerAdded = false;
             let result;
 
@@ -63,7 +59,12 @@ class SetMarkerUi
                         const fieldTitle = document.querySelector(that.cssSelectors.panel + ':last-child [data-formengine-input-name*=title]')
                         const uid = newIrreMarker.dataset.objectUid
 
-                        if (!fieldX) {
+                        if (!fieldX || !fieldY || !fieldTitle || !uid) {
+                            resolve(false);
+                            return;
+                        }
+
+                        if (that.markers[uid]) {
                             resolve(false);
                             return;
                         }
@@ -84,18 +85,15 @@ class SetMarkerUi
                         fieldTitle.focus()
 
                         resolve(true);
-                    }, 50)
+                    }, 0)
                 });
             }
 
-            while (trial < maxTrials) {
-                if (markerAdded === false) {
-                    result = await addMarkerInternal();
-                    if (result === true) {
-                        markerAdded = true;
-                    }
+            while (markerAdded === false) {
+                result = await addMarkerInternal();
+                if (result === true) {
+                    markerAdded = true;
                 }
-                trial++;
             }
 
             this.addMarkerByMap = false;
@@ -223,6 +221,9 @@ class SetMarkerUi
                 const title = panel?.querySelector('[name*=title]')?.value
                 const bodytext = panel?.querySelector('[name*=bodytext]')?.value
 
+                if (!x || !y ||!title || !bodytext) {
+                    return
+                }
                 this.updateMarker(uid, title, bodytext, x / 100, y / 100)
                 this.syncFromMarker(uid)
             }, 250)
@@ -247,23 +248,54 @@ class SetMarkerUi
         setMarker.style.top = this.calcStyleTop(marker.y)
     }
 
-    syncFormMarkerOnMap(uid) {
-        const markerTabHeader = document.querySelector(this.cssSelectors.panel + '.panel-collapsed[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
+    async syncFormMarkerOnMap(uid) {
+        let markerTabHeader = document.querySelector(this.cssSelectors.panel + '.panel-collapsed[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
         const setMarker = document.querySelector('[data-mark-uid="' + uid + '"]')
         markerTabHeader?.click()
 
-        setTimeout(() => {
-            const panel = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"]')
-            const fieldX = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_x]')
-            const fieldY = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_y]')
-            const fieldTitle = document.querySelector(this.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=title]')
+        if (!markerTabHeader) {
+            markerTabHeader = document.querySelector(this.cssSelectors.panel + '.panel-visible[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
+        }
 
-            fieldX.value = this.markers[uid].x * 100
-            fieldX.dispatchEvent(new Event('change'))
-            fieldY.value = this.markers[uid].y * 100
-            fieldY.dispatchEvent(new Event('change'))
-            fieldTitle.value = this.markers[uid].title
-        }, 250)
+        let panelReady = false
+        let result;
+        const that = this;
+
+        function copyMarkerDataToPanel() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const panel = document.querySelector(that.cssSelectors.panel + '[data-object-uid="' + uid + '"]')
+                    const fieldX = document.querySelector(that.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_x]')
+                    const fieldY = document.querySelector(that.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=position_y]')
+                    const fieldTitle = document.querySelector(that.cssSelectors.panel + '[data-object-uid="' + uid + '"] [data-formengine-input-name*=title]')
+
+                    if (!panel || !fieldX || !fieldY || !fieldTitle) {
+                        resolve(false);
+                        return;
+                    }
+
+                    if (fieldX.value === NaN || fieldY.value === NaN || fieldTitle.value === undefined) {
+                        resolve(false);
+                        return;
+                    }
+
+                    fieldX.value = that.markers[uid].x * 100
+                    fieldX.dispatchEvent(new Event('change'))
+                    fieldY.value = that.markers[uid].y * 100
+                    fieldY.dispatchEvent(new Event('change'))
+                    fieldTitle.value = that.markers[uid].title
+
+                    resolve(true);
+                }, 50)
+            });
+        }
+
+        while (panelReady === false) {
+            result = await copyMarkerDataToPanel();
+            if (result === true) {
+                panelReady = true;
+            }
+        }
     }
 
     addMarkerOnMap(map, uid, x, y) {
@@ -279,7 +311,7 @@ class SetMarkerUi
         this.setMarkerEventListener(newMarker)
     }
 
-    updateDraggedMarkerOnMap(marker, x, y) {
+    async updateDraggedMarkerOnMap(marker, x, y) {
         const uid = marker.dataset['markUid']
         const title = marker.getAttribute('title')
         const bodytext = marker.dataset['markBodytext']
@@ -290,7 +322,7 @@ class SetMarkerUi
         marker.setAttribute('mark-position-y', y)
 
         this.updateMarker(uid, title, bodytext, x, y)
-        this.syncFormMarkerOnMap(uid)
+        await this.syncFormMarkerOnMap(uid)
     }
 
     removeMarker(uid) {
@@ -305,6 +337,8 @@ class SetMarkerUi
         const uid = marker.dataset['markUid']
 
         marker.addEventListener('click', (e) => {
+            e.preventDefault()
+            e.stopPropagation()
             const markerTabHeader = document.querySelector(this.cssSelectors.panel + '.panel-collapsed[data-object-uid="' + uid + '"] .form-irre-header .form-irre-header-button');
             markerTabHeader?.click()
 
@@ -314,13 +348,13 @@ class SetMarkerUi
             }, 250)
         })
 
-        marker.addEventListener('dragend', (e) => {
+        marker.addEventListener('dragend', async (e) => {
             const X = parseFloat(this.markers[uid].x)
             const Y = parseFloat(this.markers[uid].y)
             const xPercentage = X + parseFloat(parseFloat((e.offsetX - 20) / map.offsetWidth).toFixed(4))
             const yPercentage = (Y + parseFloat(parseFloat((e.offsetY - 20) / map.offsetHeight).toFixed(4))).toFixed(4)
 
-            this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
+            await this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
         })
 
         const popover = new Popover(marker, {

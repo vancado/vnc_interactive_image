@@ -119,6 +119,23 @@
   width: 100%;
   height: 100%;
 }
+.vncInteractiveImage .marks-container .mark-title {
+  position: absolute;
+  background-color: #fff;
+  font-size: 1rem;
+  line-height: 22px;
+  padding: 2px 8px 2px 25px;
+  margin: 0;
+  left: 50%;
+  top: 9px;
+  z-index: -1;
+  white-space: nowrap;
+}
+.vncInteractiveImage .marks-container .mark-title[data-position=left] {
+  left: auto;
+  right: 50%;
+  padding: 2px 25px 2px 8px;
+}
 .vncInteractiveImage .mark {
   position: absolute;
   transform-origin: top left;
@@ -138,9 +155,6 @@
   transition: transform 0.2s ease;
   z-index: 1;
 }
-.vncInteractiveImage .mark-icon:hover {
-  transform: scale(1.2);
-}
 .vncInteractiveImage .mark-icon--number {
   padding: 10px;
 }
@@ -150,6 +164,9 @@
 }
 .vncInteractiveImage .mark-icon--no-hover:hover {
   transform: none;
+}
+.vncInteractiveImage .mark:hover .mark-icon {
+  transform: scale(1.2);
 }
 .vncInteractiveImage .content-box {
   background: #F4F4F4;

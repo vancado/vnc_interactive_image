@@ -55,6 +55,10 @@
                 <source>Show zoom buttons</source>
                 <target>Vergrößern/Verkleinern Buttons anzeigen</target>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark" approved="yes">
+                <source>Interactive Image Marker</source>
+                <target>Interactive Image Marker</target>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title" approved="yes">
                 <source>Title</source>
                 <target>Titel</target>

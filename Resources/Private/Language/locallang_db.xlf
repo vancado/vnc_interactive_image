@@ -42,6 +42,9 @@
             <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.show_zoom">
                 <source>Show zoom buttons</source>
             </trans-unit>
+            <trans-unit id="tx_vncinteractiveimage_domain_model_mark">
+                <source>Interactive Image Marker</source>
+            </trans-unit>
             <trans-unit id="tx_vncinteractiveimage_domain_model_mark.title">
                 <source>Title</source>
             </trans-unit>

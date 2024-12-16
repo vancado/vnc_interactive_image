@@ -1,6 +1,6 @@
 <div class="marks-container">
     <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark" iteration="iterator">
-        <div class="mark" data-selection="{interactiveImage.txVncinteractiveimageIconSelection}" style="left: {mark.positionX}%; top: {mark.positionY}%;">
+        <div class="mark" data-selection="{f:if(condition: '{mark.iconSelection} == "formelement"', then: 'formelement', else: '{interactiveImage.txVncinteractiveimageIconSelection}')}" style="left: {mark.positionX}%; top: {mark.positionY}%;">
             <!-- Render Mark Icon -->
             <div>
                 <f:render partial="MarkIcon" arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator}" />

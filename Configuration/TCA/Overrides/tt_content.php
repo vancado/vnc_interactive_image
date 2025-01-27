@@ -295,4 +295,21 @@ call_user_func(function () {
     ];
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] .= ',frame_layout,frame_options,background_color_class,background_image,background_image_options';
+
+    \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\B13\Container\Tca\Registry::class)->configureContainer(
+        (
+        new \B13\Container\Tca\ContainerConfiguration(
+            'interactive-image-container', // CType
+            'Interactive Image Container', // label
+            'This container contains multiple interactive image content elements', // description
+            [
+                [
+                    ['name' => 'content', 'colPos' => 200, 'allowed' => ['CType' => 'list']]
+                ],
+            ] // grid configuration
+        )
+        )
+            // set an optional icon configuration
+            ->setIcon('EXT:container/Resources/Public/Icons/container-1col.svg')
+    );
 });

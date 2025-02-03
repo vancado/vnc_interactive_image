@@ -19,6 +19,14 @@
         <source>Select Interactive Images</source>
         <target>Interaktive Bilder auswählen</target>
       </trans-unit>
+      <trans-unit id="slider.next" approved="yes">
+        <source>Next</source>
+        <target>Nächster Slide</target>
+      </trans-unit>
+      <trans-unit id="slider.prev" approved="yes">
+        <source>Previous</source>
+        <target>Vorheriger Slide</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

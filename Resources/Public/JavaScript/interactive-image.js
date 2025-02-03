@@ -259,10 +259,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", updateMarkers);
     window.addEventListener("resize", updateMarkers);
 
-    const vncInteractiveImageContainer = vncInteractiveImage.parentElement.parentElement;
-    if (vncInteractiveImageContainer.classList.contains('vncInteractiveImageContainer')) {
-      vncInteractiveImageContainer.addEventListener("shown.bs.collapse", updateMarkers);
-    }
+    vncInteractiveImage.closest('.vncInteractiveImageContainer')?.addEventListener("shown.bs.collapse", updateMarkers);
+    vncInteractiveImage.closest('.carousel')?.addEventListener("slid.bs.carousel", updateMarkers);
 
     const updateZoomControls = () => {
       if (document.fullscreenElement) {
@@ -461,6 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
   buttons?.forEach((button) => {
     if (!button.classList.contains('collapsed')) {
       button.setAttribute('disabled', 'disabled');
+      button.setAttribute('aria-expanded', 'true');
     }
     button.addEventListener('click', (e) => {
         buttons.forEach(el => {

@@ -95,6 +95,12 @@ $font-size-button: 14px;
   }
 }
 
+.vncInteractiveImageContainer {
+  .collapsing {
+    transition: none;
+  }
+}
+
 .vncInteractiveImage {
   a {
     text-decoration: none;
@@ -514,10 +520,6 @@ $font-size-button: 14px;
 
   @media (max-width: 767.98px) {
 
-    .img-fluid {
-      transform: scale(1.4);
-    }
-
     .content-box {
       &__popover {
         padding: 0.8rem;
@@ -575,11 +577,6 @@ $font-size-button: 14px;
   }
 
   @media (max-width: 575.98px) {
-
-    .img-fluid {
-      transform: scale(1.4);
-      // transform-origin: center;
-    }
 
     .content-box {
       &__popover {

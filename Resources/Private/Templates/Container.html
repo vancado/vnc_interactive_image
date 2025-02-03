@@ -16,13 +16,30 @@
                         <f:render section="Header" optional="true">
                             <f:render partial="Header/All" arguments="{_all}" />
                         </f:render>
-                        <div class="vncInteractiveImageContainer">
-                            <f:for each="{children_200}" as="record">
-                                <f:format.raw>
-                                    <f:cObject typoscriptObjectPath="tt_content.list.20.vncinteractiveimage_vncinteractive"
-                                               data="{uid: record.uid}"
-                                    />
-                                </f:format.raw>
+                        <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                            <p>
+                                <f:for each="{children_200}" as="record" iteration="iterator">
+                                    <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#interactiveImageContainer-{record.uid}"
+                                            aria-expanded="false"
+                                            aria-controls="interactiveImageContainer-{record.uid}"
+                                    >
+                                        {record.tx_vncinteractiveimage_name}
+                                    </button>
+                                </f:for>
+                            </p>
+                            <f:for each="{children_200}" as="record" iteration="iterator">
+                                <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"
+                                     data-bs-parent="#vncInteractiveImageContainer-{data.uid}"
+                                >
+                                    <f:format.raw>
+                                        <f:cObject typoscriptObjectPath="tt_content.list.20.vncinteractiveimage_vncinteractive"
+                                                   data="{uid: record.uid}"
+                                        />
+                                    </f:format.raw>
+                                </div>
                             </f:for>
                         </div>
                         <f:render section="Footer" optional="true">

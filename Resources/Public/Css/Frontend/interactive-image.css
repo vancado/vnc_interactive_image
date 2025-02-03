@@ -43,6 +43,10 @@
     fill: #101010;
   }
 }
+.vncInteractiveImageContainer .collapsing {
+  transition: none;
+}
+
 .vncInteractiveImage a {
   text-decoration: none;
 }
@@ -378,9 +382,6 @@
   }
 }
 @media (max-width: 767.98px) {
-  .vncInteractiveImage .img-fluid {
-    transform: scale(1.4);
-  }
   .vncInteractiveImage .content-box__popover {
     padding: 0.8rem;
     width: 100%;
@@ -424,9 +425,6 @@
   }
 }
 @media (max-width: 575.98px) {
-  .vncInteractiveImage .img-fluid {
-    transform: scale(1.4);
-  }
   .vncInteractiveImage .content-box__popover {
     padding: 0.4rem;
     width: 100%;

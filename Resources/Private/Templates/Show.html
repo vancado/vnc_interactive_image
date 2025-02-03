@@ -10,11 +10,13 @@
             <f:variable name="showZoom">{interactiveImage.txVncinteractiveimageShowZoom}</f:variable>
 
             <div class="vncInteractiveImage" data-show-zoom="{showZoom}">
-                <f:if condition="{interactiveImage.txVncinteractiveimageName}">
-                    <div class="row heading-block border-bottom-0 mb-2">
-                        <h2>{interactiveImage.txVncinteractiveimageName}</h2>
-                    </div>
-                </f:if>
+                <f:comment>
+                    <f:if condition="{interactiveImage.txVncinteractiveimageName}">
+                        <div class="row heading-block border-bottom-0 mb-2">
+                            <h2>{interactiveImage.txVncinteractiveimageName}</h2>
+                        </div>
+                    </f:if>
+                </f:comment>
 
                 <div class="container" data-layout="{layout}">
                     <div class="row">

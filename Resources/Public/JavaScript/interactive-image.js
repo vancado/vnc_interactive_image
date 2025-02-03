@@ -259,6 +259,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", updateMarkers);
     window.addEventListener("resize", updateMarkers);
 
+    const vncInteractiveImageContainer = vncInteractiveImage.parentElement.parentElement;
+    if (vncInteractiveImageContainer.classList.contains('vncInteractiveImageContainer')) {
+      vncInteractiveImageContainer.addEventListener("shown.bs.collapse", updateMarkers);
+    }
+
     const updateZoomControls = () => {
       if (document.fullscreenElement) {
         zoomControls.style.position = "fixed";
@@ -450,7 +455,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const dy = touch2.pageY - touch1.pageY;
       return Math.sqrt(dx * dx + dy * dy);
     };
+  });
 
+  const buttons = document.querySelectorAll('.vncInteractiveImageContainer button[data-bs-toggle="collapse"]');
+  buttons?.forEach((button) => {
+    if (!button.classList.contains('collapsed')) {
+      button.setAttribute('disabled', 'disabled');
+    }
+    button.addEventListener('click', (e) => {
+        buttons.forEach(el => {
+          el.removeAttribute('disabled');
+        });
+        e.target.setAttribute('disabled', 'disabled');
+    });
   });
 
 });

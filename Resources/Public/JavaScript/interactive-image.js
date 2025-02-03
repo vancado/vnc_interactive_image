@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    document.addEventListener("fullscreenchange", () => {
+    imageContainer.addEventListener("fullscreenchange", () => {
       if (document.fullscreenElement) {
         document.addEventListener("keydown", handleFullscreenZoom);
         marksContainer.style.position = "absolute";

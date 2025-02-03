@@ -127,6 +127,10 @@ $font-size-button: 14px;
     }
   }
 
+  .relative {
+    position: relative;
+  }
+
   &[data-show-zoom="1"] {
     .image-container {
       cursor: grab;

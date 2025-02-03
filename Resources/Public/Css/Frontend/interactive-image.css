@@ -68,6 +68,9 @@
 .vncInteractiveImage .image-container.panning {
   cursor: grabbing;
 }
+.vncInteractiveImage .relative {
+  position: relative;
+}
 .vncInteractiveImage[data-show-zoom="1"] .image-container {
   cursor: grab;
 }

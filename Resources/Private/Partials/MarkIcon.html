@@ -3,14 +3,14 @@
         <f:if condition="{interactiveImage.txVncinteractiveimageIconSelection} === 'upload'">
             <f:then>
                 <f:if condition="{interactiveImage.txVncinteractiveimageIcon}">
-                    <f:image class="mark-icon {f:if(condition: context, then: 'mark-icon--no-hover')}" data-uid="{mark.uid}" image="{interactiveImage.txVncinteractiveimageIcon}" alt="{mark.title -> f:format.stripTags()}" aria-label="{mark.title -> f:format.stripTags()}" />
+                    <f:image class="mark-icon {f:if(condition: context, then: 'mark-icon--no-hover')}" data-uid="info-{interactiveImage.uid}-{mark.uid}" image="{interactiveImage.txVncinteractiveimageIcon}" alt="{mark.title -> f:format.stripTags()}" aria-label="{mark.title -> f:format.stripTags()}" />
                 </f:if>
             </f:then>
         </f:if>
         <f:if condition="{interactiveImage.txVncinteractiveimageIconSelection} === 'formelement'">
             <f:then>
                 <f:if condition="{interactiveImage.txVncinteractiveimageIconFormelement}">
-                    <i class="mark-icon mark-icon--formelement {f:if(condition: context, then: 'mark-icon--no-hover')} {interactiveImage.txVncinteractiveimageIconFormelement}" data-uid="{mark.uid}"></i>
+                    <i class="mark-icon mark-icon--formelement {f:if(condition: context, then: 'mark-icon--no-hover')} {interactiveImage.txVncinteractiveimageIconFormelement}" data-uid="info-{interactiveImage.uid}-{mark.uid}"></i>
                 </f:if>
             </f:then>
         </f:if>
@@ -21,14 +21,14 @@
         <f:if condition="{mark.iconSelection} === 'upload'">
             <f:then>
                 <f:if condition="{mark.icon}">
-                    <f:image class="mark-icon {f:if(condition: context, then: 'mark-icon--no-hover')}" data-uid="{mark.uid}" image="{mark.icon}" alt="{mark.title -> f:format.stripTags()}" aria-label="{mark.title -> f:format.stripTags()}" />
+                    <f:image class="mark-icon {f:if(condition: context, then: 'mark-icon--no-hover')}" data-uid="info-{interactiveImage.uid}-{mark.uid}" image="{mark.icon}" alt="{mark.title -> f:format.stripTags()}" aria-label="{mark.title -> f:format.stripTags()}" />
                 </f:if>
             </f:then>
         </f:if>
         <f:if condition="{mark.iconSelection} === 'formelement'">
             <f:then>
                 <f:if condition="{mark.iconFormelement}">
-                    <i class="mark-icon mark-icon--formelement {f:if(condition: context, then: 'mark-icon--no-hover')} {mark.iconFormelement}" data-uid="{mark.uid}"></i>
+                    <i class="mark-icon mark-icon--formelement {f:if(condition: context, then: 'mark-icon--no-hover')} {mark.iconFormelement}" data-uid="info-{interactiveImage.uid}-{mark.uid}"></i>
                 </f:if>
             </f:then>
         </f:if>
@@ -36,7 +36,7 @@
 </f:if>
 <f:if condition="{interactiveImage.txVncinteractiveimageIconMode} === 'numbers'">
     <f:then>
-        <p class="mark-icon mark-icon--number {f:if(condition: context, then: 'mark-icon--no-hover')}" data-uid="{mark.uid}" aria-label="{mark.title -> f:format.stripTags()}">
+        <p class="mark-icon mark-icon--number {f:if(condition: context, then: 'mark-icon--no-hover')}" data-uid="info-{interactiveImage.uid}-{mark.uid}" aria-label="{mark.title -> f:format.stripTags()}">
             {iterator.cycle}
         </p>
     </f:then>

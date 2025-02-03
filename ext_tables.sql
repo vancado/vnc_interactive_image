@@ -29,6 +29,7 @@ CREATE TABLE tt_content
     tx_vncinteractiveimage_marks                     int(11) DEFAULT '0' NOT NULL,
     tx_vncinteractiveimage_setmarker                 int(11) DEFAULT '0' NOT NULL,
     tx_vncinteractiveimage_layout                    varchar(255) DEFAULT '' NOT NULL,
+    tx_vncinteractiveimage_container_layout          varchar(255) DEFAULT 'tabs' NOT NULL,
     tx_vncinteractiveimage_show_fullscreen           tinyint(4) unsigned DEFAULT '0' NOT NULL,
     tx_vncinteractiveimage_show_title_next_to_marker tinyint(4) unsigned DEFAULT '0' NOT NULL,
     tx_vncinteractiveimage_show_zoom                 tinyint(4) unsigned DEFAULT '0' NOT NULL,

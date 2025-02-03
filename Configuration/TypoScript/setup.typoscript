@@ -19,3 +19,14 @@ page {
         interactiveImageScript = EXT:vnc_interactive_image/Resources/Public/JavaScript/interactive-image.js
     }
 }
+
+tt_content.interactive-image-container < lib.contentElement
+tt_content.interactive-image-container {
+    templateName = Container
+    templateRootPaths {
+        10 = EXT:vnc_interactive_image/Resources/Private/Templates
+    }
+    dataProcessing {
+        100 = B13\Container\DataProcessing\ContainerProcessor
+    }
+}

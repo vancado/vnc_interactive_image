@@ -40,6 +40,19 @@ call_user_func(function () {
         ],
     ];
 
+    $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_container_layout'] = [
+        'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.layout',
+        'config' => [
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+            'items' => [
+                ['Tabs', 'tabs'],
+                ['Slider', 'slider'],
+            ],
+            'default' => 'tabs',
+        ],
+    ];
+
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_name'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.name',
         'config' => [
@@ -295,4 +308,27 @@ call_user_func(function () {
     ];
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] .= ',frame_layout,frame_options,background_color_class,background_image,background_image_options';
+
+    \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\B13\Container\Tca\Registry::class)->configureContainer(
+        (
+        new \B13\Container\Tca\ContainerConfiguration(
+            'interactive-image-container', // CType
+            'Interactive Image Container', // label
+            'This container contains multiple interactive image content elements', // description
+            [
+                [
+                    ['name' => 'content', 'colPos' => 200, 'allowed' => ['CType' => 'list']]
+                ],
+            ] // grid configuration
+        )
+        )
+            // set an optional icon configuration
+            ->setIcon('EXT:container/Resources/Public/Icons/container-1col.svg')
+    );
+
+    $GLOBALS['TCA']['tt_content']['types']['interactive-image-container']['showitem'] = '
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, --palette--;;
+        general, header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header.ALT.div_formlabel, tx_vncinteractiveimage_container_layout,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance, --palette--;;frames, --palette--;;appearanceLinks, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, --palette--;;language, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, --palette--;;hidden, --palette--;;access, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories, categories, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes, rowDescription, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
+        
+    ';
 });

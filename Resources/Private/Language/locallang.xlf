@@ -15,6 +15,12 @@
       <trans-unit id="flexform_interactive_images">
         <source>Select Interactive Images</source>
       </trans-unit>
+      <trans-unit id="slider.next">
+        <source>Next</source>
+      </trans-unit>
+      <trans-unit id="slider.prev">
+        <source>Previous</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,0 +1,192 @@
+<f:if condition="{data.frame_class} != none">
+    <f:then>
+
+        <div id="c{data.uid}" class="frame frame-{data.frame_class} frame-type-{data.CType} frame-layout-{data.layout}{f:if(condition: data.space_before_class, then: ' frame-space-before-{data.space_before_class}')}{f:if(condition: data.space_after_class, then: ' frame-space-after-{data.space_after_class}')}">
+            <div class="frame-group-container">
+                <div class="frame-group-inner">
+                    <div class="frame-container frame-container-{data.frame_class}">
+                        <div class="frame-inner">
+
+                            <f:if condition="{data._LOCALIZED_UID}">
+                                <a id="c{data._LOCALIZED_UID}"></a>
+                            </f:if>
+                            <f:render section="Before" optional="true">
+                                <f:render partial="DropIn/Before/All" arguments="{_all}" />
+                            </f:render>
+                            <f:render section="Header" optional="true">
+                                <f:render partial="Header/All" arguments="{_all}" />
+                            </f:render>
+                            <f:if condition="{data.tx_vncinteractiveimage_container_layout} == 'tabs'">
+                                <f:then>
+                                    <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                                        <p>
+                                            <f:for each="{children_200}" as="record" iteration="iterator">
+                                                <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#interactiveImageContainer-{record.uid}"
+                                                        aria-expanded="false"
+                                                        aria-controls="interactiveImageContainer-{record.uid}"
+                                                >
+                                                    {record.tx_vncinteractiveimage_name}
+                                                </button>
+                                            </f:for>
+                                        </p>
+                                        <f:for each="{children_200}" as="record" iteration="iterator">
+                                            <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"
+                                                 data-bs-parent="#vncInteractiveImageContainer-{data.uid}"
+                                            >
+                                                <f:format.raw>
+                                                    <f:cObject typoscriptObjectPath="tt_content.list.20.vncinteractiveimage_vncinteractive"
+                                                               data="{uid: record.uid}"
+                                                    />
+                                                </f:format.raw>
+                                            </div>
+                                        </f:for>
+                                    </div>
+                                </f:then>
+                                <f:else>
+                                    <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                                        <div id="carousel-{data.uid}" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-indicators">
+                                                <f:for each="{children_200}" as="record" iteration="iterator">
+                                                    <button type="button"
+                                                            data-bs-target="#carousel-{data.uid}"
+                                                            data-bs-slide-to="{iterator.index}"
+                                                            class="{f:if(condition: iterator.isFirst, then: 'active')}"
+                                                            aria-current="{f:if(condition: iterator.isFirst, then: 'true')}"
+                                                            aria-label="{record.tx_vncinteractiveimage_name}"
+                                                    ></button>
+                                                </f:for>
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <f:for each="{children_200}" as="record" iteration="iterator">
+                                                    <div class="carousel-item {f:if(condition: iterator.isFirst, then: 'active')}">
+                                                        <f:format.raw>
+                                                            <f:cObject typoscriptObjectPath="tt_content.list.20.vncinteractiveimage_vncinteractive"
+                                                                       data="{uid: record.uid}"
+                                                            />
+                                                        </f:format.raw>
+                                                    </div>
+                                                </f:for>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{data.uid}" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden"><f:translate key="LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang.xlf:slider.prev" /></span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{data.uid}" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden"><f:translate key="LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang.xlf:slider.next" /></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </f:else>
+                            </f:if>
+                            <f:render section="Footer" optional="true">
+                                <f:render partial="Footer/All" arguments="{_all}" />
+                            </f:render>
+                            <f:render section="After" optional="true">
+                                <f:render partial="DropIn/After/All" arguments="{_all}" />
+                            </f:render>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </f:then>
+    <f:else>
+
+        <a id="c{data.uid}"></a>
+        <f:if condition="{data._LOCALIZED_UID}">
+            <a id="c{data._LOCALIZED_UID}"></a>
+        </f:if>
+        <f:if condition="{data.space_before_class}">
+            <div class="frame-space-before-{data.space_before_class}"></div>
+        </f:if>
+        <f:render section="Before" optional="true">
+            <f:render partial="DropIn/Before/All" arguments="{_all}" />
+        </f:render>
+        <f:render section="Header" optional="true">
+            <f:render partial="Header/All" arguments="{_all}" />
+        </f:render>
+        <f:if condition="{data.tx_vncinteractiveimage_container_layout} == 'tabs'">
+            <f:then>
+                <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                    <p>
+                        <f:for each="{children_200}" as="record" iteration="iterator">
+                            <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#interactiveImageContainer-{record.uid}"
+                                    aria-expanded="false"
+                                    aria-controls="interactiveImageContainer-{record.uid}"
+                            >
+                                {record.tx_vncinteractiveimage_name}
+                            </button>
+                        </f:for>
+                    </p>
+                    <f:for each="{children_200}" as="record" iteration="iterator">
+                        <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"
+                             data-bs-parent="#vncInteractiveImageContainer-{data.uid}"
+                        >
+                            <f:format.raw>
+                                <f:cObject typoscriptObjectPath="tt_content.list.20.vncinteractiveimage_vncinteractive"
+                                           data="{uid: record.uid}"
+                                />
+                            </f:format.raw>
+                        </div>
+                    </f:for>
+                </div>
+            </f:then>
+            <f:else>
+                <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                    <div id="carousel-{data.uid}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <f:for each="{children_200}" as="record" iteration="iterator">
+                                <button type="button"
+                                        data-bs-target="#carousel-{data.uid}"
+                                        data-bs-slide-to="{iterator.index}"
+                                        class="{f:if(condition: iterator.isFirst, then: 'active')}"
+                                        aria-current="{f:if(condition: iterator.isFirst, then: 'true')}"
+                                        aria-label="{record.tx_vncinteractiveimage_name}"
+                                ></button>
+                            </f:for>
+                        </div>
+                        <div class="carousel-inner">
+                            <f:for each="{children_200}" as="record" iteration="iterator">
+                                <div class="carousel-item {f:if(condition: iterator.isFirst, then: 'active')}">
+                                    <f:format.raw>
+                                        <f:cObject typoscriptObjectPath="tt_content.list.20.vncinteractiveimage_vncinteractive"
+                                                   data="{uid: record.uid}"
+                                        />
+                                    </f:format.raw>
+                                </div>
+                            </f:for>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{data.uid}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden"><f:translate key="LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang.xlf:slider.prev" /></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-{data.uid}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden"><f:translate key="LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang.xlf:slider.next" /></span>
+                        </button>
+                    </div>
+                </div>
+            </f:else>
+        </f:if>
+        <f:render section="Footer" optional="true">
+            <f:render partial="Footer/All" arguments="{_all}" />
+        </f:render>
+        <f:render section="After" optional="true">
+            <f:render partial="DropIn/After/All" arguments="{_all}" />
+        </f:render>
+        <f:if condition="{data.space_after_class}">
+            <div class="frame-space-after-{data.space_after_class}"></div>
+        </f:if>
+
+    </f:else>
+</f:if>
+

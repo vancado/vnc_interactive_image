@@ -83,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const popover = vncInteractiveImage.querySelector(`#${markerId}`);
-        console.log(markerId)
         if (popover) {
           const popovers = vncInteractiveImage.querySelectorAll(".content-box__popover");
           const markerRect = marker.getBoundingClientRect();

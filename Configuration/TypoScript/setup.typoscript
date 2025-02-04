@@ -22,7 +22,7 @@ page {
 
 tt_content.interactive-image-container < lib.contentElement
 tt_content.interactive-image-container {
-    templateName = Container
+    templateName = VncInteractiveImageContainer
     templateRootPaths {
         10 = EXT:vnc_interactive_image/Resources/Private/Templates
     }

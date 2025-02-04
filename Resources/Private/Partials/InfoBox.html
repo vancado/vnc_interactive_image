@@ -1,7 +1,5 @@
 <div class="content-box content-box__info d-flex flex-column">
-  <f:for
-    each="{interactiveImage.txVncinteractiveimageMarks}"
-    as="mark">
+  <f:for each="{interactiveImage.txVncinteractiveimageMarks}" as="mark" iteration="iterator">
     <div
       class="info-item d-none"
       id="info-{interactiveImage.uid}-{mark.uid}">

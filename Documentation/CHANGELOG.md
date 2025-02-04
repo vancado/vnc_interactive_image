@@ -272,3 +272,15 @@ Related: #VAWS-64
 
 ---
 
+## 2025-02-04 - Version 12.7.3
+### Release Notes
+## What's Changed
+* Feature/vaws 64 add container by @vnc-jboe in https://github.com/vancado/vnc_interactive_image/pull/47
+
+## New Contributors
+* @vnc-jboe made their first contribution in https://github.com/vancado/vnc_interactive_image/pull/47
+
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.2...12.7.3
+
+---
+

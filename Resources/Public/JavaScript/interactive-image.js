@@ -223,6 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageContainer = vncInteractiveImage.querySelector(".image-container");
     const markersOriginalPosition = [];
 
+    console.log(zoomControls);
+
     zoomControlsOriginalPosition = [
       zoomControls ? getComputedStyle(zoomControls).right : 0,
       zoomControls ? getComputedStyle(zoomControls).bottom : 0,

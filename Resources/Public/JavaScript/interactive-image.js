@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             if (popover.parentNode === imageContainer) {
               marker.querySelector('.mark-title').after(popover);
-              popover.dispatchEvent(eventAfterShowDesktopPopover);
             }
+            popover.dispatchEvent(eventAfterShowDesktopPopover);
           }
         }
       }

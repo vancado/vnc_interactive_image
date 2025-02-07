@@ -457,7 +457,7 @@
   }
   .vncInteractiveImage .zoom-controls button {
     width: 15px;
-    height: 25px;
+    height: 15px;
   }
   .vncInteractiveImage .zoom-controls button i > svg {
     height: 25px;

@@ -429,6 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     imageContainer.addEventListener("touchmove", (e) => {
       if (e.touches.length === 2 && initialPinchDistance) {
+        e.preventDefault();
         const currentDistance = getPinchDistance(e.touches);
         const pinchScale = currentDistance / initialPinchDistance;
         scale = Math.max(1, lastScale * pinchScale);
@@ -436,6 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateMarkers();
       } else if (isPanning && e.touches.length === 1) {
         // Handle panning
+        e.preventDefault();
         const x = e.touches[0].pageX - imageContainer.offsetLeft;
         const y = e.touches[0].pageY - imageContainer.offsetTop;
         const walkX = (x - startX) * 1;

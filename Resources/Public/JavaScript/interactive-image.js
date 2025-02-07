@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const vncInteractiveImages = document.querySelectorAll('.vncInteractiveImage');
+  const eventAfterShowDesktopPopover = new Event('afterShowDesktopPopover');
   const eventAfterShowMobilePopover = new Event('afterShowMobilePopover');
   const eventAfterHidePopover = new Event('afterHidePopover');
   const eventAfterPositioning = new Event('afterPositioning');
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             if (popover.parentNode === imageContainer) {
               marker.querySelector('.mark-title').after(popover);
+              popover.dispatchEvent(eventAfterShowDesktopPopover);
             }
           }
         }

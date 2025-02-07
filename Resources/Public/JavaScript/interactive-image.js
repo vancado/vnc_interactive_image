@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
         item.classList = index === currentIndex ? "info-item d-flex flex-column flex-grow-1" : "d-none";
         item.classList.toggle("active", index === currentIndex);
 
+        if (index === currentIndex) {
+          item.scrollIntoView();
+        }
+
         const navPoints = navPointsContainer.querySelectorAll(".nav-point");
         navPoints.forEach((point, pointIndex) => {
           point.classList.toggle("active", pointIndex === currentIndex);

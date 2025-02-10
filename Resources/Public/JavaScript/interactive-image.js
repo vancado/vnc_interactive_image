@@ -295,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
     imageContainer.addEventListener('dragstart', updateZoomControls);
     imageContainer.addEventListener('drag', updateZoomControls);
     imageContainer.addEventListener('dragend', updateZoomControls);
+    updateZoomControls();
 
     zoomInButton?.addEventListener("click", () => {
       scale += scaleStep;

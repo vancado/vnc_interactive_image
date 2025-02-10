@@ -18,7 +18,10 @@
                             </f:render>
                             <f:if condition="{data.tx_vncinteractiveimage_container_layout} == 'tabs'">
                                 <f:then>
-                                    <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                                    <div class="vncInteractiveImageContainer"
+                                         id="vncInteractiveImageContainer-{data.uid}"
+                                         data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
+                                    >
                                         <p>
                                             <f:for each="{children_200}" as="record" iteration="iterator">
                                                 <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
@@ -46,7 +49,10 @@
                                     </div>
                                 </f:then>
                                 <f:else>
-                                    <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                                    <div class="vncInteractiveImageContainer"
+                                         id="vncInteractiveImageContainer-{data.uid}"
+                                         data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
+                                    >
                                         <div id="carousel-{data.uid}" class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-indicators">
                                                 <f:for each="{children_200}" as="record" iteration="iterator">
@@ -113,7 +119,10 @@
         </f:render>
         <f:if condition="{data.tx_vncinteractiveimage_container_layout} == 'tabs'">
             <f:then>
-                <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                <div class="vncInteractiveImageContainer"
+                     id="vncInteractiveImageContainer-{data.uid}"
+                     data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
+                >
                     <p>
                         <f:for each="{children_200}" as="record" iteration="iterator">
                             <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
@@ -141,7 +150,10 @@
                 </div>
             </f:then>
             <f:else>
-                <div class="vncInteractiveImageContainer" id="vncInteractiveImageContainer-{data.uid}">
+                <div class="vncInteractiveImageContainer"
+                     id="vncInteractiveImageContainer-{data.uid}"
+                     data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
+                >
                     <div id="carousel-{data.uid}" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators">
                             <f:for each="{children_200}" as="record" iteration="iterator">

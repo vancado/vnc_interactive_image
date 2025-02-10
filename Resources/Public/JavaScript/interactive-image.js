@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const vncInteractiveImageContainers = document.querySelectorAll('.vncInteractiveImageContainer');
   const vncInteractiveImages = document.querySelectorAll('.vncInteractiveImage');
   const eventAfterShowDesktopPopover = new Event('afterShowDesktopPopover');
   const eventAfterShowMobilePopover = new Event('afterShowMobilePopover');
@@ -479,4 +480,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const setConsecutiveNumbering = () => {
+      vncInteractiveImageContainers.forEach((interactiveImageContainer) => {
+          const consecutiveNumbering = interactiveImageContainer.dataset['consecutiveNumbering'];
+          if (consecutiveNumbering !== '1') {
+              return;
+          }
+
+          let number = 1;
+          interactiveImageContainer.querySelectorAll('.vncInteractiveImage')?.forEach((interactiveImage) => {
+              const marks = interactiveImage.querySelectorAll('.image-container .marks-container > .mark > div > .mark-icon--number');
+              const popOverMarks = interactiveImage.querySelectorAll('.image-container .marks-container .mark > .content-box .mark-icon--number');
+              const infoBoxMarks = interactiveImage.querySelectorAll('.container > div > div > .content-box .mark-icon--number');
+
+              for (let i = 0; i < marks.length; i++) {
+                  if (marks[i]) marks[i].innerHTML = number;
+                  if (popOverMarks[i]) popOverMarks[i].innerHTML = number;
+                  if (infoBoxMarks[i]) infoBoxMarks[i].innerHTML = number;
+
+                  number++;
+              }
+          });
+      });
+  }
+  setConsecutiveNumbering();
 });

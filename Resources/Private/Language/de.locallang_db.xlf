@@ -123,6 +123,14 @@
                  <source>Link</source>
                  <target>Link</target>
              </trans-unit>
+			<trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.consecutive_numbering" approved="yes">
+				<source>Consecutive numbering</source>
+				<target>Fortlaufende Nummerierung</target>
+			</trans-unit>
+			<trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.consecutive_numbering.on" approved="yes">
+				<source>on</source>
+				<target>an</target>
+			</trans-unit>
              <trans-unit id="tx_vncinteractiveimage_domain_model_interactiveimage.layout" approved="yes">
                  <source>Layout</source>
                  <target>Layout</target>

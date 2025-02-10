@@ -308,3 +308,9 @@ Related: #VAWS-64
 
 ---
 
+## 2025-02-10 - Version 12.7.9
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.8...12.7.9
+
+---
+

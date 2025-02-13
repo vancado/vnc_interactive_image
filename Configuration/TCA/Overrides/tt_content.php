@@ -286,6 +286,7 @@ call_user_func(function () {
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_show_fullscreen'] = [
         'exclude' => 1,
+        'displayCond' => 'FIELD:tx_vncinteractiveimage_layout:=:popover',
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.show_fullscreen',
         'config' => [
             'type' => 'check',

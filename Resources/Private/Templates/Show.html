@@ -24,7 +24,7 @@
                             <f:then>
                                 <div class="col-lg-8 col-12">
                                     <div class="image-container">
-                                        <f:render section="zoomControls" arguments="{interactiveImage: interactiveImage}" />
+                                        <f:render section="zoomControls" arguments="{interactiveImage: interactiveImage, layout: layout}" />
                                         <f:image
                                                 class="img-fluid"
                                                 image="{interactiveImage.txVncinteractiveimageImage}"
@@ -51,7 +51,7 @@
                 <f:if condition="{layout} === 'popover'">
                     <f:then>
                         <div class="col-12 relative">
-                            <f:render section="zoomControls" arguments="{interactiveImage: interactiveImage}" />
+                            <f:render section="zoomControls" arguments="{interactiveImage: interactiveImage, layout: layout}" />
                             <div class="image-container image-container--full-width">
                                 <f:image
                                         class="img-fluid"
@@ -75,7 +75,7 @@
                         <button class="btn btn-primary" id="zoom-in">+</button>
                         <button class="btn btn-primary" id="zoom-out">-</button>
                     </f:if>
-                    <f:if condition="{interactiveImage.txVncinteractiveimageShowFullscreen}">
+                    <f:if condition="{interactiveImage.txVncinteractiveimageShowFullscreen} && {layout} === 'popover'">
                         <button class="btn btn-primary" id="fullscreen">
                             <i class="fa fa-expand"
                             ><svg

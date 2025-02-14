@@ -495,9 +495,27 @@ document.addEventListener("DOMContentLoaded", () => {
               const infoBoxMarks = interactiveImage.querySelectorAll('.container > div > div > .content-box .mark-icon--number');
 
               for (let i = 0; i < marks.length; i++) {
-                  if (marks[i]) marks[i].innerHTML = number;
-                  if (popOverMarks[i]) popOverMarks[i].innerHTML = number;
-                  if (infoBoxMarks[i]) infoBoxMarks[i].innerHTML = number;
+                  if (marks[i]) {
+                      if (marks[i].childNodes.length === 1) {
+                          marks[i].innerHTML = number;
+                      } else {
+                          marks[i].childNodes[marks[i].childNodes.length - 1].data = number;
+                      }
+                  }
+                  if (popOverMarks[i]) {
+                      if (popOverMarks[i].childNodes.length === 1) {
+                          popOverMarks[i].innerHTML = number;
+                      } else {
+                          popOverMarks[i].childNodes[popOverMarks[i].childNodes.length - 1].data = number;
+                      }
+                  }
+                  if (infoBoxMarks[i]) {
+                      if (infoBoxMarks[i].childNodes.length === 1) {
+                          infoBoxMarks[i].innerHTML = number;
+                      } else {
+                          infoBoxMarks[i].childNodes[infoBoxMarks[i].childNodes.length - 1].data = number;
+                      }
+                  }
 
                   number++;
               }

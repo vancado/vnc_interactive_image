@@ -21,7 +21,7 @@ return [
         'sortby' => 'sorting',
         'default_sortby' => 'ORDER BY sorting',
         'searchFields' => 'title, bodytext',
-        'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.gif'
+        'iconfile' => 'EXT:vnc_interactive_image/Resources/Public/Icons/tx_vncinteractiveimage_domain_model_mark.svg'
     ],
     'types' => [
         '1' => ['showitem' => 'position_x, position_y, title, title_position, image, bodytext, link, icon_selection, icon, icon_formelement']

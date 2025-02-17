@@ -230,8 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageContainer = vncInteractiveImage.querySelector(".image-container");
     const markersOriginalPosition = [];
 
-    console.log(zoomControls);
-
     zoomControlsOriginalPosition = [
       zoomControls ? getComputedStyle(zoomControls).right : 0,
       zoomControls ? getComputedStyle(zoomControls).bottom : 0,
@@ -467,19 +465,51 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });
 
-  const buttons = document.querySelectorAll('.vncInteractiveImageContainer button[data-bs-toggle="collapse"]');
-  buttons?.forEach((button) => {
-    if (!button.classList.contains('collapsed')) {
-      button.setAttribute('disabled', 'disabled');
-      button.setAttribute('aria-expanded', 'true');
-    }
-    button.addEventListener('click', (e) => {
-        buttons.forEach(el => {
-          el.removeAttribute('disabled');
-        });
-        e.target.setAttribute('disabled', 'disabled');
-    });
-  });
+  vncInteractiveImageContainers.forEach(vncInteractiveImageContainer => {
+      const select = vncInteractiveImageContainer.querySelector('select');
+      const selectUi = select.nextElementSibling;
+      const selectUiCaption = selectUi?.querySelector('.caption');
+      const selectUl = vncInteractiveImageContainer.querySelector('ul.dropdown-menu');
+      const selectListElements = selectUl?.querySelectorAll('li');
+      const buttons = vncInteractiveImageContainer.querySelectorAll('.vncInteractiveImageContainer button[data-bs-toggle="collapse"]');
+
+      if (selectUiCaption) {
+        selectUiCaption.innerText = selectListElements[0]?.innerText;
+      }
+
+      selectUiCaption?.addEventListener('click', (e) => {
+          selectUl.classList.toggle('visually-hidden');
+      });
+
+      selectListElements?.forEach((el) => {
+          el.addEventListener('click', (e) => {
+              const index = el.querySelector('a').dataset['index'];
+              selectUiCaption.innerText = e.target.innerText;
+              selectUl.classList.toggle('visually-hidden');
+              buttons.forEach(el => {
+                  el.removeAttribute('disabled');
+              });
+              buttons[index].setAttribute('disabled', 'disabled');
+          });
+      });
+
+      buttons?.forEach((button) => {
+          if (!button.classList.contains('collapsed')) {
+              button.setAttribute('disabled', 'disabled');
+              button.setAttribute('aria-expanded', 'true');
+          }
+          button.addEventListener('click', (e) => {
+              buttons.forEach(el => {
+                  el.removeAttribute('disabled');
+              });
+              e.target.setAttribute('disabled', 'disabled');
+              if (selectUiCaption) {
+                  selectUiCaption.innerText = e.target.innerText;
+              }
+          });
+      });
+  })
+
 
   const setConsecutiveNumbering = () => {
       vncInteractiveImageContainers.forEach((interactiveImageContainer) => {

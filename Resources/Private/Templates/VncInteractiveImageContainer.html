@@ -22,19 +22,9 @@
                                          id="vncInteractiveImageContainer-{data.uid}"
                                          data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
                                     >
-                                        <p>
-                                            <f:for each="{children_200}" as="record" iteration="iterator">
-                                                <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
-                                                        type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#interactiveImageContainer-{record.uid}"
-                                                        aria-expanded="false"
-                                                        aria-controls="interactiveImageContainer-{record.uid}"
-                                                >
-                                                    {record.tx_vncinteractiveimage_name}
-                                                </button>
-                                            </f:for>
-                                        </p>
+                                        <f:render section="TabsSelect" arguments="{_all}" />
+                                        <f:render section="TabsTabs" arguments="{_all}" />
+
                                         <f:for each="{children_200}" as="record" iteration="iterator">
                                             <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"
                                                  data-bs-parent="#vncInteractiveImageContainer-{data.uid}"
@@ -123,19 +113,9 @@
                      id="vncInteractiveImageContainer-{data.uid}"
                      data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
                 >
-                    <p>
-                        <f:for each="{children_200}" as="record" iteration="iterator">
-                            <button class="btn btn-primary {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#interactiveImageContainer-{record.uid}"
-                                    aria-expanded="false"
-                                    aria-controls="interactiveImageContainer-{record.uid}"
-                            >
-                                {record.tx_vncinteractiveimage_name}
-                            </button>
-                        </f:for>
-                    </p>
+                    <f:render section="TabsSelect" arguments="{_all}" />
+                    <f:render section="TabsTabs" arguments="{_all}" />
+
                     <f:for each="{children_200}" as="record" iteration="iterator">
                         <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"
                              data-bs-parent="#vncInteractiveImageContainer-{data.uid}"
@@ -201,4 +181,52 @@
 
     </f:else>
 </f:if>
+
+<f:section name="TabsSelect">
+    <div class="container my-3 d-lg-none">
+        <div class="powermail_fieldwrap_type_select col-md-6 form-group">
+            <label for="vnc_interactive_image_container_tabs_select_{data.uid}" class="input__label" title="Auswahl">
+                Auswahl
+            </label>
+            <div class="powermail_field input--dropdown input--select mb-3">
+                <select autocomplete="off" class="powermail_select visually-hidden" id="vnc_interactive_image_container_tabs_select_{data.uid}" name="vnc_interactive_image_container_tabs_select_{data.uid}">
+                    <f:for each="{children_200}" as="record" iteration="iterator">
+                        <option value="{iterator.cycle}">{record.tx_vncinteractiveimage_name}</option>
+                    </f:for>
+                </select>
+                <div class="dropdown">
+                    <button data-dropdown-toggle="true" aria-expanded="false" type="button" role="button" id="vnc_interactive_image_container_tabs_select_{data.uid}--input-dropdown">
+                        <span class="caption">{children_200.0.tx_vncinteractiveimage_name}</span>
+                        <i class="svg-icon">
+                            <svg class="icon" preserveAspectRatio="xMaxYMin"><use xlink:href="{f:uri.image(src: 'EXT:vnc_sitepackage/Resources/Public/Static/symbol-defs.svg')}#icon-chevron-down"></use></svg>
+                        </i>
+                    </button>
+                    <ul class="dropdown-menu visually-hidden" aria-labelledby="powermail_field_anrede_01--input-dropdown">
+                        <f:for each="{children_200}" as="record" iteration="iterator">
+                            <li>
+                                <a class="dropdown-item" data-value="{iterator.index}" data-index="{iterator.index}">{record.tx_vncinteractiveimage_name}</a>
+                            </li>
+                        </f:for>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+<f:section name="TabsTabs">
+    <div class="container my-3 d-none d-lg-block">
+        <f:for each="{children_200}" as="record" iteration="iterator">
+            <button class="button btn btn-primary me-4 {f:if(condition: iterator.isFirst, then: '', else: 'collapsed')}"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#interactiveImageContainer-{record.uid}"
+                    aria-expanded="false"
+                    aria-controls="interactiveImageContainer-{record.uid}"
+            >
+                {record.tx_vncinteractiveimage_name}
+            </button>
+        </f:for>
+    </div>
+</f:section>
 

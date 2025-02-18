@@ -382,6 +382,7 @@ class SetMarkerUi
             await this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
         })
 
+        /*
         const popover = new Popover(marker, {
             content: function() {
                 return marker.dataset['markBodytext']
@@ -392,6 +393,8 @@ class SetMarkerUi
             },
             trigger: 'hover focus',
         })
+
+         */
     }
 }
 

@@ -7,7 +7,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Information\Typo3Version;
 
-function getConfigForImage(): array
+function getConfigForVncInteractiveImageImage(): array
 {
     $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
 
@@ -174,7 +174,7 @@ function getConfigForImage(): array
     }
 }
 
-function getConfigForIcon(): array{
+function getConfigForVncInteractiveImageIcon(): array{
     $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
 
     if ($typo3Version->getMajorVersion() >= 12) {
@@ -378,7 +378,7 @@ call_user_func(function () {
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_image'] = [
         'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_interactiveimage.image',
-        'config' => getConfigForImage(),
+        'config' => getConfigForVncInteractiveImageImage(),
     ];
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon_mode'] = [
@@ -416,7 +416,7 @@ call_user_func(function () {
                 'FIELD:tx_vncinteractiveimage_icon_selection:=:upload'
             ]
         ],
-        'config' => getConfigForIcon(),
+        'config' => getConfigForVncInteractiveImageIcon(),
     ];
 
     $GLOBALS['TCA']['tt_content']['columns']['tx_vncinteractiveimage_icon_formelement'] = [

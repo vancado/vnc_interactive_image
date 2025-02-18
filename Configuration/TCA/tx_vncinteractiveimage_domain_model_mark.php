@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 function getNumberField(): array
 {
@@ -30,6 +31,276 @@ function getNumberField(): array
             'size' => 5,
             'eval' => 'double2',
         ];
+    }
+}
+
+function getConfigForVncInteractiveImageMarkIcon(): array{
+    $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
+
+    if ($typo3Version->getMajorVersion() >= 12) {
+        return \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon', [
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'crop' => [
+                        'config' => [
+                            'type' => 'passthrough'
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+    } else {
+        return ExtensionManagementUtility::getFileFieldTCAConfig('icon', [
+            'appearance' => [
+                'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                'fileByUrlAllowed' => false,
+            ],
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                ]
+            ],
+        ], 'jpg,jpeg,png,svg');
+    }
+}
+
+function getConfigForVncInteractiveImageMarkImage(): array{
+    $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
+
+    if ($typo3Version->getMajorVersion() >= 12) {
+        return [
+            'type' => 'inline',
+            'foreign_table' => 'sys_file_reference',
+            'foreign_field' => 'uid_foreign',
+            'foreign_sortby' => 'sorting_foreign',
+            'foreign_label' => 'uid_local',
+            'foreign_selector' => 'uid_local',
+            'foreign_selector_fieldTcaOverride' => [
+                'config' => [
+                    'appearance' => [
+                        'elementBrowserType' => 'file',
+                        'elementBrowserAllowed' => 'jpg,jpeg,png,svg'
+                    ]
+                ]
+            ],
+            'filter' => [
+                [
+                    'userFunc' => \TYPO3\CMS\Core\Resource\Filter\FileExtensionFilter::class . '->filterInlineChildren',
+                    'parameters' => [
+                        'allowedFileExtensions' => 'jpg,jpeg,png,svg'
+                    ]
+                ]
+            ],
+            'appearance' => [
+                'useSortable' => true,
+                'headerThumbnail' => [
+                    'field' => 'uid_local',
+                    'width' => '45',
+                    'height' => '45'
+                ],
+                'enabledControls' => [
+                    'info' => true,
+                    'new' => false,
+                    'dragdrop' => true,
+                    'sort' => true,
+                    'hide' => true,
+                    'delete' => true
+                ],
+                'fileUploadAllowed' => true
+            ],
+            'maxitems' => 1,
+            'minitems' => 0,
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'crop' => [
+                        'config' => [
+                            'cropVariants' => [
+                                'default' => [
+                                    'title' => 'Default',
+                                    'disabled' => false,
+                                    'allowedAspectRatios' => [
+                                        '3:1' => [
+                                            'title' => 'Ultraweit 3:1',
+                                            'value' => 3.0
+                                        ],
+                                        '5:2' => [
+                                            'title' => 'Weit 5:2',
+                                            'value' => 2.5
+                                        ],
+                                        '2:0' => [
+                                            'title' => 'Univisium 2:1',
+                                            'value' => 2.0
+                                        ],
+                                        '16:9' => [
+                                            'title' => '16:9 Breitbild',
+                                            'value' => 1.77
+                                        ],
+                                        '2:3' => [
+                                            'title' => '2:3 Hochkant',
+                                            'value' => 0.66
+                                        ],
+                                        '4:3' => [
+                                            'title' => '4:3 Klassischer Fernseher',
+                                            'value' => 1.33
+                                        ],
+                                        '5:4' => [
+                                            'title' => '5:4 klassisches Monitorformat',
+                                            'value' => 1.25
+                                        ],
+                                        '1:1' => [
+                                            'title' => '1:1 Quadrat',
+                                            'value' => 1.0
+                                        ],
+                                        'NaN' => [
+                                            'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
+                                            'value' => 0.0
+                                        ],
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    } else {
+        return ExtensionManagementUtility::getFileFieldTCAConfig('image', [
+            'appearance' => [
+                'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                'fileByUrlAllowed' => false,
+            ],
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'image' => [
+                        'config' => [
+                            'cropVariants' => [
+                                'default' => [
+                                    'title' => 'Default',
+                                    'disabled' => false,
+                                    'allowedAspectRatios' => [
+                                        '3:1' => [
+                                            'title' => 'Ultraweit 3:1',
+                                            'value' => 3.0
+                                        ],
+                                        '5:2' => [
+                                            'title' => 'Weit 5:2',
+                                            'value' => 2.5
+                                        ],
+                                        '2:0' => [
+                                            'title' => 'Univisium 2:1',
+                                            'value' => 2.0
+                                        ],
+                                        '16:9' => [
+                                            'title' => '16:9 Breitbild',
+                                            'value' => 1.77
+                                        ],
+                                        '2:3' => [
+                                            'title' => '2:3 Hochkant',
+                                            'value' => 0.66
+                                        ],
+                                        '4:3' => [
+                                            'title' => '4:3 Klassischer Fernseher',
+                                            'value' => 1.33
+                                        ],
+                                        '5:4' => [
+                                            'title' => '5:4 klassisches Monitorformat',
+                                            'value' => 1.25
+                                        ],
+                                        '1:1' => [
+                                            'title' => '1:1 Quadrat',
+                                            'value' => 1.0
+                                        ],
+                                        'NaN' => [
+                                            'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
+                                            'value' => 0.0
+                                        ],
+                                    ]
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+        ], 'jpg,jpeg,png,svg');
     }
 }
 
@@ -92,121 +363,7 @@ return [
         'image' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.image',
-            'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'sys_file_reference',
-                'foreign_field' => 'uid_foreign',
-                'foreign_sortby' => 'sorting_foreign',
-                'foreign_label' => 'uid_local',
-                'foreign_selector' => 'uid_local',
-                'foreign_selector_fieldTcaOverride' => [
-                    'config' => [
-                        'appearance' => [
-                            'elementBrowserType' => 'file',
-                            'elementBrowserAllowed' => 'jpg,jpeg,png,svg'
-                        ]
-                    ]
-                ],
-                'filter' => [
-                    [
-                        'userFunc' => \TYPO3\CMS\Core\Resource\Filter\FileExtensionFilter::class . '->filterInlineChildren',
-                        'parameters' => [
-                            'allowedFileExtensions' => 'jpg,jpeg,png,svg'
-                        ]
-                    ]
-                ],
-                'appearance' => [
-                    'useSortable' => true,
-                    'headerThumbnail' => [
-                        'field' => 'uid_local',
-                        'width' => '45',
-                        'height' => '45'
-                    ],
-                    'enabledControls' => [
-                        'info' => true,
-                        'new' => false,
-                        'dragdrop' => true,
-                        'sort' => true,
-                        'hide' => true,
-                        'delete' => true
-                    ],
-                    'fileUploadAllowed' => true
-                ],
-                'maxitems' => 1,
-                'minitems' => 0,
-                'overrideChildTca' => [
-                    'columns' => [
-                        'description' => [
-                            'config' => [
-                                'type' => 'passthrough',
-                            ]
-                        ],
-                        'alternative' => [
-                            'config' => [
-                                'type' => 'passthrough',
-                            ]
-                        ],
-                        'link' => [
-                            'config' => [
-                                'type' => 'passthrough',
-                            ]
-                        ],
-                        'title' => [
-                            'config' => [
-                                'type' => 'passthrough',
-                            ]
-                        ],
-                        'crop' => [
-                            'config' => [
-                                'cropVariants' => [
-                                    'default' => [
-                                        'title' => 'Default',
-                                        'disabled' => false,
-                                        'allowedAspectRatios' => [
-                                            '3:1' => [
-                                                'title' => 'Ultraweit 3:1',
-                                                'value' => 3.0
-                                            ],
-                                            '5:2' => [
-                                                'title' => 'Weit 5:2',
-                                                'value' => 2.5
-                                            ],
-                                            '2:0' => [
-                                                'title' => 'Univisium 2:1',
-                                                'value' => 2.0
-                                            ],
-                                            '16:9' => [
-                                                'title' => '16:9 Breitbild',
-                                                'value' => 1.77
-                                            ],
-                                            '2:3' => [
-                                                'title' => '2:3 Hochkant',
-                                                'value' => 0.66
-                                            ],
-                                            '4:3' => [
-                                                'title' => '4:3 Klassischer Fernseher',
-                                                'value' => 1.33
-                                            ],
-                                            '5:4' => [
-                                                'title' => '5:4 klassisches Monitorformat',
-                                                'value' => 1.25
-                                            ],
-                                            '1:1' => [
-                                                'title' => '1:1 Quadrat',
-                                                'value' => 1.0
-                                            ],
-                                            'NaN' => [
-                                                'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
-                                                'value' => 0.0
-                                            ],
-                                        ]
-                                    ],
-                                ],
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+            'config' => getConfigForVncInteractiveImageMarkImage(),
         ],
         'bodytext' => [
             'exclude' => 0,
@@ -250,7 +407,7 @@ return [
                     'FIELD:icon_selection:=:upload'
                 ]
             ],
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon')
+            'config' => getConfigForVncInteractiveImageMarkIcon(),
         ],
         'icon_formelement' => [
             'exclude' => 0,
@@ -282,6 +439,6 @@ return [
             'config' => [
                 'type' => 'passthrough'
             ]
-        ]
+        ],
     ]
 ];

@@ -492,13 +492,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       selectListElements?.forEach((el) => {
           el.addEventListener('click', (e) => {
-              const index = el.querySelector('a').dataset['index'];
+              const a = el.querySelector('a');
+              const index = a.dataset['index'];
               selectUiCaption.innerText = e.target.innerText;
               selectUl.classList.toggle('visually-hidden');
               buttons.forEach(el => {
                   el.removeAttribute('disabled');
               });
+              buttons[index].click();
               buttons[index].setAttribute('disabled', 'disabled');
+              selectUiCaption.innerText = e.target.innerText
           });
       });
 

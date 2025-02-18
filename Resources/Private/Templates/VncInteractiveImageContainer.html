@@ -22,8 +22,10 @@
                                          id="vncInteractiveImageContainer-{data.uid}"
                                          data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
                                     >
-                                        <f:render section="TabsSelect" arguments="{_all}" />
-                                        <f:render section="TabsTabs" arguments="{_all}" />
+                                        <f:if condition="{children_200 -> f:count()} > 1">
+                                            <f:render section="TabsSelect" arguments="{_all}" />
+                                            <f:render section="TabsTabs" arguments="{_all}" />
+                                        </f:if>
 
                                         <f:for each="{children_200}" as="record" iteration="iterator">
                                             <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"
@@ -113,8 +115,10 @@
                      id="vncInteractiveImageContainer-{data.uid}"
                      data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
                 >
-                    <f:render section="TabsSelect" arguments="{_all}" />
-                    <f:render section="TabsTabs" arguments="{_all}" />
+                    <f:if condition="{children_200 -> f:count()} > 1">
+                        <f:render section="TabsSelect" arguments="{_all}" />
+                        <f:render section="TabsTabs" arguments="{_all}" />
+                    </f:if>
 
                     <f:for each="{children_200}" as="record" iteration="iterator">
                         <div class="collapse {f:if(condition: iterator.isFirst, then: 'show')}" id="interactiveImageContainer-{record.uid}"

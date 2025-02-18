@@ -467,6 +467,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   vncInteractiveImageContainers.forEach(vncInteractiveImageContainer => {
       const select = vncInteractiveImageContainer.querySelector('select');
+
+      if (!select) {
+          return;
+      }
+
       const selectUi = select.nextElementSibling;
       const selectUiCaption = selectUi?.querySelector('.caption');
       const selectUl = vncInteractiveImageContainer.querySelector('ul.dropdown-menu');

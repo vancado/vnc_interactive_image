@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
           item.scrollIntoView();
         }
 
-        const navPoints = navPointsContainer.querySelectorAll(".nav-point");
-        navPoints.forEach((point, pointIndex) => {
+        const navPoints = navPointsContainer?.querySelectorAll(".nav-point");
+        navPoints?.forEach((point, pointIndex) => {
           point.classList.toggle("active", pointIndex === currentIndex);
         });
       });
@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const generateNavPoints = () => {
+      if (infoItems.length < 2) {
+          return;
+      }
+
       navPointsContainer.innerHTML = "";
 
       infoItems.forEach((_, index) => {

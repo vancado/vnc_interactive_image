@@ -8,12 +8,6 @@ use Vancado\VncInteractiveImage\Form\Element\SetMarker;
 
 call_user_func(function () {
 
-    ExtensionUtility::registerPlugin(
-        'VncInteractiveImage',
-        'Vncinteractive',
-        'Vancado Interactive Image'
-    );
-
     ExtensionUtility::configurePlugin(
         'VncInteractiveImage',
         'Vncinteractive',

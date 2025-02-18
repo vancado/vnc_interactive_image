@@ -1,5 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Information\Typo3Version;
+
+function getNumberField(): array
+{
+    $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
+    if ($typo3Version->getMajorVersion() >= 12) {
+        return [
+            'range' => [
+                'lower' => 0,
+                'upper' => 100
+            ],
+            'type' => 'number',
+            'format' => 'decimal',
+            'size' => 5,
+            'eval' => 'double2',
+        ];
+    } else {
+        return [
+            'range' => [
+                'lower' => 0,
+                'upper' => 100
+            ],
+            'type' => 'input',
+            'format' => 'decimal',
+            'size' => 5,
+            'eval' => 'double2',
+        ];
+    }
+}
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark',
@@ -238,30 +271,12 @@ return [
         'position_x' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.position_x',
-            'config' => [
-                'range' => [
-                    'lower' => 0,
-                    'upper' => 100
-                ],
-                'type' => 'number',
-                'format' => 'decimal',
-                'size' => 5,
-                'eval' => 'double2',
-            ]
+            'config' => getNumberField(),
         ],
         'position_y' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:vnc_interactive_image/Resources/Private/Language/locallang_db.xlf:tx_vncinteractiveimage_domain_model_mark.position_y',
-            'config' => [
-                'range' => [
-                    'lower' => 0,
-                    'upper' => 100
-                ],
-                'type' => 'number',
-                'format' => 'decimal',
-                'size' => 5,
-                'eval' => 'double2',
-            ]
+            'config' => getNumberField(),
         ],
         'interactive_image' => [
             'config' => [

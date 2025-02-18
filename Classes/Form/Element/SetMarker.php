@@ -6,6 +6,7 @@ namespace Vancado\VncInteractiveImage\Form\Element;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\NodeFactory;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Resource\FileReference;
@@ -21,6 +22,18 @@ use Vancado\VncInteractiveImage\Domain\Repository\InteractiveImageRepository;
 
 class SetMarker extends AbstractFormElement
 {
+    /**
+     * Container objects give $nodeFactory down to other containers.
+     *
+     * @param NodeFactory $nodeFactory
+     * @param array $data
+     */
+    public function __construct(NodeFactory $nodeFactory, array $data = [])
+    {
+        parent::__construct($nodeFactory, $data);
+        $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+    }
+
     public function render(): array
     {
         /** @var FileRepository $fileRepository */

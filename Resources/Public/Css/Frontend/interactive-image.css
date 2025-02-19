@@ -46,6 +46,12 @@
 .vncInteractiveImageContainer .collapsing {
   transition: none;
 }
+.vncInteractiveImageContainer .svg-icon {
+  transition: transform 200ms ease-in-out;
+}
+.vncInteractiveImageContainer .svg-icon.open {
+  transform: rotate3d(0, 0, 1, 180deg);
+}
 
 .vncInteractiveImage a {
   text-decoration: none;

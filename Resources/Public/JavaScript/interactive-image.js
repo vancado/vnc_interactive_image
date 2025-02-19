@@ -478,39 +478,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const selectUi = select.nextElementSibling;
       const selectUiCaption = selectUi?.querySelector('.caption');
+      const selectUiIcon = selectUi?.querySelector('.svg-icon');
       const selectUl = vncInteractiveImageContainer.querySelector('ul.dropdown-menu');
       const selectListElements = selectUl?.querySelectorAll('li');
       const buttons = vncInteractiveImageContainer.querySelectorAll('.vncInteractiveImageContainer button[data-bs-toggle="collapse"]');
+
+      let selectedIndex = 0;
 
       if (selectUiCaption) {
         selectUiCaption.innerText = selectListElements[0]?.innerText;
       }
 
       selectUiCaption?.addEventListener('click', (e) => {
-          selectUl.classList.toggle('visually-hidden');
+          toggleSelectBox();
+      });
+
+      selectUiIcon?.addEventListener('click', (e) => {
+          toggleSelectBox();
       });
 
       selectListElements?.forEach((el) => {
           el.addEventListener('click', (e) => {
               const a = el.querySelector('a');
-              const index = a.dataset['index'];
+              const index = parseInt(a.dataset['index']);
+
+              if (index === selectedIndex) {
+                  return;
+              }
+
               selectUiCaption.innerText = e.target.innerText;
-              selectUl.classList.toggle('visually-hidden');
+              toggleSelectBox();
               buttons.forEach(el => {
                   el.removeAttribute('disabled');
               });
               buttons[index].click();
               buttons[index].setAttribute('disabled', 'disabled');
               selectUiCaption.innerText = e.target.innerText
+              selectedIndex = index;
           });
       });
 
-      buttons?.forEach((button) => {
+      buttons?.forEach((button, index) => {
           if (!button.classList.contains('collapsed')) {
               button.setAttribute('disabled', 'disabled');
               button.setAttribute('aria-expanded', 'true');
           }
           button.addEventListener('click', (e) => {
+              selectedIndex = index;
               buttons.forEach(el => {
                   el.removeAttribute('disabled');
               });
@@ -520,7 +534,12 @@ document.addEventListener("DOMContentLoaded", () => {
               }
           });
       });
-  })
+
+      function toggleSelectBox() {
+          selectUl?.classList.toggle('visually-hidden');
+          selectUiIcon.classList.toggle('open');
+      }
+  });
 
 
   const setConsecutiveNumbering = () => {

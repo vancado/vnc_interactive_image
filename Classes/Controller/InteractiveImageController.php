@@ -5,7 +5,6 @@ namespace Vancado\VncInteractiveImage\Controller;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use Vancado\VncInteractiveImage\Domain\Repository\InteractiveImageRepository;
 use Vancado\VncInteractiveImage\Domain\Model\InteractiveImage;
 use Psr\Http\Message\ResponseInterface;

@@ -190,11 +190,13 @@
 .vncInteractiveImage .content-box {
   background: #F4F4F4;
   border-radius: 0;
-  padding: 1rem;
   width: 100%;
   height: auto;
   box-sizing: border-box;
   margin-top: 20px;
+}
+.vncInteractiveImage .content-box .info-item {
+  padding: 1rem;
 }
 .vncInteractiveImage .content-box__info {
   width: 100%;

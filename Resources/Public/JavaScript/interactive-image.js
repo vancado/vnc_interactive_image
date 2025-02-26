@@ -477,6 +477,33 @@ document.addEventListener("DOMContentLoaded", () => {
             const dy = touch2.pageY - touch1.pageY;
             return Math.sqrt(dx * dx + dy * dy);
         };
+
+        // Change image cutout for resized images (height <= 512px)
+        const setImageCutOut = function() {
+            const cutOut = vncInteractiveImage.dataset['cutOut'];
+            if (cutOut === undefined || cutOut === 'false') {
+                return;
+            }
+
+            const interactiveImageContainer = image.closest('.vncInteractiveImageContainer');
+            const rearrange = function() {
+                const containerWidth = interactiveImageContainer.scrollWidth;
+                const imgWidth = parseInt(image.getAttribute('width'));
+                const imgHeight = parseInt(image.getAttribute('height'));
+
+                const ratio = containerWidth / imgWidth;
+                const calcedHeight = imgHeight * ratio;
+
+                if (calcedHeight <= 512) {
+                    image.classList.add('mobile');
+                } else {
+                    image.classList.remove('mobile');
+                }
+            }
+            window.addEventListener('resize', rearrange);
+            rearrange();
+        };
+        setImageCutOut();
     });
 
     vncInteractiveImageContainers.forEach(vncInteractiveImageContainer => {
@@ -550,7 +577,6 @@ document.addEventListener("DOMContentLoaded", () => {
             selectUiIcon.classList.toggle('open');
         }
     });
-
 
     const setConsecutiveNumbering = () => {
         vncInteractiveImageContainers.forEach((interactiveImageContainer) => {

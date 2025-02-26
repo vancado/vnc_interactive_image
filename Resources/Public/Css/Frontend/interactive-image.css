@@ -75,6 +75,12 @@
 .vncInteractiveImage .image-container img {
   width: 100%;
 }
+.vncInteractiveImage .image-container img.mobile {
+  min-height: 512px;
+  height: 512px;
+  width: auto;
+  max-width: none;
+}
 .vncInteractiveImage .image-container.panning {
   cursor: grabbing;
 }

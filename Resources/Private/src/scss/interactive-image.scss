@@ -428,6 +428,114 @@ $font-size-button: 14px;
         min-height: auto;
     }
 
+    &[data-layout="popover"] {
+        .content-box {
+            &__info {
+                display: none!important;
+            }
+
+            &__nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .content-box {
+                p {
+                    font-size: 16px;
+                }
+
+                .content-box__image {
+                    max-height: 13rem;
+                }
+
+                &__info {
+                    display: none!important;
+
+                    .mark-icon {
+                        width: 42px;
+                        height: 42px;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .content-box {
+                p {
+                    font-size: 16px;
+                }
+
+                .content-box__image {
+                    max-height: 13rem;
+                }
+
+                &__info {
+                    display: flex!important;
+
+                    .mark-icon {
+                        width: 42px;
+                        height: 42px;
+                    }
+                }
+
+                &__popover {
+                    display: none!important;
+                }
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .content-box {
+                p {
+                    font-size: 16px;
+                }
+
+                .content-box__image {
+                    max-height: 13rem;
+                }
+
+                &__info {
+                    display: flex!important;
+
+                    .mark-icon {
+                        width: 42px;
+                        height: 42px;
+                    }
+                }
+
+                &__popover {
+                    display: none!important;
+                }
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .content-box {
+                p {
+                    font-size: 16px;
+                }
+
+                .content-box__image {
+                    max-height: 13rem;
+                }
+
+                &__info {
+                    display: flex!important;
+
+                    .mark-icon {
+                        width: 42px;
+                        height: 42px;
+                    }
+                }
+
+                &__popover {
+                    display: none!important;
+                }
+            }
+        }
+    }
+
     @media (min-width: 992px) {
         .content-box__info {
             margin-top: 0;

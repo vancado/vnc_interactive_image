@@ -9,7 +9,7 @@
             <f:variable name="layout">{interactiveImage.txVncinteractiveimageLayout}</f:variable>
             <f:variable name="showZoom">{interactiveImage.txVncinteractiveimageShowZoom}</f:variable>
 
-            <div class="vncInteractiveImage" data-show-zoom="{showZoom}">
+            <div class="vncInteractiveImage" data-show-zoom="{showZoom}" data-layout="{layout}">
                 <f:comment>
                     <f:if condition="{interactiveImage.txVncinteractiveimageName}">
                         <div class="row heading-block border-bottom-0 mb-2">
@@ -62,6 +62,13 @@
                                 <f:render
                                         partial="MarksContainer"
                                         arguments="{interactiveImage: interactiveImage, layout: layout}"
+                                />
+                            </div>
+                            <div class="col-12 mt-3">
+                                <!-- Render Info Box -->
+                                <f:render
+                                    partial="InfoBox"
+                                    arguments="{interactiveImage: interactiveImage}"
                                 />
                             </div>
                         </div>

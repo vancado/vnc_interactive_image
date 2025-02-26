@@ -318,6 +318,81 @@
 .vncInteractiveImage .info-item {
   min-height: auto;
 }
+.vncInteractiveImage[data-layout=popover] .content-box__info {
+  display: none !important;
+}
+.vncInteractiveImage[data-layout=popover] .content-box__nav {
+  display: none;
+}
+@media (max-width: 1200px) {
+  .vncInteractiveImage[data-layout=popover] .content-box p {
+    font-size: 16px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
+    max-height: 13rem;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info {
+    display: none !important;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info .mark-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
+@media (max-width: 991.98px) {
+  .vncInteractiveImage[data-layout=popover] .content-box p {
+    font-size: 16px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
+    max-height: 13rem;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info {
+    display: flex !important;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info .mark-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__popover {
+    display: none !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .vncInteractiveImage[data-layout=popover] .content-box p {
+    font-size: 16px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
+    max-height: 13rem;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info {
+    display: flex !important;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info .mark-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__popover {
+    display: none !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .vncInteractiveImage[data-layout=popover] .content-box p {
+    font-size: 16px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
+    max-height: 13rem;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info {
+    display: flex !important;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__info .mark-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .vncInteractiveImage[data-layout=popover] .content-box__popover {
+    display: none !important;
+  }
+}
 @media (min-width: 992px) {
   .vncInteractiveImage .content-box__info {
     margin-top: 0;

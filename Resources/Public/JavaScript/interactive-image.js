@@ -486,6 +486,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const interactiveImageContainer = image.closest('.vncInteractiveImageContainer');
+            if (!interactiveImageContainer) {
+                return;
+            }
+
             const rearrange = function() {
                 const containerWidth = interactiveImageContainer.scrollWidth;
                 const imgWidth = parseInt(image.getAttribute('width'));
@@ -509,6 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
     vncInteractiveImageContainers.forEach(vncInteractiveImageContainer => {
         const select = vncInteractiveImageContainer.querySelector('select');
 
+        console.log(select);
         if (!select) {
             return;
         }

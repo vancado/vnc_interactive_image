@@ -513,7 +513,6 @@ document.addEventListener("DOMContentLoaded", () => {
     vncInteractiveImageContainers.forEach(vncInteractiveImageContainer => {
         const select = vncInteractiveImageContainer.querySelector('select');
 
-        console.log(select);
         if (!select) {
             return;
         }

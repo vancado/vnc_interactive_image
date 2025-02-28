@@ -486,6 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const interactiveImageContainer = image.closest('.vncInteractiveImageContainer');
+            const imageContainer = image.closest('.image-container');
             if (!interactiveImageContainer) {
                 return;
             }
@@ -500,8 +501,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (calcedHeight <= 512) {
                     image.classList.add('mobile');
+                    imageContainer.classList.add('overflow-x');
                 } else {
                     image.classList.remove('mobile');
+                    imageContainer.classList.remove('overflow-x');
                 }
             }
             window.addEventListener('resize', rearrange);

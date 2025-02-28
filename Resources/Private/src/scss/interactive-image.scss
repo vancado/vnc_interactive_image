@@ -132,6 +132,10 @@ $font-size-button: 14px;
         height: auto;
         z-index: 1;
 
+        &.overflow-x {
+            overflow-x: auto;
+        }
+
         img {
             width: 100%;
 

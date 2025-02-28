@@ -1,46 +1,48 @@
 <div
-  class="content-box content-box__popover px-4"
-  data-variant="information-box"
-  id="info-{interactiveImage.uid}-{mark.uid}">
-  <div class="row">
-    <div class="d-flex mt-lg-1 align-items-center">
-      <f:render
-        partial="MarkIcon"
-        arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator, context: 'popover'}" />
-      <p class="col-auto mx-4 fw-bold">
-        <f:format.stripTags>{mark.title}</f:format.stripTags>
-      </p>
-      <i class="content-box__close">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M24.8 9.4L23.4 8L16.4 15L9.4 8L8 9.4L15 16.4L8 23.4L9.4 24.8L16.4 17.8L23.4 24.8L24.8 23.4L17.8 16.4L24.8 9.4Z"
-            fill="black" />
-        </svg>
-      </i>
+    class="content-box content-box__popover px-4"
+    data-variant="information-box"
+    id="info-{interactiveImage.uid}-{mark.uid}">
+    <div class="row position-relative">
+        <div class="d-flex mt-lg-1 align-items-center">
+            <f:render
+                partial="MarkIcon"
+                arguments="{interactiveImage: interactiveImage, mark: mark, iterator: iterator, context: 'popover'}"/>
+            <h3 class="col-auto mx-4 fw-bold">
+                <f:format.stripTags>{mark.title}</f:format.stripTags>
+            </h3>
+            <i class="content-box__close">
+                <a href="#" aria-label="Schlie&szlig;en">
+                    <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M24.8 9.4L23.4 8L16.4 15L9.4 8L8 9.4L15 16.4L8 23.4L9.4 24.8L16.4 17.8L23.4 24.8L24.8 23.4L17.8 16.4L24.8 9.4Z"
+                            fill="black"/>
+                    </svg>
+                </a>
+            </i>
+        </div>
     </div>
-  </div>
-  <div class="mt-1 mt-md-2 mt-lg-3">
-    <f:if condition="{mark.image}">
-      <f:then>
-        <f:image
-          class="content-box__image"
-          image="{mark.image}" />
-      </f:then>
+    <div class="mt-1 mt-md-2 mt-lg-3">
+        <f:if condition="{mark.image}">
+            <f:then>
+                <f:image
+                    class="content-box__image"
+                    image="{mark.image}"/>
+            </f:then>
+        </f:if>
+    </div>
+    <div class="mt-1 mt-md-2 mt-lg-3 text-start">
+        <f:format.raw>{mark.bodytext}</f:format.raw>
+    </div>
+    <f:if condition="{mark.link}">
+        <div class="mt-1 mt-md-3 mt-lg-4 align-items-end">
+            <f:link.typolink parameter="{mark.link}" class="content-box__link">
+                Mehr erfahren
+            </f:link.typolink>
+        </div>
     </f:if>
-  </div>
-  <div class="mt-1 mt-md-2 mt-lg-3">
-    <f:format.raw>{mark.bodytext}</f:format.raw>
-  </div>
-  <f:if condition="{mark.link}">
-    <div class="mt-1 mt-md-3 mt-lg-4 align-items-end">
-      <f:link.typolink parameter="{mark.link}" class="content-box__link">
-        Mehr erfahren
-      </f:link.typolink>
-    </div>
-  </f:if>
 </div>

@@ -187,6 +187,13 @@ $font-size-button: 14px;
                 background-color: darken(black, 10%);
             }
 
+            &:active,
+            &:focus,
+            &:focus-visible {
+                outline: 0.125rem solid var(--bs-highlight-color);
+                outline-offset: 0.125rem;
+            }
+
             i {
                 font-size: 16px;
             }
@@ -243,6 +250,23 @@ $font-size-button: 14px;
         background-color: transparent;
         cursor: pointer;
 
+        /*
+        span {
+            width: 0;
+            height: 0;
+            color: transparent;
+            overflow: hidden;
+        }
+
+         */
+
+        &:active,
+        &:focus-visible,
+        &:focus {
+            outline: .125rem solid var(--bs-highlight-color);
+            outline-offset: .125rem;
+        }
+
         &-icon {
             width: $mark-icon-size-default;
             height: $mark-icon-size-default;
@@ -286,6 +310,10 @@ $font-size-button: 14px;
         height: auto;
         box-sizing: border-box;
         margin-top: 20px;
+
+        h3 {
+            font-size: 1.75rem;
+        }
 
         .info-item {
             padding: 1rem;
@@ -335,7 +363,6 @@ $font-size-button: 14px;
         }
 
         &__text {
-            // font-family: Roboto;
             font-size: 18px;
             font-style: normal;
             font-weight: 700;
@@ -349,7 +376,6 @@ $font-size-button: 14px;
             max-height: 13rem;
             aspect-ratio: 16 / 9;
             object-fit: cover;
-            // border-radius: 4px;
         }
 
         &__link {
@@ -375,6 +401,15 @@ $font-size-button: 14px;
             gap: 24px;
             flex-shrink: 0;
 
+            button {
+                &:active,
+                &:focus,
+                &:focus-visible {
+                    outline: 0.125rem solid var(--bs-highlight-color);
+                    outline-offset: 0.125rem;
+                }
+            }
+
             .nav-points {
                 display: flex;
                 align-items: center;
@@ -387,6 +422,13 @@ $font-size-button: 14px;
                     background-color: $nav-color;
                     margin: 0 5px;
                     cursor: pointer;
+
+                    &:active,
+                    &:focus,
+                    &:focus-visible {
+                        outline: 0.125rem solid var(--bs-highlight-color);
+                        outline-offset: 0.125rem;
+                    }
 
                     &.active {
                         scale: 1.4;
@@ -429,6 +471,21 @@ $font-size-button: 14px;
             z-index: 10;
             padding: 12px 1rem 1rem 1rem;
             transition: transform 0.2s ease-in-out;
+
+            a {
+                width: 32px;
+                height: 42px;
+                position: absolute;
+                left: 0;
+                top: 0;
+
+                &:active,
+                &:focus,
+                &:focus-visible {
+                    outline: 0.125rem solid var(--bs-highlight-color);
+                    outline-offset: 0.125rem;
+                }
+            }
         }
     }
 
@@ -455,10 +512,6 @@ $font-size-button: 14px;
 
         @media (max-width: 1200px) {
             .content-box {
-                p {
-                    font-size: 16px;
-                }
-
                 .content-box__image {
                     max-height: 13rem;
                 }
@@ -476,10 +529,6 @@ $font-size-button: 14px;
 
         @media (max-width: 991.98px) {
             .content-box {
-                p {
-                    font-size: 16px;
-                }
-
                 .content-box__image {
                     max-height: 13rem;
                 }
@@ -501,10 +550,6 @@ $font-size-button: 14px;
 
         @media (max-width: 767.98px) {
             .content-box {
-                p {
-                    font-size: 16px;
-                }
-
                 .content-box__image {
                     max-height: 13rem;
                 }
@@ -526,10 +571,6 @@ $font-size-button: 14px;
 
         @media (max-width: 575.98px) {
             .content-box {
-                p {
-                    font-size: 16px;
-                }
-
                 .content-box__image {
                     max-height: 13rem;
                 }
@@ -562,14 +603,6 @@ $font-size-button: 14px;
                 &__image {
                     object-fit: scale-down;
                 }
-            }
-
-            p {
-                font-size: 14px;
-            }
-
-            &__text {
-                font-size: 14px;
             }
 
             &__image {
@@ -619,14 +652,6 @@ $font-size-button: 14px;
                 bottom: 0%;
             }
 
-            p {
-                font-size: 14px;
-            }
-
-            &__text {
-                font-size: 14px;
-            }
-
             &__image {
                 max-height: 6rem;
             }
@@ -658,14 +683,6 @@ $font-size-button: 14px;
                 height: auto;
                 max-height: 100%;
                 bottom: 0%;
-            }
-
-            p {
-                font-size: 12px;
-            }
-
-            &__text {
-                font-size: 14px;
             }
 
             &__image {
@@ -716,14 +733,6 @@ $font-size-button: 14px;
                 height: auto;
                 max-height: 100%;
                 bottom: 0%;
-            }
-
-            p {
-                font-size: 11px;
-            }
-
-            &__text {
-                font-size: 12px;
             }
 
             &__image {

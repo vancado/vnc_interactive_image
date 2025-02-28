@@ -52,9 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
             navPointsContainer.innerHTML = "";
 
             infoItems.forEach((_, index) => {
-                const point = document.createElement("div");
+                const point = document.createElement("button");
                 point.classList.add("nav-point");
                 point.dataset.index = index;
+                point.setAttribute('aria-label', `Beschreibung für ${index+1}. Markierung`);
 
                 point.addEventListener("click", () => {
                     currentIndex = index;
@@ -297,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 zoomControls.style.bottom = zoomControlsOriginalPosition[1];
                 zoomControls.style.marginRight = Math.round((-1) * parseFloat(imageContainer.scrollLeft), 2) + 'px';
                 zoomControls.style.marginBottom = Math.round((-1) * parseFloat(imageContainer.scrollTop), 2) + 'px';
-                imageContainer.prepend(zoomControls);
+                imageContainer.append(zoomControls);
             }
         };
 

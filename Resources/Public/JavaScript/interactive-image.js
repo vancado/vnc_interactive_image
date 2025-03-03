@@ -600,8 +600,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const popOverInfoBoxMarks = interactiveImage.querySelectorAll('div > div > .content-box__info .mark-icon--number');
                 const infoBoxMarks = interactiveImage.querySelectorAll('.container > div > div > .content-box .mark-icon--number');
 
-                console.log(popOverInfoBoxMarks);
-
                 for (let i = 0; i < marks.length; i++) {
                     if (marks[i]) {
                         if (marks[i].childNodes.length === 1) {

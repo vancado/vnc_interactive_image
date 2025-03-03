@@ -595,9 +595,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let number = 1;
             interactiveImageContainer.querySelectorAll('.vncInteractiveImage')?.forEach((interactiveImage) => {
-                const marks = interactiveImage.querySelectorAll('.image-container .marks-container > .mark > div > .mark-icon--number');
+                const marks = interactiveImage.querySelectorAll('.image-container .marks-container > .mark > p.mark-icon--number');
                 const popOverMarks = interactiveImage.querySelectorAll('.image-container .marks-container .mark > .content-box .mark-icon--number');
+                const popOverInfoBoxMarks = interactiveImage.querySelectorAll('div > div > .content-box__info .mark-icon--number');
                 const infoBoxMarks = interactiveImage.querySelectorAll('.container > div > div > .content-box .mark-icon--number');
+
+                console.log(popOverInfoBoxMarks);
 
                 for (let i = 0; i < marks.length; i++) {
                     if (marks[i]) {
@@ -612,6 +615,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             popOverMarks[i].innerHTML = number;
                         } else {
                             popOverMarks[i].childNodes[popOverMarks[i].childNodes.length - 1].data = number;
+                        }
+                    }
+                    if (popOverInfoBoxMarks[i]) {
+                        if (popOverInfoBoxMarks[i].childNodes.length === 1) {
+                            popOverInfoBoxMarks[i].innerHTML = number;
+                        } else {
+                            popOverInfoBoxMarks[i].childNodes[popOverMarks[i].childNodes.length - 1].data = number;
                         }
                     }
                     if (infoBoxMarks[i]) {

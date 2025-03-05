@@ -344,3 +344,63 @@ Related: #VAWS-64
 
 ---
 
+## 2025-02-18 - Version 12.7.15
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.14...12.7.15
+
+---
+
+## 2025-02-19 - Version 12.7.16
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.15...12.7.16
+
+---
+
+## 2025-02-20 - Version 12.7.18
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.17...12.7.18
+
+---
+
+## 2025-02-26 - Version 12.7.19
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.18...12.7.19
+
+---
+
+## 2025-02-26 - Version 12.7.20
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.19...12.7.20
+
+---
+
+## 2025-02-26 - Version 12.7.21
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.20...12.7.21
+
+---
+
+## 2025-02-26 - Version 12.7.21
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.20...12.7.21
+
+---
+
+## 2025-02-28 - Version 12.7.22
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.21...12.7.22
+
+---
+
+## 2025-03-03 - Version 12.7.24
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.23...12.7.24
+
+---
+
+## 2025-03-05 - Version 12.7.25
+### Release Notes
+**Full Changelog**: https://github.com/vancado/vnc_interactive_image/compare/12.7.24...12.7.25
+
+---
+

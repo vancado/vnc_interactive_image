@@ -452,7 +452,7 @@ call_user_func(function () {
             ],
             'behaviour' => [
                 'sortable' => 'sorting'
-            ]
+            ],
         ]
     ];
 

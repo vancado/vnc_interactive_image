@@ -45,7 +45,11 @@
                                          id="vncInteractiveImageContainer-{data.uid}"
                                          data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
                                     >
-                                        <div id="carousel-{data.uid}" class="carousel slide" data-bs-ride="carousel">
+                                        <div id="carousel-{data.uid}"
+                                             class="carousel carousel-interactive-image slide"
+                                             data-bs-interval="false"
+                                             data-bs-touch="false"
+                                        >
                                             <div class="carousel-indicators">
                                                 <f:for each="{children_200}" as="record" iteration="iterator">
                                                     <button type="button"
@@ -138,7 +142,11 @@
                      id="vncInteractiveImageContainer-{data.uid}"
                      data-consecutive-numbering="{data.tx_vncinteractiveimage_container_consecutive_numbering}"
                 >
-                    <div id="carousel-{data.uid}" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carousel-{data.uid}"
+                         class="carousel carousel-interactive-image slide"
+                         data-bs-interval="false"
+                         data-bs-touch="false"
+                    >
                         <div class="carousel-indicators">
                             <f:for each="{children_200}" as="record" iteration="iterator">
                                 <button type="button"

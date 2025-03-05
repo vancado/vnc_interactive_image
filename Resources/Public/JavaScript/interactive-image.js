@@ -514,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setImageCutOut();
     });
 
-    vncInteractiveImageContainers.forEach(vncInteractiveImageContainer => {
+    vncInteractiveImageContainers.forEach((vncInteractiveImageContainer, vncIndex) => {
         const select = vncInteractiveImageContainer.querySelector('select');
 
         if (!select) {
@@ -522,6 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const selectUi = select.nextElementSibling;
+        const selectButton = selectUi.querySelector('button');
         const selectUiCaption = selectUi?.querySelector('.caption');
         const selectUiIcon = selectUi?.querySelector('.svg-icon');
         const selectUl = vncInteractiveImageContainer.querySelector('ul.dropdown-menu');
@@ -584,6 +585,10 @@ document.addEventListener("DOMContentLoaded", () => {
             selectUl?.classList.toggle('visually-hidden');
             selectUiIcon.classList.toggle('open');
         }
+
+        selectButton.addEventListener('keypress', (e) => {
+            toggleSelectBox();
+        });
     });
 
     const setConsecutiveNumbering = () => {

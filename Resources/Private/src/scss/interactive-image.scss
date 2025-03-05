@@ -107,6 +107,13 @@ $font-size-button: 14px;
             transform: rotate3d(0, 0, 1, 180deg);
         }
     }
+
+    ul,
+    ol {
+        &.dropdown-menu {
+            padding-left: 0!important;
+        }
+    }
 }
 
 .vncInteractiveImage {

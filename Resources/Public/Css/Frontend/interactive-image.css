@@ -52,6 +52,10 @@
 .vncInteractiveImageContainer .svg-icon.open {
   transform: rotate3d(0, 0, 1, 180deg);
 }
+.vncInteractiveImageContainer ul.dropdown-menu,
+.vncInteractiveImageContainer ol.dropdown-menu {
+  padding-left: 0 !important;
+}
 
 .vncInteractiveImage a {
   text-decoration: none;

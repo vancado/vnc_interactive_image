@@ -627,7 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (popOverInfoBoxMarks[i].childNodes.length === 1) {
                             popOverInfoBoxMarks[i].innerHTML = number;
                         } else {
-                            popOverInfoBoxMarks[i].childNodes[popOverMarks[i].childNodes.length - 1].data = number;
+                            popOverInfoBoxMarks[i].childNodes[popOverInfoBoxMarks[i].childNodes.length - 1].data = number;
                         }
                     }
                     if (infoBoxMarks[i]) {

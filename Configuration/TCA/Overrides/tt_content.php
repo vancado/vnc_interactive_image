@@ -111,6 +111,23 @@ function getConfigForVncInteractiveImageImage(): array
                         ]
                     ],
                     'link' => [
+                        'displayCond' => 'FIELD:sys_language_uid:=:1000',
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'boxalign' => [
+                        'displayCond' => 'FIELD:sys_language_uid:=:1000',
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'boxtext' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'boxtitle' => [
                         'config' => [
                             'type' => 'passthrough',
                         ]
@@ -122,6 +139,7 @@ function getConfigForVncInteractiveImageImage(): array
                     ],
                     'crop' => [
                         'config' => [
+                            'type' => 'imageManipulation',
                             'cropVariants' => [
                                 'default' => [
                                     'title' => 'Default',
@@ -167,7 +185,14 @@ function getConfigForVncInteractiveImageImage(): array
                                 ],
                             ],
                         ]
-                    ]
+                    ],
+                ],
+                'types' => [
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                        'showitem' => '
+                            --palette--;;imageoverlayPalette,
+                            --palette--;;filePalette',
+                    ],
                 ]
             ],
         ], 'jpg,jpeg,png,svg');
@@ -246,50 +271,7 @@ function getConfigForVncInteractiveImageIcon(): array{
                     ],
                     'crop' => [
                         'config' => [
-                            'cropVariants' => [
-                                'default' => [
-                                    'title' => 'Default',
-                                    'disabled' => false,
-                                    'allowedAspectRatios' => [
-                                        '3:1' => [
-                                            'title' => 'Ultraweit 3:1',
-                                            'value' => 3.0
-                                        ],
-                                        '5:2' => [
-                                            'title' => 'Weit 5:2',
-                                            'value' => 2.5
-                                        ],
-                                        '2:0' => [
-                                            'title' => 'Univisium 2:1',
-                                            'value' => 2.0
-                                        ],
-                                        '16:9' => [
-                                            'title' => '16:9 Breitbild',
-                                            'value' => 1.77
-                                        ],
-                                        '2:3' => [
-                                            'title' => '2:3 Hochkant',
-                                            'value' => 0.66
-                                        ],
-                                        '4:3' => [
-                                            'title' => '4:3 Klassischer Fernseher',
-                                            'value' => 1.33
-                                        ],
-                                        '5:4' => [
-                                            'title' => '5:4 klassisches Monitorformat',
-                                            'value' => 1.25
-                                        ],
-                                        '1:1' => [
-                                            'title' => '1:1 Quadrat',
-                                            'value' => 1.0
-                                        ],
-                                        'NaN' => [
-                                            'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
-                                            'value' => 0.0
-                                        ],
-                                    ]
-                                ],
-                            ],
+                            'type' => 'passthrough',
                         ]
                     ]
                 ]

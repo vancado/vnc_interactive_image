@@ -1,9 +1,9 @@
-define(['TYPO3/CMS/Core/DocumentService'], function(DocumentService) {
+define(['TYPO3/CMS/Core/DocumentService', 'bootstrap'], function(DocumentService, bootstrap) {
     var SetMarkerUIModule = {
     };
 
+    window.bootstrap = bootstrap;
     SetMarkerUIModule.init = function() {
-        console.log('init');
         window.VncSetMarkerUi = new SetMarkerUi();
     };
 
@@ -382,8 +382,7 @@ class SetMarkerUi
             await this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
         })
 
-        /*
-        const popover = new Popover(marker, {
+        const popover = new window.bootstrap.Popover(marker, {
             content: function() {
                 return marker.dataset['markBodytext']
             },
@@ -393,8 +392,6 @@ class SetMarkerUi
             },
             trigger: 'hover focus',
         })
-
-         */
     }
 }
 

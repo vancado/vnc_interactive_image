@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = vncInteractiveImage.querySelector(".container[data-layout]");
         const marksContainer = vncInteractiveImage.querySelector(".marks-container");
         const layout = container ? container.dataset.layout : "popover";
+        const scrollIntoView = vncInteractiveImage?.dataset.scrollIntoView;
         const showZoom = vncInteractiveImage?.dataset.showZoom;
         const image = vncInteractiveImage.querySelector(".img-fluid");
         const infoItems = vncInteractiveImage.querySelectorAll(".info-item");
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 item.classList = index === currentIndex ? "info-item d-flex flex-column flex-grow-1" : "d-none";
                 item.classList.toggle("active", index === currentIndex);
 
-                if (index === currentIndex) {
+                if (index === currentIndex && scrollIntoView === 'true') {
                     item.scrollIntoView();
                 }
 
@@ -356,7 +357,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.removeEventListener("keydown", handleFullscreenZoom);
                 marksContainer.style.position = "static";
                 marksContainer.style.height = "100%";
-                imageContainer.scrollIntoView();
+                if (scrollIntoView === 'true') {
+                    imageContainer.scrollIntoView();
+                }
             }
             updateZoomControls();
             updateMarkers();

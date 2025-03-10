@@ -271,7 +271,6 @@
 .vncInteractiveImage .content-box__image {
   width: 100%;
   height: auto;
-  max-height: 13rem;
   aspect-ratio: 16/9;
   object-fit: cover;
 }
@@ -379,9 +378,6 @@
   display: none;
 }
 @media (max-width: 1200px) {
-  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
-    max-height: 13rem;
-  }
   .vncInteractiveImage[data-layout=popover] .content-box__info {
     display: none !important;
   }
@@ -391,9 +387,6 @@
   }
 }
 @media (max-width: 991.98px) {
-  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
-    max-height: 13rem;
-  }
   .vncInteractiveImage[data-layout=popover] .content-box__info {
     display: flex !important;
   }
@@ -406,9 +399,6 @@
   }
 }
 @media (max-width: 767.98px) {
-  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
-    max-height: 13rem;
-  }
   .vncInteractiveImage[data-layout=popover] .content-box__info {
     display: flex !important;
   }
@@ -421,9 +411,6 @@
   }
 }
 @media (max-width: 575.98px) {
-  .vncInteractiveImage[data-layout=popover] .content-box .content-box__image {
-    max-height: 13rem;
-  }
   .vncInteractiveImage[data-layout=popover] .content-box__info {
     display: flex !important;
   }
@@ -443,9 +430,6 @@
 @media (max-width: 1200px) {
   .vncInteractiveImage .content-box__popover__image {
     object-fit: scale-down;
-  }
-  .vncInteractiveImage .content-box__image {
-    max-height: 6rem;
   }
   .vncInteractiveImage .content-box__link {
     padding: 0.8em;
@@ -476,9 +460,6 @@
     max-height: 100%;
     bottom: 0%;
   }
-  .vncInteractiveImage .content-box__image {
-    max-height: 6rem;
-  }
   .vncInteractiveImage .content-box__link {
     padding: 0.8em;
     font-size: 14px;
@@ -500,9 +481,6 @@
     height: auto;
     max-height: 100%;
     bottom: 0%;
-  }
-  .vncInteractiveImage .content-box__image {
-    max-height: 3rem;
   }
   .vncInteractiveImage .content-box__link {
     padding: 0.8em;
@@ -537,9 +515,6 @@
     height: auto;
     max-height: 100%;
     bottom: 0%;
-  }
-  .vncInteractiveImage .content-box__image {
-    max-height: 2rem;
   }
   .vncInteractiveImage .content-box__link {
     padding: 0.6em;

@@ -380,7 +380,6 @@ $font-size-button: 14px;
         &__image {
             width: 100%;
             height: auto;
-            max-height: 13rem;
             aspect-ratio: 16 / 9;
             object-fit: cover;
         }
@@ -519,10 +518,6 @@ $font-size-button: 14px;
 
         @media (max-width: 1200px) {
             .content-box {
-                .content-box__image {
-                    max-height: 13rem;
-                }
-
                 &__info {
                     display: none!important;
 
@@ -536,10 +531,6 @@ $font-size-button: 14px;
 
         @media (max-width: 991.98px) {
             .content-box {
-                .content-box__image {
-                    max-height: 13rem;
-                }
-
                 &__info {
                     display: flex!important;
 
@@ -557,10 +548,6 @@ $font-size-button: 14px;
 
         @media (max-width: 767.98px) {
             .content-box {
-                .content-box__image {
-                    max-height: 13rem;
-                }
-
                 &__info {
                     display: flex!important;
 
@@ -578,10 +565,6 @@ $font-size-button: 14px;
 
         @media (max-width: 575.98px) {
             .content-box {
-                .content-box__image {
-                    max-height: 13rem;
-                }
-
                 &__info {
                     display: flex!important;
 
@@ -610,10 +593,6 @@ $font-size-button: 14px;
                 &__image {
                     object-fit: scale-down;
                 }
-            }
-
-            &__image {
-                max-height: 6rem;
             }
 
             &__link {
@@ -659,10 +638,6 @@ $font-size-button: 14px;
                 bottom: 0%;
             }
 
-            &__image {
-                max-height: 6rem;
-            }
-
             &__link {
                 padding: 0.8em;
                 font-size: 14px;
@@ -690,10 +665,6 @@ $font-size-button: 14px;
                 height: auto;
                 max-height: 100%;
                 bottom: 0%;
-            }
-
-            &__image {
-                max-height: 3rem;
             }
 
             &__link {
@@ -740,10 +711,6 @@ $font-size-button: 14px;
                 height: auto;
                 max-height: 100%;
                 bottom: 0%;
-            }
-
-            &__image {
-                max-height: 2rem;
             }
 
             &__link {

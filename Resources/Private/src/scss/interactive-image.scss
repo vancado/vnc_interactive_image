@@ -194,8 +194,6 @@ $font-size-button: 14px;
                 background-color: darken(black, 10%);
             }
 
-            &:active,
-            &:focus,
             &:focus-visible {
                 outline: 0.125rem solid var(--bs-highlight-color);
                 outline-offset: 0.125rem;
@@ -267,9 +265,7 @@ $font-size-button: 14px;
 
          */
 
-        &:active,
-        &:focus-visible,
-        &:focus {
+        &:focus-visible {
             outline: .125rem solid var(--bs-highlight-color);
             outline-offset: .125rem;
         }
@@ -408,8 +404,6 @@ $font-size-button: 14px;
             flex-shrink: 0;
 
             button {
-                &:active,
-                &:focus,
                 &:focus-visible {
                     outline: 0.125rem solid var(--bs-highlight-color);
                     outline-offset: 0.125rem;
@@ -429,8 +423,6 @@ $font-size-button: 14px;
                     margin: 0 5px;
                     cursor: pointer;
 
-                    &:active,
-                    &:focus,
                     &:focus-visible {
                         outline: 0.125rem solid var(--bs-highlight-color);
                         outline-offset: 0.125rem;
@@ -485,8 +477,6 @@ $font-size-button: 14px;
                 left: 0;
                 top: 0;
 
-                &:active,
-                &:focus,
                 &:focus-visible {
                     outline: 0.125rem solid var(--bs-highlight-color);
                     outline-offset: 0.125rem;

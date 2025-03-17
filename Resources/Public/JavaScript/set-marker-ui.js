@@ -11,6 +11,9 @@ class SetMarkerUi
 
     intervalRemoveMarker = null
 
+    layerX = 0
+    layerY = 0
+
     map = null;
 
     cssSelectors = {
@@ -32,6 +35,11 @@ class SetMarkerUi
 
         window.addEventListener('resize', () => {
             this.setPositionsOfAllMarkers()
+        })
+
+        this.map?.addEventListener('drop', (e) => {
+            this.layerX = e.offsetX
+            this.layerY = e.offsetY
         })
 
         // click on map creates a new marker on map and in irre panel
@@ -360,10 +368,8 @@ class SetMarkerUi
         })
 
         marker.addEventListener('dragend', async (e) => {
-            const X = parseFloat(this.markers[uid].x)
-            const Y = parseFloat(this.markers[uid].y)
-            const xPercentage = X + parseFloat(parseFloat((e.offsetX - 20) / map.offsetWidth).toFixed(4))
-            const yPercentage = (Y + parseFloat(parseFloat((e.offsetY - 20) / map.offsetHeight).toFixed(4))).toFixed(4)
+            const xPercentage = (this.layerX / map.offsetWidth).toFixed(4)
+            const yPercentage = (this.layerY / map.offsetHeight).toFixed(4)
 
             await this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
         })

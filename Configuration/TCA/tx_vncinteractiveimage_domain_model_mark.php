@@ -40,7 +40,40 @@ function getNumberField(): array
 function getConfigForVncInteractiveImageMarkIcon(): array{
     $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
 
-    if ($typo3Version->getMajorVersion() >= 12) {
+    if ($typo3Version->getMajorVersion() >= 13) {
+        return [
+            'type' => 'file',
+            'overrideChildTca' => [
+                'columns' => [
+                    'description' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'alternative' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'link' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'title' => [
+                        'config' => [
+                            'type' => 'passthrough',
+                        ]
+                    ],
+                    'crop' => [
+                        'config' => [
+                            'type' => 'passthrough'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    } elseif ($typo3Version->getMajorVersion() >= 12) {
         return \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon', [
             'overrideChildTca' => [
                 'columns' => [
@@ -317,6 +350,9 @@ return [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
+        ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
         ],
         'sortby' => 'sorting',
         'default_sortby' => 'ORDER BY sorting',

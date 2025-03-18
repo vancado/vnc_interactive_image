@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Service\ImageService;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use Vancado\VncInteractiveImage\Domain\Model\InteractiveImage;
 use Vancado\VncInteractiveImage\Domain\Model\Mark;
@@ -30,7 +31,9 @@ class SetMarker extends AbstractFormElement
      */
     public function __construct(NodeFactory $nodeFactory, array $data = [])
     {
-        parent::__construct($nodeFactory, $data);
+        if (method_exists(AbstractFormElement::class, '__construct')) {
+            parent::__construct($nodeFactory, $data);
+        }
         $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
     }
 
@@ -172,6 +175,10 @@ class SetMarker extends AbstractFormElement
         }
 
         $html = [];
+        $versionInformation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class);
+        if ($versionInformation->getMajorVersion() > 12) {
+            $html[] = $this->renderLabel($fieldId);
+        }
         $html[] = '<div class="formengine-field-item t3js-formengine-field-item">';
         $html[] = $fieldInformationHtml;
         $html[] = '<div class="form-wizards-wrap">';

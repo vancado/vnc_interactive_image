@@ -14,21 +14,24 @@ call_user_func(function () {
         'Configuration/TypoScript',
         'VNC Interactive Image'
     );
-    ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_vncinteractiveimage_domain_model_interactiveimage',
-        'EXT:vnc_interactive_image/Resources/Private/Language/locallang_csh_tx_vncinteractiveimage_domain_model_interactiveimage.xlf'
-    );
-    ExtensionManagementUtility::allowTableOnStandardPages(
-        'tx_vncinteractiveimage_domain_model_interactiveimage'
-    );
+    
+    if ($typo3Version->getMajorVersion() <= 12) {
+        ExtensionManagementUtility::addLLrefForTCAdescr(
+            'tx_vncinteractiveimage_domain_model_interactiveimage',
+            'EXT:vnc_interactive_image/Resources/Private/Language/locallang_csh_tx_vncinteractiveimage_domain_model_interactiveimage.xlf'
+        );
+        ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_vncinteractiveimage_domain_model_interactiveimage'
+        );
 
-    ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_vncinteractiveimage_domain_model_mark',
-        'EXT:vnc_interactive_image/Resources/Private/Language/locallang_csh_tx_vncinteractiveimage_domain_model_mark.xlf'
-    );
-    ExtensionManagementUtility::allowTableOnStandardPages(
-        'tx_vncinteractiveimage_domain_model_mark'
-    );
+        ExtensionManagementUtility::addLLrefForTCAdescr(
+            'tx_vncinteractiveimage_domain_model_mark',
+            'EXT:vnc_interactive_image/Resources/Private/Language/locallang_csh_tx_vncinteractiveimage_domain_model_mark.xlf'
+        );
+        ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_vncinteractiveimage_domain_model_mark'
+        );
+    }
 
     if ($typo3Version->getMajorVersion() <= 11) {
         $GLOBALS['TBE_STYLES']['skins']['vnc_interactive_image'] = [];

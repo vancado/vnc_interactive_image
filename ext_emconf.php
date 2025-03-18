@@ -11,8 +11,8 @@ $EM_CONF['vnc_interactive_image'] = [
     'version' => '12.8.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.0-12.4.99',
-            'vnc_icon_formelement' => '12.0.0-12.4.99'
+            'typo3' => '11.5.0-13.4.99',
+            'vnc_icon_formelement' => '12.0.0-13.4.99'
         ],
         'conflicts' => [],
         'suggests' => [],

@@ -29,7 +29,7 @@
   ],
   "require": {
     "typo3/cms-core": "^11.5 || ^12.0 || ^13.0",
-    "vancado/vnc-icon-formelement": "^12.0",
+    "vancado/vnc-icon-formelement": "^12.0 || dev-feature/typo3-v13-upgrade",
     "b13/container": "*"
   },
   "autoload": {

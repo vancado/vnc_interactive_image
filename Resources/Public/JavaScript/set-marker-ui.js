@@ -37,14 +37,21 @@ class SetMarkerUi
             this.setPositionsOfAllMarkers()
         })
 
+        console.log(this.map)
         this.map?.addEventListener('drop', (e) => {
             this.layerX = e.offsetX
             this.layerY = e.offsetY
+
+            connsole.log(this.layerX, this.layerY)
         })
 
         // click on map creates a new marker on map and in irre panel
         document.querySelector('#setMarkerImage')?.addEventListener('click', async(e) => {
-            const newButton = document.querySelector(this.cssSelectors.newButton)
+            let newButton = document.querySelector(this.cssSelectors.newButton)
+            if (!newButton) {
+                newButton = document.querySelector(this.cssSelectors.newButtonV13)
+            }
+
             const xPercentage = parseFloat(e.offsetX / e.target.offsetWidth).toFixed(2)
             const yPercentage = parseFloat(e.offsetY / e.target.offsetHeight).toFixed(2)
             const that = this;
@@ -152,10 +159,12 @@ class SetMarkerUi
         const panelGroup = localField + ' .panel-group'
         const panel = panelGroup + ' > div'
         const newButton = localField + ' .typo3-newRecordLink button'
+        const newButtonV13 = localField + ' .t3js-inline-controls button[data-type="newRecord"]'
 
         this.cssSelectors = {
             localField,
             newButton,
+            newButtonV13,
             panel,
             panelGroup,
         }
@@ -367,9 +376,28 @@ class SetMarkerUi
             }, 250)
         })
 
+        marker.addEventListener('dragstart', (e) => {
+            console.log('start drag', e);
+        })
+
         marker.addEventListener('dragend', async (e) => {
-            const xPercentage = (this.layerX / map.offsetWidth).toFixed(4)
-            const yPercentage = (this.layerY / map.offsetHeight).toFixed(4)
+            const X = parseFloat(this.markers[uid].x)
+            const Y = parseFloat(this.markers[uid].y)
+
+            let xPercentage = 0;
+            let yPercentage = 0;
+
+            if (this.layerX > 0) {
+                xPercentage = (this.layerX / map.offsetWidth).toFixed(4)
+            } else {
+                xPercentage = parseFloat(X + ((e.offsetX - 20) / map.offsetWidth)).toFixed(4)
+            }
+
+            if (this.layerY > 0) {
+                yPercentage = (this.layerY / map.offsetHeight).toFixed(4)
+            } else {
+                yPercentage = parseFloat(Y + ((e.offsetY - 20) / map.offsetHeight)).toFixed(4)
+            }
 
             await this.updateDraggedMarkerOnMap(marker, xPercentage, yPercentage)
         })

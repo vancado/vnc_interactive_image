@@ -43,6 +43,12 @@
     fill: #101010;
   }
 }
+.vncInteractiveImageContainer .collapse {
+  display: none;
+}
+.vncInteractiveImageContainer .collapse.show {
+  display: block;
+}
 .vncInteractiveImageContainer .collapsing {
   transition: none;
 }

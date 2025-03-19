@@ -96,6 +96,14 @@ $font-size-button: 14px;
 }
 
 .vncInteractiveImageContainer {
+    .collapse {
+        display: none;
+
+        &.show {
+            display: block;
+        }
+    }
+
     .collapsing {
         transition: none;
     }

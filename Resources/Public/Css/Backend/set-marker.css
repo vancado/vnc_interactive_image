@@ -18,6 +18,10 @@
     color: #fff;
 }
 
+.set-marker-marker[data-mark-hidden="true"] {
+    opacity: 0.6;
+}
+
 .set-marker-marker .number {
     position: absolute;
     left: -2px;

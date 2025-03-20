@@ -8,6 +8,21 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 class Mark extends AbstractEntity
 {
     /**
+     * @var int
+     */
+    protected $hidden = 0;
+
+    /**
+     * @var int
+     */
+    protected $starttime = 0;
+
+    /**
+     * @var int
+     */
+    protected $endtime = 0;
+
+    /**
      * @var string
      */
     protected $title = '';
@@ -56,6 +71,21 @@ class Mark extends AbstractEntity
      * @var float
      */
     protected $positionY = 0.0;
+
+    public function getHidden(): int
+    {
+        return $this->hidden;
+    }
+
+    public function getStarttime(): int
+    {
+        return $this->starttime;
+    }
+
+    public function getEndtime(): int
+    {
+        return $this->endtime;
+    }
 
     public function getTitle(): string
     {

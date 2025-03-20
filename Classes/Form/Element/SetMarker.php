@@ -15,11 +15,11 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Service\ImageService;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use Vancado\VncInteractiveImage\Domain\Model\InteractiveImage;
 use Vancado\VncInteractiveImage\Domain\Model\Mark;
 use Vancado\VncInteractiveImage\Domain\Repository\InteractiveImageRepository;
+use Vancado\VncInteractiveImage\Domain\Repository\MarkRepository;
 
 class SetMarker extends AbstractFormElement
 {
@@ -45,6 +45,8 @@ class SetMarker extends AbstractFormElement
         $imageService = GeneralUtility::makeInstance(ImageService::class);
         /** @var InteractiveImageRepository $interactiveImageRepository */
         $interactiveImageRepository = GeneralUtility::makeInstance(InteractiveImageRepository::class);
+        /** @var MarkRepository $markRepository */
+        $markRepository = GeneralUtility::makeInstance(MarkRepository::class);
 
         $row = $this->data['databaseRow'];
         $parameterArray = $this->data['parameterArray'];
@@ -53,6 +55,8 @@ class SetMarker extends AbstractFormElement
         $iconFormElement = null;
         /** @var InteractiveImage $interactiveImage */
         $interactiveImage = $interactiveImageRepository->findByUidAndIgnoreHidden((int)$row['uid']);
+
+        $marks = $markRepository->findByInteractiveImageUid((int)$row['uid']);
 
         try {
             /** @var FileReference[] $fileObjects */
@@ -137,11 +141,26 @@ class SetMarker extends AbstractFormElement
 
         $markers = [];
         if ($interactiveImage) {
-            /** @var Mark $mark */
             $count = 0;
-            foreach ($interactiveImage->getTxVncinteractiveimageMarks() as $mark) {
+            $now = time();
+            /** @var Mark $mark */
+            foreach ($marks as $mark) {
                 $left = $mark->getPositionX();
                 $top = $mark->getPositionY();
+
+                $hidden = 'false';
+                if ($mark->getHidden() === 1) {
+                    $hidden = 'true';
+                }
+                if ($mark->getStarttime() > 0 && $mark->getEndtime() === 0 && $mark->getStarttime() >= $now) {
+                    $hidden = 'true';
+                }
+                if ($mark->getEndtime() > 0 && $mark->getStarttime() === 0 && $mark->getEndtime() <= $now) {
+                    $hidden = 'true';
+                }
+                if ($mark->getStarttime() > 0 && $mark->getEndtime() > 0 && ($mark->getStarttime() > $now || $mark->getEndtime() < $now)) {
+                    $hidden = 'true';
+                }
 
                 $numberDiv = $interactiveImage->getTxVncinteractiveimageIconMode() === 'numbers' ?
                     '<div class="number">' . (++$count) . '</div>' : '';
@@ -160,6 +179,7 @@ class SetMarker extends AbstractFormElement
                     data-mark-bodytext="' . htmlentities($mark->getBodytext()) . '"
                     data-mark-position-x="' . (string)($mark->getPositionX() / 100) . '"
                     data-mark-position-y="' . (string)($mark->getPositionY() / 100) . '"
+                    data-mark-hidden="' . (string)$hidden . '"
                     style="
                         left: calc(' . $left . '% - 22px);
                         top: calc(' . $top . '% - 22px);

@@ -1,56 +1,17 @@
 $primary-color: black;
 $secondary-color: #F4F4F4;
-$bg-color: #F4F4F4;
-$popover-bg-color: #fff;
-$popover-border-color: #ccc;
-$btn-color: black;
-$popover-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $mark-icon-size-default: 42px;
-$mark-icon-size-lg: 2.2rem;
-$mark-icon-size-md: 1.7rem;
-$mark-icon-size-sm: 0.8rem;
 $mark-icon-color: white;
 $mark-icon-bg-color: $primary-color;
 $font-color-link: white;
 $prev-next-color: $secondary-color;
 $prev-next-color-acitve: #101010;
 $nav-color: $secondary-color;
-$nav-color-active: $secondary-color;
-$pulse-animation-duration: 2s;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
-$padding: 5px;
-$content-box-padding: 1rem;
-$popover-link-padding: 0.7em;
-$popover-close-padding: 1rem;
-$font-size-default: 16px;
-$font-size-title: 18px;
-$font-size-button: 14px;
-
-#page-content {
-    // background-color: #d9d9d9;
-}
-
-@mixin pulse {
-    animation: pulse $pulse-animation-duration infinite;
-}
 
 @mixin fade-in {
     animation: fadeIn $fade-in-duration;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
 }
 
 @keyframes fadeIn {
@@ -70,18 +31,6 @@ $font-size-button: 14px;
 
     100% {
         background-position: calc(200px + 100%);
-    }
-}
-
-@keyframes close-effect {
-    0% {
-        border-radius: 0 0 0 30px;
-        padding: 5px;
-    }
-
-    100% {
-        border-radius: 0 0 0 0;
-        padding: 10px;
     }
 }
 
@@ -110,6 +59,13 @@ $font-size-button: 14px;
 
     .svg-icon {
         transition: transform 200ms ease-in-out;
+
+        &:before {
+            display: block;
+            width: 100%;
+            text-align: center;
+            line-height: var(--input-height);
+        }
 
         &.open {
             transform: rotate3d(0, 0, 1, 180deg);
@@ -152,7 +108,9 @@ $font-size-button: 14px;
         }
 
         img {
-            width: 100%;
+            &.mark-icon {
+                background-color: transparent;
+            }
 
             &.mobile {
                 min-height: 512px;
@@ -236,22 +194,32 @@ $font-size-button: 14px;
         width: 100%;
         height: 100%;
 
+        > button.mark {
+            > img.mark-icon {
+                width: 100%;
+                height: auto;
+            }
+        }
+
         .mark-title {
             position: absolute;
             background-color: #fff;
             font-size: 1rem;
-            line-height: 22px;
+            line-height: 38px;
             padding: 2px 8px 2px 25px;
             margin: 0;
             left: 50%;
-            top: 9px;
+            top: 0.1875em;
             z-index: -1;
             white-space: nowrap;
+            transition: transform 0.2s ease;
+            transform-origin: left;
 
             &[data-position="left"] {
                 left: auto;
                 right: 50%;
                 padding: 2px 25px 2px 8px;
+                transform-origin: right;
             }
         }
     }
@@ -263,16 +231,6 @@ $font-size-button: 14px;
         background-color: transparent;
         cursor: pointer;
 
-        /*
-        span {
-            width: 0;
-            height: 0;
-            color: transparent;
-            overflow: hidden;
-        }
-
-         */
-
         &:focus-visible {
             outline: .125rem solid var(--bs-highlight-color);
             outline-offset: .125rem;
@@ -281,17 +239,14 @@ $font-size-button: 14px;
         &-icon {
             width: $mark-icon-size-default;
             height: $mark-icon-size-default;
-            color: $mark-icon-color !important;
+            color: $mark-icon-color;
             border-radius: $border-radius;
             background-color: $mark-icon-bg-color;
-            display: flex !important;
+            display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.2s ease;
             z-index: 1;
-
-            &:hover {
-            }
 
             &--number {
                 padding: 10px 0;
@@ -299,16 +254,20 @@ $font-size-button: 14px;
 
             &--no-hover {
                 transition: none;
-                transform: none;
+                transform: none!important;
 
                 &:hover {
-                    transform: none;
+                    transform: none!important;
                 }
             }
         }
 
         &:hover {
             .mark-icon {
+                transform: scale(1.2);
+            }
+
+            .mark-title {
                 transform: scale(1.2);
             }
         }
@@ -324,6 +283,12 @@ $font-size-button: 14px;
 
         h3 {
             font-size: 1.75rem;
+        }
+
+        img {
+            &.mark-icon {
+                background-color: transparent;
+            }
         }
 
         .info-item {
@@ -370,6 +335,12 @@ $font-size-button: 14px;
 
             &.right {
                 left: 100%;
+            }
+
+            h3 {
+                width: calc(100% - 0.5rem - $mark-icon-size-default);
+                margin-left: 0.5rem !important;
+                text-align: left;
             }
         }
 
@@ -518,11 +489,6 @@ $font-size-button: 14px;
             .content-box {
                 &__info {
                     display: none!important;
-
-                    .mark-icon {
-                        width: 42px;
-                        height: 42px;
-                    }
                 }
             }
         }
@@ -531,11 +497,6 @@ $font-size-button: 14px;
             .content-box {
                 &__info {
                     display: flex!important;
-
-                    .mark-icon {
-                        width: 42px;
-                        height: 42px;
-                    }
                 }
 
                 &__popover {
@@ -548,11 +509,6 @@ $font-size-button: 14px;
             .content-box {
                 &__info {
                     display: flex!important;
-
-                    .mark-icon {
-                        width: 42px;
-                        height: 42px;
-                    }
                 }
 
                 &__popover {
@@ -565,11 +521,6 @@ $font-size-button: 14px;
             .content-box {
                 &__info {
                     display: flex!important;
-
-                    .mark-icon {
-                        width: 42px;
-                        height: 42px;
-                    }
                 }
 
                 &__popover {
@@ -602,25 +553,6 @@ $font-size-button: 14px;
     }
 
     @media (max-width: 991.98px) {
-
-        // .img-fluid {
-        //   transform: scale(1.2);
-        //   transform-origin: center;
-        // }
-
-        .mark-icon {
-            width: $mark-icon-size-lg;
-            height: $mark-icon-size-lg;
-
-            &--number {
-                font-size: 1.5rem;
-            }
-
-            &--icon {
-                padding: 5px;
-            }
-        }
-
         .image-container {
             position: relative;
             width: 100%;
@@ -654,7 +586,6 @@ $font-size-button: 14px;
     }
 
     @media (max-width: 767.98px) {
-
         .content-box {
             &__popover {
                 padding: 0.8rem;
@@ -680,27 +611,9 @@ $font-size-button: 14px;
                 }
             }
         }
-
-        .zoom-controls {
-            button {
-                width: 25px;
-                height: 25px;
-
-                i > svg {
-                    height: 25px;
-                    width: 16px;
-                }
-            }
-        }
-
-        .mark-icon {
-            width: $mark-icon-size-md;
-            height: $mark-icon-size-md;
-        }
     }
 
     @media (max-width: 575.98px) {
-
         .content-box {
             &__popover {
                 padding: 0.4rem;
@@ -726,21 +639,6 @@ $font-size-button: 14px;
                     height: 25px;
                 }
             }
-        }
-        .zoom-controls {
-            button {
-                width: 15px;
-                height: 15px;
-
-                i > svg {
-                    height: 25px;
-                    width: 16px;
-                }
-            }
-        }
-        .mark-icon {
-            width: $mark-icon-size-sm;
-            height: $mark-icon-size-sm;
         }
     }
 }

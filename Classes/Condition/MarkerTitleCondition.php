@@ -8,6 +8,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class MarkerTitleCondition
 {
@@ -30,7 +31,7 @@ final class MarkerTitleCondition
                     ->where(
                         $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($interactiveImageUid, \Doctrine\DBAL\ParameterType::INTEGER))
                     )
-                    ->fetchOne();
+                    ->fetchAssociative();
             } else {
                 $interactiveImage = $queryBuilder
                     ->select('tx_vncinteractiveimage_show_title_next_to_marker')

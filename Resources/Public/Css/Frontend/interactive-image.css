@@ -47,6 +47,29 @@
 .vncInteractiveImageContainer ol.dropdown-menu {
   padding-left: 0 !important;
 }
+.vncInteractiveImageContainer .carousel-interactive-image .carousel-control-prev, .vncInteractiveImageContainer .carousel-interactive-image .carousel-control-next {
+  top: 50%;
+  bottom: auto;
+  width: 3rem;
+  margin-top: -1.5rem;
+}
+.vncInteractiveImageContainer .carousel-interactive-image .carousel-control-prev-icon, .vncInteractiveImageContainer .carousel-interactive-image .carousel-control-next-icon {
+  width: 4rem;
+  height: 4rem;
+}
+.vncInteractiveImageContainer .carousel-interactive-image .carousel-control-prev {
+  left: 1rem;
+}
+.vncInteractiveImageContainer .carousel-interactive-image .carousel-control-next {
+  right: 1rem;
+}
+.vncInteractiveImageContainer .carousel-interactive-image .carousel-indicators {
+  margin-bottom: 0;
+  bottom: -2rem;
+}
+.vncInteractiveImageContainer .carousel-interactive-image .carousel-indicators [data-bs-target] {
+  background-color: #000;
+}
 
 .vncInteractiveImage a {
   text-decoration: none;
@@ -257,7 +280,7 @@
   left: 100%;
 }
 .vncInteractiveImage .content-box__popover h3 {
-  width: calc(100% - 0.5rem - 42px);
+  flex: 1 1;
   margin-left: 0.5rem !important;
   text-align: left;
 }

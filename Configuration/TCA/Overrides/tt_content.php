@@ -501,8 +501,7 @@ call_user_func(function () {
             ] // grid configuration
         )
         )
-            // set an optional icon configuration
-            ->setIcon('EXT:container/Resources/Public/Icons/container-1col.svg')
+        ->setIcon('EXT:vnc_interactive_image/Resources/Public/Icons/interactive-image-container.svg')
     );
 
     $GLOBALS['TCA']['tt_content']['types']['interactive-image-container']['showitem'] = '

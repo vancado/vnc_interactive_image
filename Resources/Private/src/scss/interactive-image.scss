@@ -1,12 +1,15 @@
-$primary-color: black;
-$secondary-color: #F4F4F4;
+$primary-color: #101010;
+$secondary-color: #f0f0f0;
+$tertiary-color: #c0c0c0;
+$quartiary-color: #e0e0e0;
 $mark-icon-size-default: 42px;
 $mark-icon-color: white;
-$mark-icon-bg-color: $primary-color;
+$mark-icon-bg-color: $secondary-color;
 $font-color-link: white;
 $prev-next-color: $secondary-color;
 $prev-next-color-acitve: #101010;
 $nav-color: $secondary-color;
+$nav-active-color: #808080;
 $fade-in-duration: 0.5s;
 $border-radius: 50%;
 
@@ -107,7 +110,7 @@ $border-radius: 50%;
             .carousel-indicators {
                 margin-bottom: 0;
                 bottom: -2rem;
-                
+
                 [data-bs-target] {
                     background-color: #000;
                 }
@@ -145,7 +148,8 @@ $border-radius: 50%;
 
         img {
             &.mark-icon {
-                background-color: transparent;
+                background-color: transparent!important;
+                border: none;
             }
 
             &.mobile {
@@ -179,16 +183,16 @@ $border-radius: 50%;
         gap: 5px;
 
         button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 48px;
+            height: 48px;
+            margin-top: 8px;
             background-color: black;
             color: white;
             font-size: 20px;
-            border: none;
+            border: 2px solid $secondary-color;
             cursor: pointer;
             transition: background-color 0.3s;
 
@@ -239,22 +243,29 @@ $border-radius: 50%;
 
         .mark-title {
             position: absolute;
-            background-color: #fff;
+            top: 0.1875em;
+            left: 50%;
+            margin: 0;
+            padding: 2px 8px 2px 25px;
+            border-top-right-radius: 21px;
+            border-bottom-right-radius: 21px;
+            border: 1px solid $primary-color;
+            background-color: $quartiary-color;
             font-size: 1rem;
             line-height: 38px;
-            padding: 2px 8px 2px 25px;
-            margin: 0;
-            left: 50%;
-            top: 0.1875em;
-            z-index: -1;
             white-space: nowrap;
             transition: transform 0.2s ease;
             transform-origin: left;
+            z-index: -1;
 
             &[data-position="left"] {
                 left: auto;
                 right: 50%;
                 padding: 2px 25px 2px 8px;
+                border-top-left-radius: 21px;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 21px;
+                border-bottom-right-radius: 0;
                 transform-origin: right;
             }
         }
@@ -267,15 +278,11 @@ $border-radius: 50%;
         background-color: transparent;
         cursor: pointer;
 
-        &:focus-visible {
-            outline: .125rem solid var(--bs-highlight-color);
-            outline-offset: .125rem;
-        }
-
         &-icon {
             width: $mark-icon-size-default;
             height: $mark-icon-size-default;
-            color: $mark-icon-color;
+            color: $primary-color;
+            border: 1px solid $primary-color;
             border-radius: $border-radius;
             background-color: $mark-icon-bg-color;
             display: flex;
@@ -286,11 +293,14 @@ $border-radius: 50%;
 
             &--number {
                 padding: 10px 0;
+                font-size: 28px;
+                font-weight: 700;
             }
 
             &--no-hover {
                 transition: none;
                 transform: none!important;
+                background-color: $primary-color!important;
 
                 &:hover {
                     transform: none!important;
@@ -298,13 +308,32 @@ $border-radius: 50%;
             }
         }
 
+        &:focus-visible {
+            outline: .125rem solid var(--bs-highlight-color);
+            outline-offset: .125rem;
+        }
+
         &:hover {
             .mark-icon {
-                transform: scale(1.2);
+                background-color: $tertiary-color;
+                transform: scale(1.142857);
             }
 
             .mark-title {
-                transform: scale(1.2);
+                transform: scale(1.142857);
+            }
+        }
+
+        &.active {
+            > .mark-icon {
+                background-color: $primary-color;
+                color: $secondary-color;
+                border-color: $secondary-color;
+            }
+            > .mark-title {
+                background-color: $primary-color;
+                color: $secondary-color;
+                border-color: $secondary-color;
             }
         }
     }
@@ -318,12 +347,13 @@ $border-radius: 50%;
         margin-top: 20px;
 
         h3 {
-            font-size: 1.75rem;
+            font-size: 1.125rem;
+            line-height: 1.3;
         }
 
         img {
             &.mark-icon {
-                background-color: transparent;
+                background-color: transparent!important;
             }
         }
 
@@ -335,6 +365,18 @@ $border-radius: 50%;
             width: 100%;
             flex-shrink: 0;
             gap: 1rem;
+
+            i {
+                background-color: $primary-color;
+                color: $secondary-color;
+            }
+
+            .mark-icon {
+                flex: none;
+                background-color: $primary-color;
+                color: $secondary-color;
+                border-color: $secondary-color;
+            }
         }
 
         &__popover {
@@ -377,6 +419,12 @@ $border-radius: 50%;
                 flex: 1 1;
                 margin-left: 0.5rem !important;
                 text-align: left;
+            }
+
+            .mark-icon {
+                background-color: $primary-color;
+                color: $secondary-color;
+                border-color: $secondary-color;
             }
         }
 
@@ -431,10 +479,10 @@ $border-radius: 50%;
                 gap: 2px;
 
                 .nav-point {
-                    width: 11px;
-                    height: 11px;
+                    width: 16px;
+                    height: 16px;
                     border-radius: 50%;
-                    background-color: $nav-color;
+                    background-color: $quartiary-color;
                     margin: 0 5px;
                     cursor: pointer;
 
@@ -444,8 +492,8 @@ $border-radius: 50%;
                     }
 
                     &.active {
-                        scale: 1.4;
-                        background-color: $primary-color;
+                        scale: 1.5;
+                        background-color: $nav-active-color;
                     }
                 }
             }

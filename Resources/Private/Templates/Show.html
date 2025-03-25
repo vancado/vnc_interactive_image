@@ -84,8 +84,18 @@
             <f:section name="zoomControls">
                 <div class="zoom-controls">
                     <f:if condition="{interactiveImage.txVncinteractiveimageShowZoom}">
-                        <button class="btn btn-primary" id="zoom-in" aria-label="Vergr&ouml;&szlig;ern">+</button>
-                        <button class="btn btn-primary" id="zoom-out" aria-label="Verkleinern">-</button>
+                        <button class="btn btn-primary" id="zoom-in" aria-label="Vergr&ouml;&szlig;ern">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                                <path d="M10.0937 5H8.08123V8H5.0625V10H8.08123V13H10.0937V10H13.1125V8H10.0937V5Z" fill="#F0F0F0"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1437 9C18.1437 11.12 17.399 13.07 16.1513 14.61L22.5812 21L21.1624 22.41L14.7325 16.03C13.1829 17.26 11.2207 18 9.08745 18C4.09648 18 0.03125 13.96 0.03125 9C0.03125 4.04 4.09648 0 9.08745 0C14.0784 0 18.1437 4.04 18.1437 9ZM2.04374 9C2.04374 12.86 5.20335 16 9.08745 16C12.9716 16 16.1312 12.86 16.1312 9C16.1312 5.14 12.9716 2 9.08745 2C5.20335 2 2.04374 5.14 2.04374 9Z" fill="#F0F0F0"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-primary" id="zoom-out" aria-label="Verkleinern">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                                <rect x="5.0625" y="8" width="8.04996" height="2" fill="white" style="fill:white;fill-opacity:1;"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1437 9C18.1437 11.12 17.399 13.07 16.1513 14.61L22.5812 21L21.1624 22.41L14.7325 16.03C13.1829 17.26 11.2207 18 9.08745 18C4.09648 18 0.03125 13.96 0.03125 9C0.03125 4.04 4.09648 0 9.08745 0C14.0784 0 18.1437 4.04 18.1437 9ZM2.04374 9C2.04374 12.86 5.20335 16 9.08745 16C12.9716 16 16.1312 12.86 16.1312 9C16.1312 5.14 12.9716 2 9.08745 2C5.20335 2 2.04374 5.14 2.04374 9Z" fill="white" style="fill:white;fill-opacity:1;"/>
+                            </svg>
+                        </button>
                     </f:if>
                     <f:if condition="{interactiveImage.txVncinteractiveimageShowFullscreen} && {layout} === 'popover'">
                         <button class="btn btn-primary" id="fullscreen" aria-label="Vollbildschirm">

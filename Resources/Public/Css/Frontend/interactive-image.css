@@ -187,6 +187,7 @@
   outline-offset: 0.125rem;
 }
 .vncInteractiveImage .mark-icon {
+  flex: 0 0 auto;
   width: 42px;
   height: 42px;
   color: white !important;
@@ -224,6 +225,7 @@
 }
 .vncInteractiveImage .content-box .info-item {
   padding: 1rem;
+  overflow-x: hidden;
 }
 .vncInteractiveImage .content-box__info {
   width: 100%;
@@ -398,6 +400,15 @@
     display: none !important;
   }
 }
+@media (max-width: 991.98px) and (display-mode: fullscreen) {
+  .vncInteractiveImage[data-layout=popover] .image-container > .content-box__popover.active {
+    display: flex !important;
+    left: 50%;
+    margin-left: -25vw;
+    width: auto !important;
+    min-width: 40vw;
+  }
+}
 @media (max-width: 767.98px) {
   .vncInteractiveImage[data-layout=popover] .content-box__info {
     display: flex !important;
@@ -466,7 +477,7 @@
     text-align: center;
   }
   .vncInteractiveImage .content-box__close {
-    padding: 1.5rem;
+    padding: 0.75rem;
   }
   .vncInteractiveImage .content-box__close svg {
     width: 30px;

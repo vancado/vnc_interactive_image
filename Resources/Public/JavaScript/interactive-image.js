@@ -1,5 +1,5 @@
 window.VNC_INTERACTIVE_IMAGE = {
-    MAX_WIDTH: 1024,
+    MAX_MOBILE_WIDTH: 1024,
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -140,24 +140,30 @@ document.addEventListener("DOMContentLoaded", () => {
                     marker.style.zIndex = 2;
 
                     popover.style = null;
-                    const y1 = Math.round((vncInteractiveImageRect.height - popoverRect.height) / 2);
+                    let y1 = Math.round((vncInteractiveImageRect.height - popoverRect.height) / 2);
                     const y2 = parseInt(marker.style.top);
+
+                    if (document.fullscreenElement) {
+                        y1 = Math.round((window.innerHeight - popoverRect.height) / 2);
+                    }
+
                     popover.style.top = (y1 - y2) + "px";
 
-                    const isMobile = window.matchMedia("(max-width: " + window.VNC_INTERACTIVE_IMAGE.MAX_WIDTH + "px)").matches;
+                    const isMobile = window.matchMedia("(max-width: " + window.VNC_INTERACTIVE_IMAGE.MAX_MOBILE_WIDTH + "px)").matches;
                     if (isMobile) {
                         popover.classList.remove("top", "bottom", "left", "right");
                         // document.querySelectorAll('.content-box__image').forEach(el => el.remove());
                         if (document.fullscreenElement) {
-                            popover.style.bottom = "0";
-                            popover.style.right = "0";
-
-                            if (popover.parentNode !== imageContainer) {
-                                imageContainer.parentNode.prepend(popover);
-                            }
+                            const popoverClone = popover.cloneNode(true);
+                            vncInteractiveImage.querySelectorAll('.image-container > .content-box__popover').forEach(box => {
+                                box.remove();
+                            });
+                            popoverClone.style.bottom = 'auto';
+                            popoverClone.style.top = parseInt(marker.style.top) + 'px';
+                            imageContainer.prepend(popoverClone);
                         } else {
                             popover.style = null;
-                            imageContainer.append(popover);
+                            // imageContainer.append(popover);
                             popover.dispatchEvent(eventAfterShowMobilePopover);
                         }
                     } else {

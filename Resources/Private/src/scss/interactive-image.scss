@@ -279,6 +279,7 @@ $border-radius: 50%;
         cursor: pointer;
 
         &-icon {
+            flex: 0 0 auto;
             width: $mark-icon-size-default;
             height: $mark-icon-size-default;
             color: $primary-color;
@@ -359,6 +360,7 @@ $border-radius: 50%;
 
         .info-item {
             padding: 1rem;
+            overflow-x: hidden;
         }
 
         &__info {
@@ -587,6 +589,18 @@ $border-radius: 50%;
                     display: none!important;
                 }
             }
+
+            .image-container {
+                > .content-box__popover.active {
+                    @media all and (display-mode: fullscreen) {
+                        display: flex !important;
+                        left: 50%;
+                        margin-left: -25vw;
+                        width: auto!important;
+                        min-width: 40vw;
+                    }
+                }
+            }
         }
 
         @media (max-width: 767.98px) {
@@ -659,7 +673,7 @@ $border-radius: 50%;
             }
 
             &__close {
-                padding: 1.5rem;
+                padding: 0.75rem;
 
                 svg {
                     width: 30px;

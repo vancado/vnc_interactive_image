@@ -1,3 +1,7 @@
+window.VNC_INTERACTIVE_IMAGE = {
+    MAX_WIDTH: 1024,
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     const vncInteractiveImageContainers = document.querySelectorAll('.vncInteractiveImageContainer');
     const vncInteractiveImages = document.querySelectorAll('.vncInteractiveImage');
@@ -140,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const y2 = parseInt(marker.style.top);
                     popover.style.top = (y1 - y2) + "px";
 
-                    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+                    const isMobile = window.matchMedia("(max-width: " + window.VNC_INTERACTIVE_IMAGE.MAX_WIDTH + "px)").matches;
                     if (isMobile) {
                         popover.classList.remove("top", "bottom", "left", "right");
                         // document.querySelectorAll('.content-box__image').forEach(el => el.remove());

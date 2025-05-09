@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const eventAfterShowMobilePopover = new Event('afterShowMobilePopover');
     const eventAfterHidePopover = new Event('afterHidePopover');
     const eventAfterPositioning = new Event('afterPositioning');
+    const eventAfterScrollIntoView = new Event('afterScrollIntoView');
 
     vncInteractiveImages.forEach(vncInteractiveImage => {
         const markers = vncInteractiveImage.querySelectorAll(".mark");
@@ -22,14 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const navPointsContainer = vncInteractiveImage.querySelector(".nav-points");
 
         let currentIndex = 0;
+        let navPointsInitialized = false;
 
         const showCurrentInfoItem = () => {
             infoItems.forEach((item, index) => {
                 item.classList = index === currentIndex ? "info-item d-flex flex-column flex-grow-1" : "d-none";
                 item.classList.toggle("active", index === currentIndex);
 
-                if (index === currentIndex && scrollIntoView === 'true') {
+                if (index === currentIndex && scrollIntoView === 'true' && navPointsInitialized) {
                     item.scrollIntoView();
+                    item.dispatchEvent(eventAfterScrollIntoView);
                 }
 
                 const navPoints = navPointsContainer?.querySelectorAll(".nav-point");
@@ -71,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             showCurrentInfoItem();
+            navPointsInitialized = true;
         };
 
         const handleMarkerClick = (marker, markerId, event) => {
@@ -369,6 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 marksContainer.style.height = "100%";
                 if (scrollIntoView === 'true') {
                     imageContainer.scrollIntoView();
+                    imageContainer.dispatchEvent(eventAfterScrollIntoView);
                 }
             }
             updateZoomControls();

@@ -31,8 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 item.classList.toggle("active", index === currentIndex);
 
                 if (index === currentIndex && scrollIntoView === 'true' && navPointsInitialized) {
-                    item.scrollIntoView();
-                    item.dispatchEvent(eventAfterScrollIntoView);
+                    if (layout === 'popover' && window.innerWidth <= window.VNC_INTERACTIVE_IMAGE.MAX_MOBILE_WIDTH) {
+                        item.scrollIntoView();
+                        item.dispatchEvent(eventAfterScrollIntoView);
+                    } else if (layout === 'infoBox') {
+                        item.scrollIntoView();
+                        item.dispatchEvent(eventAfterScrollIntoView);
+                    }
                 }
 
                 const navPoints = navPointsContainer?.querySelectorAll(".nav-point");
